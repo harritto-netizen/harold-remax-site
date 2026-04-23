@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Contact Insert</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Test Contact Form Insert</h1>
+    <form id="contactForm">
+        <input type="text" id="name" placeholder="Name" required><br>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <input type="tel" id="phone" placeholder="Phone"><br>
+        <textarea id="message" placeholder="Message" required></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        const SUPABASE_URL = 'https://wllejqlypxctumdxkecn.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsbGVqcWx5cHhjdHVtZHhrZWNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY0NzIxNzQsImV4cCI6MjA4MjA0ODE3NH0.eO-IpRHPmZRq98pZRjeSofTqSqHHpqn749-APs9RqhQ';
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value || null,
+                message: document.getElementById('message').value
+            };
+
+            console.log('Submitting:', formData);
+
+            try {
+                const { data, error } = await supabase
+                    .from('contacts')
+                    .insert([formData])
+                    .select();
+
+                if (error) {
+                    console.error('Error:', error);
+                    document.getElementById('result').innerHTML =
+                        `<p style="color: red;">Error: ${error.message}</p>
+                         <pre>${JSON.stringify(error, null, 2)}</pre>`;
+                } else {
+                    console.log('Success:', data);
+                    document.getElementById('result').innerHTML =
+                        `<p style="color: green;">Success! Contact submitted.</p>
+                         <pre>${JSON.stringify(data, null, 2)}</pre>`;
+                }
+            } catch (err) {
+                console.error('Exception:', err);
+                document.getElementById('result').innerHTML =
+                    `<p style="color: red;">Exception: ${err.message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
