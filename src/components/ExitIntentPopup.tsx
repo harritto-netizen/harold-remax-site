@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { X, Bell, CheckCircle, AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 
 const STORAGE_KEY = 'property_alert_popup_dismissed';
@@ -63,16 +63,15 @@ export default function ExitIntentPopup() {
       };
 
       const { error } = await supabase.from('property_alerts').insert([alertData]);
-      if (error) throw error;
+      if (error) throw new Error(`DB insert failed: ${error.message} (code: ${error.code || 'n/a'})`);
 
       try {
-        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-        const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-        await fetch(`${supabaseUrl}/functions/v1/send-property-alert-notification`, {
+        await fetch(`${SUPABASE_URL}/functions/v1/send-property-alert-notification`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${supabaseKey}`,
+            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+            apikey: SUPABASE_ANON_KEY,
           },
           body: JSON.stringify(alertData),
         });
@@ -86,7 +85,11 @@ export default function ExitIntentPopup() {
       setTimeout(() => setIsOpen(false), 3500);
     } catch (error: any) {
       setStatus('error');
-      setErrorMessage(error.message || 'Something went wrong. Please try again.');
+      const detail = error?.message || String(error);
+      const urlInfo = SUPABASE_URL ? SUPABASE_URL.slice(0, 40) : 'MISSING_URL';
+      const keyInfo = SUPABASE_ANON_KEY ? `key_len=${SUPABASE_ANON_KEY.length}` : 'MISSING_KEY';
+      setErrorMessage(`${detail} | ${urlInfo} | ${keyInfo}`);
+      console.error('Popup submit failed:', error);
     }
   };
 

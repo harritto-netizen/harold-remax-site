@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { Bell, CheckCircle, AlertCircle, Star } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 
 interface PropertyAlertFormProps {
@@ -48,24 +48,22 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
         is_active: true
       };
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('property_alerts')
         .insert([alertData])
         .select();
 
       if (error) {
-        throw error;
+        throw new Error(`DB insert failed: ${error.message} (code: ${error.code || 'n/a'}, details: ${error.details || 'n/a'})`);
       }
 
       try {
-        const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-        const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-        await fetch(`${supabaseUrl}/functions/v1/send-property-alert-notification`, {
+        await fetch(`${SUPABASE_URL}/functions/v1/send-property-alert-notification`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${supabaseKey}`,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'apikey': SUPABASE_ANON_KEY,
           },
           body: JSON.stringify(alertData),
         });
@@ -100,7 +98,11 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
       }, 5000);
     } catch (error: any) {
       setFormStatus('error');
-      setErrorMessage(error.message || 'Failed to subscribe. Please try again.');
+      const detail = error?.message || String(error);
+      const urlInfo = SUPABASE_URL ? SUPABASE_URL.slice(0, 40) : 'MISSING_URL';
+      const keyInfo = SUPABASE_ANON_KEY ? `key_len=${SUPABASE_ANON_KEY.length}` : 'MISSING_KEY';
+      setErrorMessage(`${detail} | ${urlInfo} | ${keyInfo}`);
+      console.error('Form submit failed:', error);
     }
   };
 
