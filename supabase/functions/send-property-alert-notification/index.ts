@@ -1,4 +1,5 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createClient } from "npm:@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -16,35 +17,60 @@ interface PropertyAlert {
   price_max: number | null;
 }
 
+function jsonResponse(body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json" },
+  });
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
-    return new Response(null, {
-      status: 200,
-      headers: corsHeaders,
-    });
+    return new Response(null, { status: 200, headers: corsHeaders });
   }
 
   try {
     const payload: PropertyAlert = await req.json();
 
+    if (!payload.email || typeof payload.email !== "string") {
+      return jsonResponse({ success: false, error: "Email is required" }, 400);
+    }
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const admin = createClient(supabaseUrl, serviceRoleKey, {
+      auth: { persistSession: false },
+    });
+
+    const { error: insertError } = await admin.from("property_alerts").insert([
+      {
+        email: payload.email,
+        name: payload.name,
+        phone: payload.phone,
+        property_type: payload.property_type,
+        location: payload.location,
+        price_min: payload.price_min,
+        price_max: payload.price_max,
+        is_active: true,
+      },
+    ]);
+
+    if (insertError) {
+      console.error("DB insert failed:", insertError);
+      return jsonResponse(
+        { success: false, error: `DB insert failed: ${insertError.message}` },
+        500
+      );
+    }
+
     const adminEmail = Deno.env.get("ADMIN_EMAIL") || "your-email@example.com";
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
 
     if (!resendApiKey) {
-      console.log("RESEND_API_KEY not configured. Alert received:", payload);
-      return new Response(
-        JSON.stringify({ 
-          success: true, 
-          message: "Alert saved successfully. Email notifications not configured." 
-        }),
-        {
-          status: 200,
-          headers: {
-            ...corsHeaders,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      return jsonResponse({
+        success: true,
+        message: "Alert saved successfully. Email notifications not configured.",
+      });
     }
 
     const formatPrice = (price: number | null) => {
@@ -59,21 +85,21 @@ Deno.serve(async (req: Request) => {
     const emailHtml = `
       <h2>New Property Alert Subscription</h2>
       <p>Someone just signed up for property alerts on your website!</p>
-      
+
       <h3>Contact Information:</h3>
       <ul>
         <li><strong>Name:</strong> ${payload.name || "Not provided"}</li>
         <li><strong>Email:</strong> ${payload.email}</li>
         <li><strong>Phone:</strong> ${payload.phone || "Not provided"}</li>
       </ul>
-      
+
       <h3>Property Preferences:</h3>
       <ul>
         <li><strong>Property Type:</strong> ${payload.property_type || "Any"}</li>
         <li><strong>Location:</strong> ${payload.location || "Any"}</li>
         <li><strong>Price Range:</strong> ${formatPrice(payload.price_min)} - ${formatPrice(payload.price_max)}</li>
       </ul>
-      
+
       <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ccc; color: #666;">
         This is an automated notification from your property alert system.
       </p>
@@ -95,37 +121,15 @@ Deno.serve(async (req: Request) => {
 
     if (!emailResponse.ok) {
       const errorData = await emailResponse.text();
-      console.error("Failed to send email:", errorData);
-      throw new Error(`Email service error: ${emailResponse.status}`);
+      console.error("Email send failed:", errorData);
     }
 
-    const emailData = await emailResponse.json();
-    console.log("Email sent successfully:", emailData);
-
-    return new Response(
-      JSON.stringify({ success: true, message: "Notification sent successfully" }),
-      {
-        status: 200,
-        headers: {
-          ...corsHeaders,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    return jsonResponse({ success: true, message: "Alert saved successfully" });
   } catch (error) {
     console.error("Error processing request:", error);
-    return new Response(
-      JSON.stringify({ 
-        success: false, 
-        error: error instanceof Error ? error.message : "Unknown error" 
-      }),
-      {
-        status: 500,
-        headers: {
-          ...corsHeaders,
-          "Content-Type": "application/json",
-        },
-      }
+    return jsonResponse(
+      { success: false, error: error instanceof Error ? error.message : "Unknown error" },
+      500
     );
   }
 });

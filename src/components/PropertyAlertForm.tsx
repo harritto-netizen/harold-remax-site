@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { Bell, CheckCircle, AlertCircle, Star } from 'lucide-react';
-import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 
 interface PropertyAlertFormProps {
@@ -48,27 +48,24 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
         is_active: true
       };
 
-      const { error } = await supabase
-        .from('property_alerts')
-        .insert([alertData])
-        .select();
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/send-property-alert-notification`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'apikey': SUPABASE_ANON_KEY,
+        },
+        body: JSON.stringify(alertData),
+      });
 
-      if (error) {
-        throw new Error(`DB insert failed: ${error.message} (code: ${error.code || 'n/a'}, details: ${error.details || 'n/a'})`);
+      if (!response.ok) {
+        const text = await response.text().catch(() => '');
+        throw new Error(`Submit failed: HTTP ${response.status} ${text}`);
       }
 
-      try {
-        await fetch(`${SUPABASE_URL}/functions/v1/send-property-alert-notification`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'apikey': SUPABASE_ANON_KEY,
-          },
-          body: JSON.stringify(alertData),
-        });
-      } catch (notifError) {
-        console.error('Failed to send notification:', notifError);
+      const result = await response.json().catch(() => ({}));
+      if (result.success === false) {
+        throw new Error(result.error || 'Submit failed');
       }
 
       const [firstName, ...restName] = (formData.name || '').trim().split(/\s+/);

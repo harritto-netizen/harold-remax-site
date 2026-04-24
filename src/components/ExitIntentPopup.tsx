@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { X, Bell, CheckCircle, AlertCircle } from 'lucide-react';
-import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 
 const STORAGE_KEY = 'property_alert_popup_dismissed';
@@ -62,21 +62,24 @@ export default function ExitIntentPopup() {
         is_active: true,
       };
 
-      const { error } = await supabase.from('property_alerts').insert([alertData]);
-      if (error) throw new Error(`DB insert failed: ${error.message} (code: ${error.code || 'n/a'})`);
+      const response = await fetch(`${SUPABASE_URL}/functions/v1/send-property-alert-notification`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+          apikey: SUPABASE_ANON_KEY,
+        },
+        body: JSON.stringify(alertData),
+      });
 
-      try {
-        await fetch(`${SUPABASE_URL}/functions/v1/send-property-alert-notification`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-            apikey: SUPABASE_ANON_KEY,
-          },
-          body: JSON.stringify(alertData),
-        });
-      } catch (notifError) {
-        console.error('Failed to send notification:', notifError);
+      if (!response.ok) {
+        const text = await response.text().catch(() => '');
+        throw new Error(`Submit failed: HTTP ${response.status} ${text}`);
+      }
+
+      const result = await response.json().catch(() => ({}));
+      if (result.success === false) {
+        throw new Error(result.error || 'Submit failed');
       }
 
       trackLead({ contentName: 'exit_intent_popup', userData: { email } });
