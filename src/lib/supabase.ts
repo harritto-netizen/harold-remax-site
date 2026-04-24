@@ -1,11 +1,17 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL ?? '').trim();
+const rawSupabaseUrl = (import.meta.env.VITE_SUPABASE_URL ?? '').trim();
 const supabaseAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY ?? '').trim();
 
-if (!supabaseUrl || !supabaseAnonKey) {
+if (!rawSupabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables');
 }
+
+const supabaseUrl =
+  typeof window !== 'undefined' &&
+  window.location.hostname === 'primerealestatedr.com'
+    ? `${window.location.origin}/supabase-proxy`
+    : rawSupabaseUrl;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export const SUPABASE_URL = supabaseUrl;
