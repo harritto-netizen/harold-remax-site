@@ -145,10 +145,12 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Email *</label>
+            <label htmlFor="alert-email" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Email *</label>
             <input
+              id="alert-email"
               type="email"
               required
+              aria-required="true"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
@@ -157,8 +159,9 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
             />
           </div>
           <div>
-            <label className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Name</label>
+            <label htmlFor="alert-name" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Name</label>
             <input
+              id="alert-name"
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -171,8 +174,9 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Property Type</label>
+            <label htmlFor="alert-property-type" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Property Type</label>
             <select
+              id="alert-property-type"
               value={formData.property_type}
               onChange={(e) => setFormData({ ...formData, property_type: e.target.value })}
               className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato [&>option]:bg-charcoal [&>option]:text-cream"
@@ -188,8 +192,9 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
             </select>
           </div>
           <div>
-            <label className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Location</label>
+            <label htmlFor="alert-location" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Location</label>
             <select
+              id="alert-location"
               value={formData.location}
               onChange={(e) => setFormData({ ...formData, location: e.target.value })}
               className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato [&>option]:bg-charcoal [&>option]:text-cream"
@@ -208,8 +213,9 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
 
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Min Price (USD)</label>
+            <label htmlFor="alert-price-min" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Min Price (USD)</label>
             <input
+              id="alert-price-min"
               type="number"
               value={formData.price_min}
               onChange={(e) => setFormData({ ...formData, price_min: e.target.value })}
@@ -220,8 +226,9 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
             />
           </div>
           <div>
-            <label className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Max Price (USD)</label>
+            <label htmlFor="alert-price-max" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Max Price (USD)</label>
             <input
+              id="alert-price-max"
               type="number"
               value={formData.price_max}
               onChange={(e) => setFormData({ ...formData, price_max: e.target.value })}
@@ -234,8 +241,9 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
         </div>
 
         <div>
-          <label className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Phone (optional)</label>
+          <label htmlFor="alert-phone" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Phone (optional)</label>
           <input
+            id="alert-phone"
             type="tel"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}

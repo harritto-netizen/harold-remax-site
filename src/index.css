@@ -47,3 +47,54 @@ h1, h2, h3, h4, h5, h6 {
 .hover-zoom:hover img {
   animation: subtle-zoom 0.4s ease-out forwards;
 }
+
+*:focus {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+summary:focus-visible {
+  outline: 2px solid #403E3F;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.bg-charcoal a:focus-visible,
+.bg-charcoal button:focus-visible,
+.bg-charcoal [role="button"]:focus-visible {
+  outline-color: #F5F1EB;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #403E3F;
+  outline-offset: 2px;
+}
+
+.bg-charcoal input:focus-visible,
+.bg-charcoal select:focus-visible,
+.bg-charcoal textarea:focus-visible {
+  outline-color: #F5F1EB;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: #403E3F;
+  color: #F5F1EB;
+  padding: 0.75rem 1.25rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  z-index: 100;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}

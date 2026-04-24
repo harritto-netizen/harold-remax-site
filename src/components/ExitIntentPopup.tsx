@@ -99,7 +99,12 @@ export default function ExitIntentPopup() {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="exit-popup-title"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 animate-fade-in"
+    >
       <div
         className="absolute inset-0 bg-charcoal/80 backdrop-blur-sm"
         onClick={dismiss}
@@ -110,9 +115,9 @@ export default function ExitIntentPopup() {
           type="button"
           onClick={dismiss}
           className="absolute top-4 right-4 text-charcoal/60 hover:text-charcoal transition-colors"
-          aria-label="Close"
+          aria-label="Close popup"
         >
-          <X className="w-5 h-5" />
+          <X className="w-5 h-5" aria-hidden="true" />
         </button>
 
         <div className="p-8 md:p-10">
@@ -122,7 +127,7 @@ export default function ExitIntentPopup() {
             </div>
             <div>
               <p className="font-lato text-xs uppercase tracking-widest text-charcoal/60">Don't miss out</p>
-              <h3 className="font-montserrat text-xl text-charcoal uppercase tracking-wider font-light">
+              <h3 id="exit-popup-title" className="font-montserrat text-xl text-charcoal uppercase tracking-wider font-light">
                 Off-Market Listings
               </h3>
             </div>
@@ -153,9 +158,12 @@ export default function ExitIntentPopup() {
                   <p className="font-lato text-red-700 text-sm">{errorMessage}</p>
                 </div>
               )}
+              <label htmlFor="exit-popup-email" className="sr-only">Email address</label>
               <input
+                id="exit-popup-email"
                 type="email"
                 required
+                aria-required="true"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"

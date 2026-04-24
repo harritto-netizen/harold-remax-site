@@ -74,9 +74,10 @@ function App() {
   return (
     <div className="min-h-screen bg-cream">
       <SchemaMarkup />
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       {/* Header/Navigation */}
       <header className="bg-cream/95 backdrop-blur-sm border-b border-charcoal/10 fixed w-full top-0 z-50 transition-all duration-300">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <nav aria-label="Primary" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 sm:space-x-3">
               <img
@@ -107,6 +108,7 @@ function App() {
         </nav>
       </header>
 
+      <main id="main-content">
       {/* Hero Section with Video Background */}
       <section id="inicio" className="relative pt-24 overflow-hidden min-h-screen flex items-center">
         {/* Video Background */}
@@ -455,6 +457,7 @@ function App() {
         </div>
       </section>
 
+      </main>
       {/* Footer */}
       <footer className="bg-cream border-t border-charcoal/10 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -482,9 +485,10 @@ function App() {
           <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setShowVideoModal(false)}
+              aria-label="Close video"
               className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
             >
-              <X className="w-8 h-8" />
+              <X className="w-8 h-8" aria-hidden="true" />
             </button>
             <div className="relative pt-[56.25%] bg-black rounded-lg overflow-hidden shadow-2xl">
               <iframe
@@ -503,7 +507,7 @@ function App() {
       {/* WhatsApp Floating Button */}
       <div className="fixed bottom-8 right-8 z-50">
         {showWhatsApp && (
-          <div className="mb-4 bg-cream border border-charcoal/20 shadow-xl p-6 max-w-sm animate-fade-in">
+          <div role="dialog" aria-label="WhatsApp contact" className="mb-4 bg-cream border border-charcoal/20 shadow-xl p-6 max-w-sm animate-fade-in">
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
@@ -516,9 +520,10 @@ function App() {
               </div>
               <button
                 onClick={() => setShowWhatsApp(false)}
+                aria-label="Close WhatsApp panel"
                 className="text-charcoal/60 hover:text-charcoal transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
             <p className="font-lato text-charcoal/70 mb-4 leading-relaxed">
@@ -538,12 +543,13 @@ function App() {
         <button
           onClick={() => setShowWhatsApp(!showWhatsApp)}
           className="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-xl hover:scale-110 transition-all duration-300 flex items-center justify-center"
-          aria-label="Contact via WhatsApp"
+          aria-label={showWhatsApp ? 'Close WhatsApp panel' : 'Open WhatsApp contact panel'}
+          aria-expanded={showWhatsApp}
         >
           {showWhatsApp ? (
-            <X className="w-6 h-6" />
+            <X className="w-6 h-6" aria-hidden="true" />
           ) : (
-            <MessageCircle className="w-6 h-6" />
+            <MessageCircle className="w-6 h-6" aria-hidden="true" />
           )}
         </button>
       </div>
