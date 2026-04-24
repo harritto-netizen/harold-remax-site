@@ -1,1 +1,4 @@
+/api/send-property-alert-notification  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/send-property-alert-notification  200
+/api/send-contact-notification  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/send-contact-notification  200
+/api/meta-capi  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/meta-capi  200
 /*    /index.html   200

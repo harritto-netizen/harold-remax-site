@@ -62,7 +62,7 @@ export default function ExitIntentPopup() {
         is_active: true,
       };
 
-      const response = await fetch(`${SUPABASE_URL}/functions/v1/send-property-alert-notification`, {
+      const response = await fetch(`/api/send-property-alert-notification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
