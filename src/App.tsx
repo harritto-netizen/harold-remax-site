@@ -402,7 +402,7 @@ function App() {
                 location: 'Santo Domingo'
               },
               {
-                title: 'Apartamento en Torre Roraima',
+                title: 'Apartment in Torre Roraima',
                 price: '$198,000',
                 beds: 1,
                 baths: 2,
