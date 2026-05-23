@@ -402,13 +402,13 @@ function App() {
                 location: 'Santo Domingo'
               },
               {
-                title: 'Tropical Villa in Punta Cana',
-                price: '$950,000',
-                beds: 5,
-                baths: 4,
-                sqft: '4,500',
-                image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200',
-                location: 'Punta Cana'
+                title: 'Apartamento en Torre Roraima',
+                price: '$198,000',
+                beds: 1,
+                baths: 2,
+                sqft: '902',
+                image: 'https://images.remaxrd.com/media/pictures/watermark/big/R-215680-1766431874-6e4a8a14-6098-44d3-a8f2-9893e1a4b824.webp',
+                location: 'Evaristo Morales, Santo Domingo'
               },
               {
                 title: 'Furnished Apartment in Bayahibe',
