@@ -158,6 +158,149 @@ export default function SchemaMarkup() {
     }
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://primerealestatedr.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Properties",
+        "item": "https://primerealestatedr.com/#propiedades"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Services",
+        "item": "https://primerealestatedr.com/#servicios"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Testimonials",
+        "item": "https://primerealestatedr.com/#testimonios"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Blog",
+        "item": "https://primerealestatedr.com/#blog"
+      }
+    ]
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the process of buying property in the Dominican Republic as a foreigner?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Foreigners can freely purchase property in the Dominican Republic with the same rights as citizens. The process involves selecting a property, signing a promise of sale, conducting due diligence and title search, signing the final deed before a notary, and registering the title. The entire process typically takes 30-60 days. RE/MAX Next Door provides full guidance including legal referrals and bilingual support throughout the transaction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the best areas to invest in real estate in the Dominican Republic?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The top areas for real estate investment include Punta Cana and Cap Cana for resort-style living and vacation rentals, Santo Domingo for urban apartments and commercial properties, Bayahibe for beachfront condos, and La Romana for luxury villas. Each area offers different investment returns depending on whether you seek rental income, capital appreciation, or personal use."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to buy a luxury property in Punta Cana?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Luxury properties in Punta Cana typically range from $200,000 for modern apartments and condos to over $2 million for beachfront villas. Cap Cana properties start around $250,000 for apartments and can exceed $5 million for premium estates. Closing costs average 3-5% of the purchase price, including transfer tax, legal fees, and registration."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What services does RE/MAX Next Door provide for property sellers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "RE/MAX Next Door provides comprehensive selling services including professional photography and virtual tours, strategic pricing based on market analysis, listing on international MLS and real estate portals, targeted digital marketing campaigns, qualified buyer screening, negotiation expertise, and full transaction management through closing. Our average time to sell is under 60 days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get a mortgage to buy property in the Dominican Republic?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, both local and international buyers can obtain financing in the Dominican Republic. Local banks offer mortgages with terms of 15-25 years at competitive rates. Foreign buyers may qualify for financing with a 30-40% down payment. Some developers also offer direct financing plans. RE/MAX Next Door can connect you with trusted banking partners for pre-approval."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the rental income potential for properties in Punta Cana and Santo Domingo?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vacation rentals in Punta Cana can generate 8-12% annual returns, with peak season occupancy rates of 80-90%. Santo Domingo long-term rentals typically yield 6-9% annually. Cap Cana luxury properties can achieve higher nightly rates during tourist season. RE/MAX Next Door provides rental management services and market data to help maximize your investment returns."
+        }
+      }
+    ]
+  };
+
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "RE/MAX Next Door",
+    "@id": "https://primerealestatedr.com/#reviews",
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "María González"
+        },
+        "datePublished": "2025-02-15",
+        "reviewBody": "Excellent service. He helped me find the perfect house for my family in record time. His market knowledge and attention to detail were impressive.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        }
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Carlos Rodríguez"
+        },
+        "datePublished": "2025-01-20",
+        "reviewBody": "I sold my property in less than a month and above the price I expected. His marketing strategy and negotiation skills are exceptional.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        }
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Ana Martínez"
+        },
+        "datePublished": "2024-12-10",
+        "reviewBody": "As an investor, I needed an agent who understood the market deeply. His analysis and recommendations were key to my success.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        }
+      }
+    ]
+  };
+
   const properties = [
     {
       name: "Luxury Villa in Punta Cana",
@@ -251,6 +394,18 @@ export default function SchemaMarkup() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
       />
       {propertiesSchema.map((schema, index) => (
         <script

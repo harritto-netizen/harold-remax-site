@@ -1,4 +1,13 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
 
 Sitemap: https://primerealestatedr.com/sitemap.xml

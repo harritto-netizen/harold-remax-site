@@ -539,8 +539,60 @@ function App() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section id="faq" className="py-24 md:py-32 bg-cream">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
+              Frequently Asked Questions
+            </h2>
+            <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
+              Everything you need to know about buying and investing in Dominican Republic real estate
+            </p>
+          </div>
+          <div className="space-y-6">
+            {[
+              {
+                question: 'What is the process of buying property in the Dominican Republic as a foreigner?',
+                answer: 'Foreigners can freely purchase property in the Dominican Republic with the same rights as citizens. The process involves selecting a property, signing a promise of sale, conducting due diligence and title search, signing the final deed before a notary, and registering the title. The entire process typically takes 30-60 days. RE/MAX Next Door provides full guidance including legal referrals and bilingual support throughout the transaction.'
+              },
+              {
+                question: 'What are the best areas to invest in real estate in the Dominican Republic?',
+                answer: 'The top areas for real estate investment include Punta Cana and Cap Cana for resort-style living and vacation rentals, Santo Domingo for urban apartments and commercial properties, Bayahibe for beachfront condos, and La Romana for luxury villas. Each area offers different investment returns depending on whether you seek rental income, capital appreciation, or personal use.'
+              },
+              {
+                question: 'How much does it cost to buy a luxury property in Punta Cana?',
+                answer: 'Luxury properties in Punta Cana typically range from $200,000 for modern apartments and condos to over $2 million for beachfront villas. Cap Cana properties start around $250,000 for apartments and can exceed $5 million for premium estates. Closing costs average 3-5% of the purchase price, including transfer tax, legal fees, and registration.'
+              },
+              {
+                question: 'What services does RE/MAX Next Door provide for property sellers?',
+                answer: 'RE/MAX Next Door provides comprehensive selling services including professional photography and virtual tours, strategic pricing based on market analysis, listing on international MLS and real estate portals, targeted digital marketing campaigns, qualified buyer screening, negotiation expertise, and full transaction management through closing. Our average time to sell is under 60 days.'
+              },
+              {
+                question: 'Can I get a mortgage to buy property in the Dominican Republic?',
+                answer: 'Yes, both local and international buyers can obtain financing in the Dominican Republic. Local banks offer mortgages with terms of 15-25 years at competitive rates. Foreign buyers may qualify for financing with a 30-40% down payment. Some developers also offer direct financing plans. RE/MAX Next Door can connect you with trusted banking partners for pre-approval.'
+              },
+              {
+                question: 'What is the rental income potential for properties in Punta Cana and Santo Domingo?',
+                answer: 'Vacation rentals in Punta Cana can generate 8-12% annual returns, with peak season occupancy rates of 80-90%. Santo Domingo long-term rentals typically yield 6-9% annually. Cap Cana luxury properties can achieve higher nightly rates during tourist season. RE/MAX Next Door provides rental management services and market data to help maximize your investment returns.'
+              }
+            ].map((faq, index) => (
+              <details key={index} className="group border border-charcoal/10 bg-beige-light">
+                <summary className="flex items-center justify-between cursor-pointer p-6 font-montserrat text-sm sm:text-base uppercase tracking-wider text-charcoal hover:opacity-70 transition-opacity">
+                  <span className="pr-4">{faq.question}</span>
+                  <span className="text-charcoal/50 text-xl group-open:rotate-45 transition-transform duration-200">+</span>
+                </summary>
+                <div className="px-6 pb-6">
+                  <p className="font-lato text-charcoal/80 leading-relaxed">{faq.answer}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Blog Section */}
-      <section id="blog" className="py-24 md:py-32 bg-cream">
+      <section id="blog" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
@@ -603,20 +655,46 @@ function App() {
       {/* Footer */}
       <footer className="bg-cream border-t border-charcoal/10 py-16 pb-24 md:pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <div className="flex items-center space-x-3">
+          <div className="grid md:grid-cols-3 gap-12 mb-12">
+            <div>
               <img
                 src="/re_max_next_door_(4).png"
                 alt="RE/MAX Next Door Logo - Real Estate Dominican Republic"
-                className="h-10 w-auto"
+                className="h-10 w-auto mb-4"
                 loading="lazy"
                 width="180"
                 height="40"
               />
+              <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                Certified RE/MAX real estate agency specializing in luxury properties across the Dominican Republic. Serving Santo Domingo, Punta Cana, Cap Cana, and Bayahibe.
+              </p>
             </div>
-            <div className="text-center md:text-right">
-              <p className="font-lato text-sm text-charcoal/60">© 2025 RE/MAX Next Door. All rights reserved.</p>
+            <div>
+              <h4 className="font-montserrat text-xs uppercase tracking-widest text-charcoal mb-4">Quick Links</h4>
+              <nav aria-label="Footer navigation" className="space-y-2">
+                <a href="#propiedades" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Properties for Sale</a>
+                <a href="#servicios" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Real Estate Services</a>
+                <a href="#testimonios" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Client Testimonials</a>
+                <a href="#faq" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">FAQ</a>
+                <a href="#blog" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Market Insights</a>
+              </nav>
             </div>
+            <div>
+              <h4 className="font-montserrat text-xs uppercase tracking-widest text-charcoal mb-4">Contact</h4>
+              <address className="not-italic space-y-2">
+                <p className="font-lato text-sm text-charcoal/70">Plaza Cuadra Alameda, Prol. Av. 27 de Febrero 7</p>
+                <p className="font-lato text-sm text-charcoal/70">Santo Domingo, Dominican Republic</p>
+                <a href="tel:+18094262269" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">
+                  <Phone className="w-3.5 h-3.5 inline mr-1" />+1 (809) 426-2269
+                </a>
+              </address>
+            </div>
+          </div>
+          <div className="border-t border-charcoal/10 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="font-lato text-xs text-charcoal/50">
+              Luxury real estate in Santo Domingo, Punta Cana, Cap Cana, Bayahibe, and La Romana
+            </p>
+            <p className="font-lato text-xs text-charcoal/50">© 2025 RE/MAX Next Door. All rights reserved.</p>
           </div>
         </div>
       </footer>
