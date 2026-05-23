@@ -9,6 +9,7 @@ interface PropertyAlertFormProps {
 }
 
 export default function PropertyAlertForm({ initialLocation = '', initialPropertyType = '' }: PropertyAlertFormProps) {
+  const [expanded, setExpanded] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
     name: '',
@@ -26,8 +27,10 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
         location: initialLocation || prev.location,
         property_type: initialPropertyType || prev.property_type,
       }));
+      setExpanded(true);
     }
   }, [initialLocation, initialPropertyType]);
+
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -143,127 +146,153 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
           </div>
         )}
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="alert-email" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Email *</label>
-            <input
-              id="alert-email"
-              type="email"
-              required
-              aria-required="true"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
-              placeholder="you@email.com"
-              disabled={formStatus === 'loading'}
-            />
-          </div>
-          <div>
-            <label htmlFor="alert-name" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Name</label>
-            <input
-              id="alert-name"
-              type="text"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
-              placeholder="Your name"
-              disabled={formStatus === 'loading'}
-            />
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="alert-property-type" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Property Type</label>
-            <select
-              id="alert-property-type"
-              value={formData.property_type}
-              onChange={(e) => setFormData({ ...formData, property_type: e.target.value })}
-              className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato [&>option]:bg-charcoal [&>option]:text-cream"
-              disabled={formStatus === 'loading'}
-            >
-              <option value="">Any</option>
-              <option value="villa">Villa</option>
-              <option value="apartment">Apartment</option>
-              <option value="condo">Condo</option>
-              <option value="penthouse">Penthouse</option>
-              <option value="land">Land</option>
-              <option value="commercial">Commercial</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="alert-location" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Location</label>
-            <select
-              id="alert-location"
-              value={formData.location}
-              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-              className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato [&>option]:bg-charcoal [&>option]:text-cream"
-              disabled={formStatus === 'loading'}
-            >
-              <option value="">Any</option>
-              <option value="Santo Domingo">Santo Domingo</option>
-              <option value="Punta Cana">Punta Cana</option>
-              <option value="Cap Cana">Cap Cana</option>
-              <option value="Bayahibe">Bayahibe</option>
-              <option value="La Romana">La Romana</option>
-              <option value="Casa de Campo">Casa de Campo</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <label htmlFor="alert-price-min" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Min Price (USD)</label>
-            <input
-              id="alert-price-min"
-              type="number"
-              value={formData.price_min}
-              onChange={(e) => setFormData({ ...formData, price_min: e.target.value })}
-              className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
-              placeholder="100000"
-              min="0"
-              disabled={formStatus === 'loading'}
-            />
-          </div>
-          <div>
-            <label htmlFor="alert-price-max" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Max Price (USD)</label>
-            <input
-              id="alert-price-max"
-              type="number"
-              value={formData.price_max}
-              onChange={(e) => setFormData({ ...formData, price_max: e.target.value })}
-              className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
-              placeholder="500000"
-              min="0"
-              disabled={formStatus === 'loading'}
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="alert-phone" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Phone (optional)</label>
+        {/* Step 1: Email only */}
+        <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
           <input
-            id="alert-phone"
-            type="tel"
-            value={formData.phone}
-            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
-            placeholder="809-000-0000"
+            id="alert-email"
+            type="email"
+            required
+            aria-required="true"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="flex-1 px-4 py-4 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
+            placeholder="your@email.com"
             disabled={formStatus === 'loading'}
           />
+          {!expanded && (
+            <button
+              type="submit"
+              disabled={formStatus === 'loading'}
+              className="border-2 border-cream text-cream px-8 py-4 text-sm uppercase tracking-widest hover:bg-cream hover:text-charcoal transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-lato whitespace-nowrap"
+            >
+              {formStatus === 'loading' ? 'Subscribing...' : 'Get Early Access'}
+            </button>
+          )}
         </div>
 
-        <div className="flex justify-center">
-          <div className="cf-turnstile" data-sitekey="0x4AAAAAACIywdosyC_96b7n"></div>
-        </div>
+        {!expanded && (
+          <p className="text-center">
+            <button
+              type="button"
+              onClick={() => setExpanded(true)}
+              className="font-lato text-xs text-cream/50 uppercase tracking-wider hover:text-cream/80 transition-colors underline underline-offset-4"
+            >
+              Customize preferences (location, budget, type)
+            </button>
+          </p>
+        )}
 
-        <button
-          type="submit"
-          disabled={formStatus === 'loading'}
-          className="w-full border-2 border-cream text-cream px-8 py-4 text-sm uppercase tracking-widest hover:bg-cream hover:text-charcoal transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-lato"
-        >
-          {formStatus === 'loading' ? 'Subscribing...' : 'Get Property Alerts'}
-        </button>
+        {/* Step 2: Expanded preferences */}
+        {expanded && (
+          <div className="animate-fade-in space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="alert-name" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Name</label>
+                <input
+                  id="alert-name"
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
+                  placeholder="Your name"
+                  disabled={formStatus === 'loading'}
+                />
+              </div>
+              <div>
+                <label htmlFor="alert-phone" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Phone</label>
+                <input
+                  id="alert-phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
+                  placeholder="809-000-0000"
+                  disabled={formStatus === 'loading'}
+                />
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="alert-property-type" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Property Type</label>
+                <select
+                  id="alert-property-type"
+                  value={formData.property_type}
+                  onChange={(e) => setFormData({ ...formData, property_type: e.target.value })}
+                  className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato [&>option]:bg-charcoal [&>option]:text-cream"
+                  disabled={formStatus === 'loading'}
+                >
+                  <option value="">Any</option>
+                  <option value="villa">Villa</option>
+                  <option value="apartment">Apartment</option>
+                  <option value="condo">Condo</option>
+                  <option value="penthouse">Penthouse</option>
+                  <option value="land">Land</option>
+                  <option value="commercial">Commercial</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="alert-location" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Location</label>
+                <select
+                  id="alert-location"
+                  value={formData.location}
+                  onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                  className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato [&>option]:bg-charcoal [&>option]:text-cream"
+                  disabled={formStatus === 'loading'}
+                >
+                  <option value="">Any</option>
+                  <option value="Santo Domingo">Santo Domingo</option>
+                  <option value="Punta Cana">Punta Cana</option>
+                  <option value="Cap Cana">Cap Cana</option>
+                  <option value="Bayahibe">Bayahibe</option>
+                  <option value="La Romana">La Romana</option>
+                  <option value="Casa de Campo">Casa de Campo</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="alert-price-min" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Min Price (USD)</label>
+                <input
+                  id="alert-price-min"
+                  type="number"
+                  value={formData.price_min}
+                  onChange={(e) => setFormData({ ...formData, price_min: e.target.value })}
+                  className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
+                  placeholder="100000"
+                  min="0"
+                  disabled={formStatus === 'loading'}
+                />
+              </div>
+              <div>
+                <label htmlFor="alert-price-max" className="font-lato text-sm text-cream/90 uppercase tracking-wider mb-2 block">Max Price (USD)</label>
+                <input
+                  id="alert-price-max"
+                  type="number"
+                  value={formData.price_max}
+                  onChange={(e) => setFormData({ ...formData, price_max: e.target.value })}
+                  className="w-full px-4 py-3 bg-cream/10 border border-cream/20 text-cream focus:border-cream focus:outline-none transition-all font-lato placeholder-cream/40"
+                  placeholder="500000"
+                  min="0"
+                  disabled={formStatus === 'loading'}
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-center">
+              <div className="cf-turnstile" data-sitekey="0x4AAAAAACIywdosyC_96b7n"></div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={formStatus === 'loading'}
+              className="w-full border-2 border-cream text-cream px-8 py-4 text-sm uppercase tracking-widest hover:bg-cream hover:text-charcoal transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-lato"
+            >
+              {formStatus === 'loading' ? 'Subscribing...' : 'Get Property Alerts'}
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );

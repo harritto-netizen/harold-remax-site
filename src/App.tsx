@@ -1,8 +1,9 @@
-import { Home, Building2, Key, Search, Star, Calendar, TrendingUp, Play, MessageCircle, X, Bell } from 'lucide-react';
+import { Home, Building2, Key, Search, Star, Calendar, TrendingUp, Play, MessageCircle, X, Bell, Menu, Phone } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import SchemaMarkup from './components/SchemaMarkup';
 import PropertyAlertForm from './components/PropertyAlertForm';
 import ExitIntentPopup from './components/ExitIntentPopup';
+import MobileCTABar from './components/MobileCTABar';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
 import { getCurrentUser } from './lib/auth';
@@ -15,6 +16,7 @@ function App() {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [showWhatsApp, setShowWhatsApp] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [alertPrefill, setAlertPrefill] = useState<{ location: string; propertyType: string }>({ location: '', propertyType: '' });
 
   const scrollToAlerts = (location: string = '', propertyType: string = '') => {
@@ -27,6 +29,11 @@ function App() {
     checkAuth();
     initTracking();
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
 
   const checkAuth = async () => {
     const path = window.location.pathname;
@@ -95,18 +102,58 @@ function App() {
               <a href="#testimonios" className="text-charcoal text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">Testimonials</a>
               <a href="#blog" className="text-charcoal text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">Blog</a>
             </div>
-            <a
-              href="https://wa.me/18094262269?text=Hello%20Harold,%20I'm%20interested%20in%20your%20real%20estate%20services"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackContact('whatsapp_general')}
-              className="border border-charcoal text-charcoal px-6 py-2 text-sm uppercase tracking-widest hover:bg-charcoal hover:text-cream transition-all duration-300"
-            >
-              Get In Touch
-            </a>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://wa.me/18094262269?text=Hello%20Harold,%20I'm%20interested%20in%20your%20real%20estate%20services"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackContact('whatsapp_general')}
+                className="hidden sm:inline-block border border-charcoal text-charcoal px-6 py-2 text-sm uppercase tracking-widest hover:bg-charcoal hover:text-cream transition-all duration-300"
+              >
+                Get In Touch
+              </a>
+              <button
+                onClick={() => setMobileMenuOpen(true)}
+                className="lg:hidden text-charcoal p-2"
+                aria-label="Open navigation menu"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+            </div>
           </div>
         </nav>
       </header>
+
+      {/* Mobile Navigation Drawer */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-[60] lg:hidden animate-slide-in">
+          <div className="absolute inset-0 bg-cream flex flex-col p-8 pt-24">
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="absolute top-6 right-6 text-charcoal p-2"
+              aria-label="Close navigation menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <a href="#inicio" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Home</a>
+            <a href="#servicios" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Services</a>
+            <a href="#propiedades" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Properties</a>
+            <a href="#testimonios" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Testimonials</a>
+            <a href="#blog" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Blog</a>
+            <div className="mt-auto">
+              <a
+                href="https://wa.me/18094262269?text=Hello%20Harold,%20I'm%20interested%20in%20your%20real%20estate%20services"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => { trackContact('whatsapp_mobile_menu'); setMobileMenuOpen(false); }}
+                className="block w-full text-center border-2 border-charcoal text-charcoal px-6 py-4 text-sm uppercase tracking-widest hover:bg-charcoal hover:text-cream transition-all duration-300"
+              >
+                Get In Touch
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       <main id="main-content">
       {/* Hero Section with Video Background */}
@@ -138,6 +185,54 @@ function App() {
           <a href="#propiedades" className="inline-block border-2 border-cream text-cream px-8 py-3 text-sm uppercase tracking-widest hover:bg-cream hover:text-charcoal transition-all duration-300">
             View Properties
           </a>
+
+          {/* Quick Search Bar */}
+          <div className="mt-12 w-full max-w-3xl mx-auto bg-cream/10 backdrop-blur-md border border-cream/20 p-4 md:p-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <select
+                aria-label="Location"
+                className="bg-transparent border border-cream/30 text-cream font-lato text-sm px-4 py-3 uppercase tracking-wider appearance-none cursor-pointer"
+                defaultValue=""
+              >
+                <option value="" disabled className="text-charcoal">Location</option>
+                <option value="Santo Domingo" className="text-charcoal">Santo Domingo</option>
+                <option value="Punta Cana" className="text-charcoal">Punta Cana</option>
+                <option value="Cap Cana" className="text-charcoal">Cap Cana</option>
+                <option value="Bayahibe" className="text-charcoal">Bayahibe</option>
+                <option value="La Romana" className="text-charcoal">La Romana</option>
+              </select>
+              <select
+                aria-label="Property type"
+                className="bg-transparent border border-cream/30 text-cream font-lato text-sm px-4 py-3 uppercase tracking-wider appearance-none cursor-pointer"
+                defaultValue=""
+              >
+                <option value="" disabled className="text-charcoal">Property Type</option>
+                <option value="villa" className="text-charcoal">Villa</option>
+                <option value="apartment" className="text-charcoal">Apartment</option>
+                <option value="condo" className="text-charcoal">Condo</option>
+                <option value="penthouse" className="text-charcoal">Penthouse</option>
+                <option value="land" className="text-charcoal">Land</option>
+              </select>
+              <select
+                aria-label="Budget range"
+                className="bg-transparent border border-cream/30 text-cream font-lato text-sm px-4 py-3 uppercase tracking-wider appearance-none cursor-pointer"
+                defaultValue=""
+              >
+                <option value="" disabled className="text-charcoal">Budget</option>
+                <option value="0-200000" className="text-charcoal">Under $200K</option>
+                <option value="200000-500000" className="text-charcoal">$200K - $500K</option>
+                <option value="500000-1000000" className="text-charcoal">$500K - $1M</option>
+                <option value="1000000+" className="text-charcoal">$1M+</option>
+              </select>
+              <a
+                href="#propiedades"
+                className="flex items-center justify-center gap-2 bg-cream text-charcoal px-6 py-3 text-sm uppercase tracking-widest font-lato hover:bg-cream/90 transition-all"
+              >
+                <Search className="w-4 h-4" />
+                Search
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -199,10 +294,10 @@ function App() {
                 About Harold
               </h2>
               <p className="font-lato text-lg text-charcoal/80 leading-relaxed">
-                With over 15 years of experience in the Caribbean real estate market, I specialize in helping clients find their ideal properties in Santo Domingo and Punta Cana.
+                Discover your dream home in paradise with Prime Real Estate DR! With over 15 years of experience, we specialize in luxury properties throughout the Dominican Republic, including the stunning Punta Cana region. As a certified RE/MAX agency, we offer an unparalleled experience and an extensive network of contacts to help you find the perfect investment or the ideal home for your family.
               </p>
               <p className="font-lato text-lg text-charcoal/80 leading-relaxed">
-                My commitment is to provide personalized, transparent, and professional service at every stage of the process. Whether you're buying, selling, or renting, I work tirelessly to exceed your expectations.
+                Imagine waking up to spectacular views and enjoying the vibrant culture of Santo Domingo or Punta Cana. Let our expert agents guide you through the entire process with a free consultation. Start building your future today!
               </p>
               <div className="grid grid-cols-2 gap-8 pt-4">
                 <div>
@@ -224,6 +319,35 @@ function App() {
                 Get In Touch
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Credentials Section */}
+      <section className="py-12 md:py-16 bg-cream border-y border-charcoal/5">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="font-lato text-xs text-charcoal/50 uppercase tracking-widest text-center mb-8">
+            Trusted Credentials & Partnerships
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
+            <img
+              src="/re_max_next_door_(4).png"
+              alt="RE/MAX Next Door"
+              className="h-12 md:h-14 w-auto opacity-70 hover:opacity-100 transition-opacity"
+              loading="lazy"
+            />
+            <img
+              src="/png-clipart-remax-logo-re-max-llc-real-estate-estate-agent-house-re-max-ocean-properties-new-balloon-logo-thumbnail.png"
+              alt="RE/MAX International"
+              className="h-10 md:h-12 w-auto opacity-70 hover:opacity-100 transition-opacity"
+              loading="lazy"
+            />
+            <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2">
+              15+ Years Certified
+            </span>
+            <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2">
+              500+ Properties Sold
+            </span>
           </div>
         </div>
       </section>
@@ -319,7 +443,7 @@ function App() {
                     <span>{property.baths} Baths</span>
                     <span>{property.sqft} ft²</span>
                   </div>
-                  <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-1">
+                  <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 pt-2">
                     <a
                       href={`https://wa.me/18094262269?text=Hello%20Harold,%20I'm%20interested%20in%20the%20${encodeURIComponent(property.title)}%20listed%20at%20${encodeURIComponent(property.price)}%20in%20${encodeURIComponent(property.location)}.%20Can%20you%20provide%20more%20details?`}
                       target="_blank"
@@ -333,13 +457,23 @@ function App() {
                     >
                       View Details
                     </a>
+                    <a
+                      href={`https://wa.me/18094262269?text=${encodeURIComponent(`Hi Harold, I'd like to schedule a tour of ${property.title} in ${property.location}. When are you available?`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackContact('schedule_tour')}
+                      className="inline-flex items-center gap-1.5 font-lato text-xs text-charcoal uppercase tracking-widest border border-charcoal px-3 py-1.5 hover:bg-charcoal hover:text-cream transition-all duration-300"
+                    >
+                      <Calendar className="w-3.5 h-3.5" />
+                      Schedule Tour
+                    </a>
                     <button
                       type="button"
                       onClick={() => scrollToAlerts(property.location, '')}
                       className="inline-flex items-center gap-1.5 font-lato text-xs text-charcoal/70 uppercase tracking-wider hover:text-charcoal transition-colors"
                     >
                       <Bell className="w-3.5 h-3.5" />
-                      Alert me of similar in {property.location.split(',')[0]}
+                      Alert me of similar
                     </button>
                   </div>
                 </div>
@@ -373,19 +507,27 @@ function App() {
                 name: 'María González',
                 role: 'Home Buyer',
                 text: 'Excellent service. He helped me find the perfect house for my family in record time. His market knowledge and attention to detail were impressive.',
+                rating: 5,
               },
               {
                 name: 'Carlos Rodríguez',
                 role: 'Seller',
                 text: 'I sold my property in less than a month and above the price I expected. His marketing strategy and negotiation skills are exceptional.',
+                rating: 5,
               },
               {
                 name: 'Ana Martínez',
                 role: 'Investor',
                 text: 'As an investor, I needed an agent who understood the market deeply. His analysis and recommendations were key to my success.',
+                rating: 5,
               },
             ].map((testimonial, index) => (
               <div key={index} className="bg-cream p-8">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-charcoal/70 text-charcoal/70" />
+                  ))}
+                </div>
                 <p className="font-lato text-charcoal/80 leading-relaxed mb-6 italic">"{testimonial.text}"</p>
                 <div>
                   <p className="font-montserrat text-sm uppercase tracking-wider text-charcoal">{testimonial.name}</p>
@@ -459,7 +601,7 @@ function App() {
 
       </main>
       {/* Footer */}
-      <footer className="bg-cream border-t border-charcoal/10 py-16">
+      <footer className="bg-cream border-t border-charcoal/10 py-16 pb-24 md:pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <div className="flex items-center space-x-3">
@@ -504,8 +646,11 @@ function App() {
         </div>
       )}
 
+      {/* Mobile Sticky CTA Bar */}
+      <MobileCTABar />
+
       {/* WhatsApp Floating Button */}
-      <div className="fixed bottom-8 right-8 z-50">
+      <div className="fixed bottom-24 md:bottom-8 right-8 z-50">
         {showWhatsApp && (
           <div role="dialog" aria-label="WhatsApp contact" className="mb-4 bg-cream border border-charcoal/20 shadow-xl p-6 max-w-sm animate-fade-in">
             <div className="flex justify-between items-start mb-4">

@@ -2,11 +2,11 @@ export default function SchemaMarkup() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "@id": "https://www.primerealestatedr.com/#organization",
+    "@id": "https://primerealestatedr.com/#organization",
     "name": "RE/MAX Next Door",
-    "url": "https://www.primerealestatedr.com",
-    "logo": "https://www.primerealestatedr.com/re_max_next_door_(4).png",
-    "image": "https://www.primerealestatedr.com/harold-portrait.jpg",
+    "url": "https://primerealestatedr.com",
+    "logo": "https://primerealestatedr.com/re_max_next_door_(4).png",
+    "image": "https://primerealestatedr.com/harold-portrait.jpg",
     "description": "Certified RE/MAX real estate agent with 15+ years of experience in Santo Domingo and Punta Cana. Services for buying, selling, and renting luxury properties.",
     "address": {
       "@type": "PostalAddress",
@@ -47,7 +47,7 @@ export default function SchemaMarkup() {
     "@type": "Person",
     "name": "Harold",
     "jobTitle": "Certified Real Estate Agent",
-    "image": "https://www.primerealestatedr.com/harold-portrait.jpg",
+    "image": "https://primerealestatedr.com/harold-portrait.jpg",
     "telephone": "+1-809-426-2269",
     "email": "harold@remaxnextdoor.com",
     "worksFor": {
@@ -68,9 +68,9 @@ export default function SchemaMarkup() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "RE/MAX Next Door",
-    "image": "https://www.primerealestatedr.com/re_max_next_door_(4).png",
-    "@id": "https://www.primerealestatedr.com",
-    "url": "https://www.primerealestatedr.com",
+    "image": "https://primerealestatedr.com/re_max_next_door_(4).png",
+    "@id": "https://primerealestatedr.com",
+    "url": "https://primerealestatedr.com",
     "telephone": "+1-809-426-2269",
     "priceRange": "$$$$",
     "address": {
@@ -106,10 +106,10 @@ export default function SchemaMarkup() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "RE/MAX Next Door",
-    "url": "https://www.primerealestatedr.com",
+    "url": "https://primerealestatedr.com",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://www.primerealestatedr.com/?s={search_term_string}",
+      "target": "https://primerealestatedr.com/?s={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };
@@ -175,7 +175,7 @@ export default function SchemaMarkup() {
       beds: 1,
       baths: 1,
       sqft: 786,
-      image: "https://www.primerealestatedr.com/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.png"
+      image: "https://primerealestatedr.com/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.png"
     },
     {
       name: "Villa Playa Nueva Romana",
@@ -184,20 +184,20 @@ export default function SchemaMarkup() {
       beds: 3,
       baths: 3,
       sqft: 4521,
-      image: "https://www.primerealestatedr.com/laud-2.webp"
+      image: "https://primerealestatedr.com/laud-2.webp"
     }
   ];
 
   const propertiesSchema = properties.map((property, index) => ({
     "@context": "https://schema.org",
     "@type": "Product",
-    "@id": `https://www.primerealestatedr.com/property/${index + 1}`,
+    "@id": `https://primerealestatedr.com/property/${index + 1}`,
     "name": property.name,
     "image": property.image,
     "description": `Luxury property in ${property.location} with ${property.beds} bedrooms and ${property.baths} bathrooms`,
     "offers": {
       "@type": "Offer",
-      "url": `https://www.primerealestatedr.com/property/${index + 1}`,
+      "url": `https://primerealestatedr.com/property/${index + 1}`,
       "priceCurrency": "USD",
       "price": property.price,
       "availability": "https://schema.org/InStock",

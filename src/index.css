@@ -48,6 +48,19 @@ h1, h2, h3, h4, h5, h6 {
   animation: subtle-zoom 0.4s ease-out forwards;
 }
 
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-slide-in {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+.mobile-cta-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 *:focus {
   outline: none;
 }
