@@ -407,7 +407,7 @@ function App() {
                 beds: 1,
                 baths: 2,
                 sqft: '902',
-                image: 'https://images.remaxrd.com/media/pictures/watermark/big/R-215680-1766431874-6e4a8a14-6098-44d3-a8f2-9893e1a4b824.webp',
+                image: '/60.jpg',
                 location: 'Evaristo Morales, Santo Domingo'
               },
               {
