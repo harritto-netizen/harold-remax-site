@@ -9,7 +9,8 @@ if (!rawSupabaseUrl || !supabaseAnonKey) {
 
 const supabaseUrl =
   typeof window !== 'undefined' &&
-  window.location.hostname === 'primerealestatedr.com'
+  (window.location.hostname === 'primerealestatedr.com' ||
+   window.location.hostname === 'www.primerealestatedr.com')
     ? `${window.location.origin}/supabase-proxy`
     : rawSupabaseUrl;
 
