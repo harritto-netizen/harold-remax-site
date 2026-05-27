@@ -106,12 +106,7 @@ export default function SchemaMarkup() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "RE/MAX Next Door",
-    "url": "https://primerealestatedr.com",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://primerealestatedr.com/?s={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
+    "url": "https://primerealestatedr.com"
   };
 
   const serviceSchema = {
@@ -331,16 +326,15 @@ export default function SchemaMarkup() {
     }
   ];
 
-  const propertiesSchema = properties.map((property, index) => ({
+  const propertiesSchema = properties.map((property) => ({
     "@context": "https://schema.org",
     "@type": "Product",
-    "@id": `https://primerealestatedr.com/property/${index + 1}`,
     "name": property.name,
     "image": property.image,
     "description": `Luxury property in ${property.location} with ${property.beds} bedrooms and ${property.baths} bathrooms`,
     "offers": {
       "@type": "Offer",
-      "url": `https://primerealestatedr.com/property/${index + 1}`,
+      "url": "https://primerealestatedr.com/#propiedades",
       "priceCurrency": "USD",
       "price": property.price,
       "availability": "https://schema.org/InStock",
