@@ -335,21 +335,12 @@ export default function SchemaMarkup() {
 
   const propertiesSchema = properties.map((property) => ({
     "@context": "https://schema.org",
-    "@type": "Product",
+    "@type": "RealEstateListing",
     "name": property.name,
     "image": property.image,
     "description": `Luxury property in ${property.location} with ${property.beds} bedrooms and ${property.baths} bathrooms`,
-    "offers": {
-      "@type": "Offer",
-      "url": "https://primerealestatedr.com/#propiedades",
-      "priceCurrency": "USD",
-      "price": property.price,
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "RealEstateAgent",
-        "name": "RE/MAX Next Door"
-      }
-    },
+    "url": "https://primerealestatedr.com/#propiedades",
+    "datePosted": "2025-01-01",
     "additionalProperty": [
       {
         "@type": "PropertyValue",
