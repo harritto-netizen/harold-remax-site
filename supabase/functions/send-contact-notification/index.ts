@@ -13,38 +13,6 @@ interface ContactMessage {
   message: string;
 }
 
-async function sendWhatsApp(body: string) {
-  const sid = Deno.env.get("TWILIO_ACCOUNT_SID");
-  const token = Deno.env.get("TWILIO_AUTH_TOKEN");
-  const adminPhone = Deno.env.get("ADMIN_PHONE");
-  const from = Deno.env.get("TWILIO_WHATSAPP_FROM") || "whatsapp:+14155238886";
-
-  if (!sid || !token || !adminPhone) {
-    console.log("Twilio not configured, skipping WhatsApp");
-    return;
-  }
-
-  const to = adminPhone.startsWith("whatsapp:") ? adminPhone : `whatsapp:${adminPhone}`;
-  const params = new URLSearchParams({ To: to, From: from, Body: body });
-
-  const res = await fetch(
-    `https://api.twilio.com/2010-04-01/Accounts/${sid}/Messages.json`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${btoa(`${sid}:${token}`)}`,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: params.toString(),
-    }
-  );
-
-  if (!res.ok) {
-    const err = await res.text();
-    console.error("Twilio WhatsApp send failed:", err);
-  }
-}
-
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 200, headers: corsHeaders });
@@ -55,15 +23,6 @@ Deno.serve(async (req: Request) => {
 
     const adminEmail = Deno.env.get("ADMIN_EMAIL") || "your-email@example.com";
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
-
-    const whatsappBody =
-      `New Contact Message\n` +
-      `Name: ${payload.name}\n` +
-      `Email: ${payload.email}\n` +
-      `Phone: ${payload.phone || "N/A"}\n\n` +
-      `${payload.message}`;
-
-    await sendWhatsApp(whatsappBody);
 
     if (!resendApiKey) {
       return new Response(
