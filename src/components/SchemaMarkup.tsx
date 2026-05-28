@@ -250,6 +250,13 @@ export default function SchemaMarkup() {
     "@type": "LocalBusiness",
     "name": "RE/MAX Next Door",
     "@id": "https://primerealestatedr.com/#reviews",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "ratingCount": "3",
+      "reviewCount": "3"
+    },
     "review": [
       {
         "@type": "Review",
