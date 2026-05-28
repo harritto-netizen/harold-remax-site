@@ -82,7 +82,7 @@ export default function ExitIntentPopup() {
         throw new Error(result.error || 'Submit failed');
       }
 
-      trackLead({ contentName: 'exit_intent_popup', userData: { email } });
+      trackLead({ contentName: 'exit_intent_popup' });
       setStatus('success');
       localStorage.setItem(STORAGE_KEY, Date.now().toString());
       setTimeout(() => setIsOpen(false), 3500);

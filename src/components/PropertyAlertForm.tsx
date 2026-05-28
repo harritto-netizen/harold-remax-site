@@ -71,17 +71,7 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
         throw new Error(result.error || 'Submit failed');
       }
 
-      const [firstName, ...restName] = (formData.name || '').trim().split(/\s+/);
-      trackLead({
-        contentName: 'property_alert_form',
-        userData: {
-          email: formData.email || undefined,
-          phone: formData.phone || undefined,
-          firstName: firstName || undefined,
-          lastName: restName.length ? restName.join(' ') : undefined,
-          city: formData.location || undefined,
-        },
-      });
+      trackLead({ contentName: 'property_alert_form' });
       setFormStatus('success');
       setFormData({
         email: '',
