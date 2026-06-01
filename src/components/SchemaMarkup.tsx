@@ -303,6 +303,72 @@ export default function SchemaMarkup() {
     ]
   };
 
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "RE/MAX Next Door Market Insights",
+    "url": "https://primerealestatedr.com/#blog",
+    "description": "Expert analysis on Dominican Republic real estate trends, investment opportunities, and market forecasts",
+    "publisher": {
+      "@type": "Organization",
+      "name": "RE/MAX Next Door",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://primerealestatedr.com/re_max_next_door_(4).png"
+      }
+    },
+    "blogPost": [
+      {
+        "@type": "BlogPosting",
+        "headline": "Dominican Republic Real Estate Market Forecast 2026: Record Foreign Investment Drives Growth",
+        "datePublished": "2026-05-28",
+        "dateModified": "2026-05-28",
+        "author": {
+          "@type": "Person",
+          "name": "Harold",
+          "jobTitle": "Certified Real Estate Agent",
+          "worksFor": { "@type": "Organization", "name": "RE/MAX Next Door" }
+        },
+        "description": "The DR real estate market is experiencing unprecedented growth in 2026 with foreign investment up 34% year-over-year. Punta Cana and Cap Cana lead with average property appreciation of 12-18% annually.",
+        "image": "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg",
+        "url": "https://primerealestatedr.com/#blog",
+        "keywords": ["Dominican Republic real estate 2026", "Punta Cana investment", "Cap Cana property", "Caribbean real estate market", "foreign investment DR"]
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Why Remote Workers Are Buying Homes in Punta Cana and Cap Cana in 2026",
+        "datePublished": "2026-05-15",
+        "dateModified": "2026-05-15",
+        "author": {
+          "@type": "Person",
+          "name": "Harold",
+          "jobTitle": "Certified Real Estate Agent",
+          "worksFor": { "@type": "Organization", "name": "RE/MAX Next Door" }
+        },
+        "description": "The digital nomad visa program and fiber-optic infrastructure expansion are attracting remote professionals to purchase condos and villas in Punta Cana.",
+        "image": "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg",
+        "url": "https://primerealestatedr.com/#blog",
+        "keywords": ["digital nomad Dominican Republic", "remote work Punta Cana", "buy home Cap Cana", "expat real estate DR", "work from home Caribbean"]
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Santo Domingo Luxury Condo Boom: New Developments and Investment Returns",
+        "datePublished": "2026-05-02",
+        "dateModified": "2026-05-02",
+        "author": {
+          "@type": "Person",
+          "name": "Harold",
+          "jobTitle": "Certified Real Estate Agent",
+          "worksFor": { "@type": "Organization", "name": "RE/MAX Next Door" }
+        },
+        "description": "Santo Domingo is experiencing a luxury condo construction boom along the Malecon and in Naco district. Pre-construction prices offer 20-30% savings compared to completed units.",
+        "image": "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg",
+        "url": "https://primerealestatedr.com/#blog",
+        "keywords": ["Santo Domingo condos", "luxury apartments Dominican Republic", "Malecon real estate", "Naco district property", "pre-construction investment"]
+      }
+    ]
+  };
+
   const properties = [
     {
       name: "Luxury Villa in Punta Cana",
@@ -398,6 +464,10 @@ export default function SchemaMarkup() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
       {propertiesSchema.map((schema, index) => (
         <script

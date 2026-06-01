@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://primerealestatedr.com/</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -44,31 +44,31 @@
   </url>
   <url>
     <loc>https://primerealestatedr.com/#propiedades</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://primerealestatedr.com/#servicios</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://primerealestatedr.com/#testimonios</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://primerealestatedr.com/#blog</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://primerealestatedr.com/#property-alerts</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
