@@ -624,7 +624,7 @@ function App() {
                 title: 'Santo Domingo Luxury Condo Boom: New Developments and Investment Returns',
                 date: 'May 2, 2026',
                 excerpt: 'Santo Domingo is experiencing a luxury condo construction boom along the Malecon and in Naco district. Pre-construction prices offer 20-30% savings compared to completed units, with rental yields averaging 8-10% for furnished short-term rentals.',
-                image: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800',
+                image: 'https://images.pexels.com/photos/2476632/pexels-photo-2476632.jpeg?auto=compress&cs=tinysrgb&w=800',
                 readTime: '6 min read',
                 category: 'Investment',
               },

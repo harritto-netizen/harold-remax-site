@@ -362,7 +362,7 @@ export default function SchemaMarkup() {
           "worksFor": { "@type": "Organization", "name": "RE/MAX Next Door" }
         },
         "description": "Santo Domingo is experiencing a luxury condo construction boom along the Malecon and in Naco district. Pre-construction prices offer 20-30% savings compared to completed units.",
-        "image": "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg",
+        "image": "https://images.pexels.com/photos/2476632/pexels-photo-2476632.jpeg",
         "url": "https://primerealestatedr.com/#blog",
         "keywords": ["Santo Domingo condos", "luxury apartments Dominican Republic", "Malecon real estate", "Naco district property", "pre-construction investment"]
       }
