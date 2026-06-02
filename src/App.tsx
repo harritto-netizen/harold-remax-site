@@ -1,4 +1,4 @@
-import { Home, Building2, Key, Search, Star, Calendar, TrendingUp, Play, MessageCircle, X, Bell, Menu, Phone } from 'lucide-react';
+import { Home, Building2, Key, Search, Star, Calendar, TrendingUp, Play, MessageCircle, X, Bell, Menu, Phone, Instagram, Facebook } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import SchemaMarkup from './components/SchemaMarkup';
 import PropertyAlertForm from './components/PropertyAlertForm';
@@ -697,6 +697,26 @@ function App() {
               <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
                 Certified RE/MAX real estate agency specializing in luxury properties across the Dominican Republic. Serving Santo Domingo, Punta Cana, Cap Cana, and Bayahibe.
               </p>
+              <div className="flex items-center gap-4 mt-4">
+                <a
+                  href="https://instagram.com/haroldremax"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow Harold on Instagram"
+                  className="text-charcoal/60 hover:text-charcoal transition-colors"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://facebook.com/harold.plasencia.3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow Harold on Facebook"
+                  className="text-charcoal/60 hover:text-charcoal transition-colors"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+              </div>
             </div>
             <div>
               <h4 className="font-montserrat text-xs uppercase tracking-widest text-charcoal mb-4">Quick Links</h4>

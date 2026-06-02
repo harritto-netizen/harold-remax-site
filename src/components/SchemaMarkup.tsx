@@ -29,8 +29,8 @@ export default function SchemaMarkup() {
       "areaServed": ["DO", "Santo Domingo", "Punta Cana", "Cap Cana"]
     },
     "sameAs": [
-      "https://www.facebook.com/remaxnextdoor",
-      "https://www.instagram.com/remaxnextdoor"
+      "https://www.facebook.com/harold.plasencia.3",
+      "https://www.instagram.com/haroldremax"
     ],
     "priceRange": "$$$$",
     "aggregateRating": {
