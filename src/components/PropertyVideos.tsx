@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Play, X } from 'lucide-react';
+import { Play, X, ExternalLink } from 'lucide-react';
 import { supabase, PropertyVideo } from '../lib/supabase';
 import { trackContact } from '../lib/tracking';
 
 function getYouTubeId(url: string): string | null {
   const patterns = [
-    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([\w-]{11})/,
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([\w-]{11})/,
+    /[?&]v=([\w-]{11})/,
   ];
   for (const p of patterns) {
     const m = url.match(p);
@@ -21,9 +22,19 @@ function getVimeoId(url: string): string | null {
 
 function buildEmbedUrl(url: string): string {
   const yt = getYouTubeId(url);
-  if (yt) return `https://www.youtube.com/embed/${yt}?autoplay=1&rel=0`;
+  if (yt) {
+    return `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+  }
   const vm = getVimeoId(url);
   if (vm) return `https://player.vimeo.com/video/${vm}?autoplay=1`;
+  return url;
+}
+
+function buildWatchUrl(url: string): string {
+  const yt = getYouTubeId(url);
+  if (yt) return `https://www.youtube.com/watch?v=${yt}`;
+  const vm = getVimeoId(url);
+  if (vm) return `https://vimeo.com/${vm}`;
   return url;
 }
 
@@ -136,8 +147,9 @@ export default function PropertyVideos() {
                 <iframe
                   src={buildEmbedUrl(activeVideo.video_url)}
                   title={activeVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
                   className="w-full h-full"
                 />
               ) : (
@@ -157,9 +169,20 @@ export default function PropertyVideos() {
                 {activeVideo.title}
               </h4>
               {activeVideo.description && (
-                <p className="font-lato text-sm text-cream/70 max-w-2xl mx-auto">
+                <p className="font-lato text-sm text-cream/70 max-w-2xl mx-auto whitespace-pre-line">
                   {activeVideo.description}
                 </p>
+              )}
+              {activeVideo.video_type === 'embed' && getYouTubeId(activeVideo.video_url) && (
+                <a
+                  href={buildWatchUrl(activeVideo.video_url)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-4 px-5 py-2 border border-cream/40 text-cream hover:bg-cream hover:text-charcoal transition-colors duration-300 font-lato text-xs uppercase tracking-widest"
+                >
+                  Watch on YouTube
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
               )}
             </div>
           </div>
