@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { LogOut, Mail, Phone, MapPin, Home, DollarSign, Calendar, Trash2, CheckCircle, XCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { signOut } from '../lib/auth';
+import VideoManager from './VideoManager';
 
 interface PropertyAlert {
   id: string;
@@ -24,6 +25,7 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
   const [alerts, setAlerts] = useState<PropertyAlert[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'active' | 'inactive'>('all');
+  const [tab, setTab] = useState<'alerts' | 'videos'>('alerts');
 
   useEffect(() => {
     fetchAlerts();
@@ -103,7 +105,7 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
       <div className="border-b border-cream/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
           <h1 className="font-montserrat text-2xl sm:text-3xl font-light uppercase tracking-wider">
-            Property Alerts Dashboard
+            Admin Dashboard
           </h1>
           <button
             onClick={handleSignOut}
@@ -113,9 +115,27 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
             <span>Logout</span>
           </button>
         </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-6 -mb-px">
+          <button
+            onClick={() => setTab('alerts')}
+            className={`py-3 text-sm uppercase tracking-wider font-lato border-b-2 transition-colors ${tab === 'alerts' ? 'border-cream text-cream' : 'border-transparent text-cream/60 hover:text-cream'}`}
+          >
+            Property Alerts
+          </button>
+          <button
+            onClick={() => setTab('videos')}
+            className={`py-3 text-sm uppercase tracking-wider font-lato border-b-2 transition-colors ${tab === 'videos' ? 'border-cream text-cream' : 'border-transparent text-cream/60 hover:text-cream'}`}
+          >
+            Property Videos
+          </button>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {tab === 'videos' ? (
+          <VideoManager />
+        ) : (
+          <>
         <div className="mb-6 flex items-center justify-between">
           <div className="flex space-x-2">
             <button
@@ -236,6 +256,8 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
               </div>
             ))}
           </div>
+        )}
+          </>
         )}
       </div>
     </div>

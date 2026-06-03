@@ -28,3 +28,16 @@ export type Contact = {
   created_at: string;
   updated_at: string;
 };
+
+export type PropertyVideo = {
+  id: string;
+  title: string;
+  description: string | null;
+  video_type: 'embed' | 'upload';
+  video_url: string;
+  thumbnail_url: string | null;
+  display_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};

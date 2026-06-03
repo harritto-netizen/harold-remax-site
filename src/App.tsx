@@ -6,6 +6,7 @@ import ExitIntentPopup from './components/ExitIntentPopup';
 import MobileCTABar from './components/MobileCTABar';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
+import PropertyVideos from './components/PropertyVideos';
 import { getCurrentUser } from './lib/auth';
 import { initTracking, trackContact, trackViewContent } from './lib/tracking';
 
@@ -480,6 +481,8 @@ function App() {
               </div>
             ))}
           </div>
+
+          <PropertyVideos />
         </div>
       </section>
 
