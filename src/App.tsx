@@ -1,4 +1,4 @@
-import { Home, Building2, Key, Search, Star, Calendar, TrendingUp, Play, MessageCircle, X, Bell, Menu, Phone, Instagram, Facebook } from 'lucide-react';
+import { Home, Building2, Key, Search, Star, Calendar, TrendingUp, Play, MessageCircle, X, Bell, Menu, Phone, Instagram, Facebook, Shield, BadgeCheck, Landmark, MapPin, AlertTriangle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import SchemaMarkup from './components/SchemaMarkup';
 import PropertyAlertForm from './components/PropertyAlertForm';
@@ -101,6 +101,7 @@ function App() {
               <a href="#servicios" className="text-charcoal text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">Services</a>
               <a href="#propiedades" className="text-charcoal text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">Properties</a>
               <a href="#testimonios" className="text-charcoal text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">Testimonials</a>
+              <a href="#confotur" className="text-charcoal text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">CONFOTUR</a>
               <a href="#blog" className="text-charcoal text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">Blog</a>
             </div>
             <div className="flex items-center gap-4">
@@ -140,6 +141,7 @@ function App() {
             <a href="#servicios" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Services</a>
             <a href="#propiedades" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Properties</a>
             <a href="#testimonios" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Testimonials</a>
+            <a href="#confotur" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">CONFOTUR</a>
             <a href="#blog" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Blog</a>
             <div className="mt-auto">
               <a
@@ -683,6 +685,152 @@ function App() {
         </div>
       </section>
 
+      {/* CONFOTUR Tax Incentives Section */}
+      <section id="confotur" className="py-24 md:py-32 bg-cream">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-4">Dominican Republic Tax Incentives</p>
+            <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
+              CONFOTUR Law
+            </h2>
+            <p className="font-lato text-lg text-charcoal/70 max-w-3xl mx-auto leading-relaxed">
+              The CONFOTUR Law (Law 158-01) is a highly lucrative tax incentive program enacted by the Dominican Republic government to stimulate tourism development and attract foreign and local real estate investments. Managed by the Consejo de Fomento Turistico (Tourism Promotion Council), it grants significant tax exemptions lasting up to 15 years.
+            </p>
+          </div>
+
+          {/* Key Benefits for Buyers */}
+          <div className="mb-20">
+            <div className="flex items-center gap-3 mb-10">
+              <Shield className="w-6 h-6 text-charcoal" />
+              <h3 className="font-montserrat text-2xl uppercase tracking-wider text-charcoal">
+                Major Benefits for Buyers
+              </h3>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="border border-charcoal/10 p-8 hover:border-charcoal/30 transition-colors duration-300">
+                <p className="font-montserrat text-4xl font-light text-charcoal mb-2">0%</p>
+                <p className="font-montserrat text-xs uppercase tracking-widest text-charcoal mb-3">Title Transfer Tax</p>
+                <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                  Skip the standard 3% tax normally due when registering and transferring the property title into your name.
+                </p>
+              </div>
+              <div className="border border-charcoal/10 p-8 hover:border-charcoal/30 transition-colors duration-300">
+                <p className="font-montserrat text-4xl font-light text-charcoal mb-2">0%</p>
+                <p className="font-montserrat text-xs uppercase tracking-widest text-charcoal mb-3">Property Tax (IPI)</p>
+                <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                  Exempt from the 1% annual property tax for up to 15 years on properties exceeding the ~$168,000 USD threshold.
+                </p>
+              </div>
+              <div className="border border-charcoal/10 p-8 hover:border-charcoal/30 transition-colors duration-300">
+                <p className="font-montserrat text-4xl font-light text-charcoal mb-2">0%</p>
+                <p className="font-montserrat text-xs uppercase tracking-widest text-charcoal mb-3">Income Tax on Rentals</p>
+                <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                  In approved rental-pool or condo-hotel setups, pay no tax on the rental income earned from the property.
+                </p>
+              </div>
+              <div className="border border-charcoal/10 p-8 hover:border-charcoal/30 transition-colors duration-300">
+                <p className="font-montserrat text-4xl font-light text-charcoal mb-2">15</p>
+                <p className="font-montserrat text-xs uppercase tracking-widest text-charcoal mb-3">Years Tax-Free</p>
+                <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                  Tax exemptions are tied to the property. Resale after 5 years passes remaining benefits to the next buyer.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Benefits for Developers */}
+          <div className="mb-20">
+            <div className="flex items-center gap-3 mb-10">
+              <Landmark className="w-6 h-6 text-charcoal" />
+              <h3 className="font-montserrat text-2xl uppercase tracking-wider text-charcoal">
+                Benefits for Developers
+              </h3>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-8">
+              <div className="bg-beige-light p-8">
+                <p className="font-montserrat text-sm uppercase tracking-wider text-charcoal mb-3">100% Exemption</p>
+                <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                  National and municipal taxes on project setup and construction are fully waived.
+                </p>
+              </div>
+              <div className="bg-beige-light p-8">
+                <p className="font-montserrat text-sm uppercase tracking-wider text-charcoal mb-3">Import Duty Free</p>
+                <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                  100% exemption from import duties on building materials, equipment, and initial furnishing.
+                </p>
+              </div>
+              <div className="bg-beige-light p-8">
+                <p className="font-montserrat text-sm uppercase tracking-wider text-charcoal mb-3">Corporate Tax Free</p>
+                <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                  100% exemption from the standard corporate Income Tax and ITBIS (VAT) on related development services.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Eligible Regions & Project Types */}
+          <div className="mb-20">
+            <div className="flex items-center gap-3 mb-10">
+              <MapPin className="w-6 h-6 text-charcoal" />
+              <h3 className="font-montserrat text-2xl uppercase tracking-wider text-charcoal">
+                Eligible Regions & Project Types
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-2 gap-12">
+              <div>
+                <p className="font-lato text-charcoal/80 leading-relaxed mb-6">
+                  Originally limited to underdeveloped regions, the law has evolved through amendments to cover modern, blooming hubs including Punta Cana, Cap Cana, Las Terrenas, Puerto Plata, and Santo Domingo.
+                </p>
+                <ul className="space-y-3">
+                  {['Hotels, resorts, and condo-hotels', 'Residential tourist villas and apartment complexes', 'Theme parks, marinas, and cruise ship facilities', 'Commercial infrastructure supporting tourism'].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <BadgeCheck className="w-4 h-4 text-charcoal mt-0.5 flex-shrink-0" />
+                      <span className="font-lato text-sm text-charcoal/70">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="border border-charcoal/10 p-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <AlertTriangle className="w-5 h-5 text-charcoal" />
+                  <p className="font-montserrat text-sm uppercase tracking-wider text-charcoal">Important to Know</p>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <p className="font-lato text-sm font-semibold text-charcoal mb-1">Not All Properties Qualify</p>
+                    <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                      CONFOTUR status is given to specific projects, not general areas. Always ask the developer for the official certificate of approval issued by the Ministry of Tourism.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-lato text-sm font-semibold text-charcoal mb-1">The Clock Starts Early</p>
+                    <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
+                      The 15-year tax holiday begins when the government grants final approval to the developer, not when you sign your contract. If approved 3 years before purchase, you receive the remaining 12 years.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center border-t border-charcoal/10 pt-16">
+            <p className="font-lato text-lg text-charcoal/80 max-w-2xl mx-auto mb-8">
+              Interested in purchasing a CONFOTUR-approved property? Our team can help you identify qualifying projects and maximize your tax savings.
+            </p>
+            <a
+              href="https://wa.me/18094262269?text=Hello%20Harold,%20I'm%20interested%20in%20CONFOTUR-approved%20properties%20in%20the%20Dominican%20Republic.%20Can%20you%20tell%20me%20more?"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackContact('whatsapp_confotur')}
+              className="inline-block border-2 border-charcoal text-charcoal px-8 py-3 text-sm uppercase tracking-widest hover:bg-charcoal hover:text-cream transition-all duration-300"
+            >
+              Ask About CONFOTUR Properties
+            </a>
+          </div>
+        </div>
+      </section>
+
       </main>
       {/* Footer */}
       <footer className="bg-cream border-t border-charcoal/10 py-16 pb-24 md:pb-16">
@@ -728,6 +876,7 @@ function App() {
                 <a href="#servicios" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Real Estate Services</a>
                 <a href="#testimonios" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Client Testimonials</a>
                 <a href="#faq" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">FAQ</a>
+                <a href="#confotur" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">CONFOTUR Law</a>
                 <a href="#blog" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Market Insights</a>
               </nav>
             </div>
