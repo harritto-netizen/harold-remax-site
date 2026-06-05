@@ -9,7 +9,6 @@ import AdminDashboard from './components/AdminDashboard';
 import PropertyVideos from './components/PropertyVideos';
 import { getCurrentUser } from './lib/auth';
 import { initTracking, trackContact, trackViewContent } from './lib/tracking';
-import { useScrollReveal } from './lib/useScrollReveal';
 
 type View = 'main' | 'admin-login' | 'admin-dashboard';
 
@@ -36,8 +35,6 @@ function App() {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
-
-  useScrollReveal();
 
   const checkAuth = async () => {
     const path = window.location.pathname;
@@ -87,7 +84,7 @@ function App() {
       <SchemaMarkup />
       <a href="#main-content" className="skip-link">Skip to main content</a>
       {/* Header/Navigation */}
-      <header className="bg-cream/95 backdrop-blur-sm border-b border-charcoal/10 fixed w-full top-0 z-50 transition-all duration-300" style={{ opacity: 0, transform: 'translateY(-20px)', animation: 'headerReveal 0.8s ease-out 0.1s forwards' }}>
+      <header className="bg-cream/95 backdrop-blur-sm border-b border-charcoal/10 fixed w-full top-0 z-50 transition-all duration-300">
         <nav aria-label="Primary" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 sm:space-x-3">
@@ -243,9 +240,9 @@ function App() {
       </section>
 
       {/* Services Section */}
-      <section id="servicios" className="py-24 md:py-32 bg-cream" data-reveal="up">
+      <section id="servicios" className="py-24 md:py-32 bg-cream">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20" data-reveal-child>
+          <div className="text-center mb-20">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Our Services
             </h2>
@@ -254,7 +251,7 @@ function App() {
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div className="text-center" data-reveal-child>
+            <div className="text-center">
               <Home className="w-12 h-12 text-charcoal mx-auto mb-6" />
               <h3 className="font-montserrat text-xl uppercase tracking-wider text-charcoal mb-4">Property Buying</h3>
               <p className="font-lato text-charcoal/70">
@@ -262,7 +259,7 @@ function App() {
               </p>
             </div>
 
-            <div className="text-center" data-reveal-child>
+            <div className="text-center">
               <Building2 className="w-12 h-12 text-charcoal mx-auto mb-6" />
               <h3 className="font-montserrat text-xl uppercase tracking-wider text-charcoal mb-4">Property Selling</h3>
               <p className="font-lato text-charcoal/70">
@@ -270,7 +267,7 @@ function App() {
               </p>
             </div>
 
-            <div className="text-center" data-reveal-child>
+            <div className="text-center">
               <Key className="w-12 h-12 text-charcoal mx-auto mb-6" />
               <h3 className="font-montserrat text-xl uppercase tracking-wider text-charcoal mb-4">Property Rentals</h3>
               <p className="font-lato text-charcoal/70">
@@ -282,10 +279,10 @@ function App() {
       </section>
 
       {/* About Me Section */}
-      <section className="py-24 md:py-32 bg-beige-light" data-reveal="up">
+      <section className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div data-reveal-child>
+            <div>
               <img
                 src="/harold-portrait.jpg"
                 alt="Harold - Certified Real Estate Agent RE/MAX Next Door in Santo Domingo"
@@ -293,10 +290,9 @@ function App() {
                 loading="lazy"
                 width="600"
                 height="800"
-                data-parallax="0.2"
               />
             </div>
-            <div className="space-y-8" data-reveal-child>
+            <div className="space-y-8">
               <h2 className="font-montserrat text-4xl sm:text-5xl font-light text-charcoal uppercase tracking-wider leading-tight">
                 About Harold
               </h2>
@@ -308,11 +304,11 @@ function App() {
               </p>
               <div className="grid grid-cols-2 gap-8 pt-4">
                 <div>
-                  <p className="font-montserrat text-5xl font-light text-charcoal mb-2" data-counter="500">500+</p>
+                  <p className="font-montserrat text-5xl font-light text-charcoal mb-2">500+</p>
                   <p className="font-lato text-sm text-charcoal/70 uppercase tracking-wider">Properties Sold</p>
                 </div>
                 <div>
-                  <p className="font-montserrat text-5xl font-light text-charcoal mb-2" data-counter="15">15+</p>
+                  <p className="font-montserrat text-5xl font-light text-charcoal mb-2">15+</p>
                   <p className="font-lato text-sm text-charcoal/70 uppercase tracking-wider">Years Experience</p>
                 </div>
               </div>
@@ -360,9 +356,9 @@ function App() {
       </section>
 
       {/* Featured Properties Gallery */}
-      <section id="propiedades" className="py-24 md:py-32 bg-cream" data-reveal="up">
+      <section id="propiedades" className="py-24 md:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20" data-reveal-child>
+          <div className="text-center mb-20">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Featured Properties
             </h2>
@@ -427,7 +423,7 @@ function App() {
                 location: 'Bayahibe'
               }
             ].map((property, index) => (
-              <div key={index} className="group hover-zoom overflow-hidden" data-reveal-child>
+              <div key={index} className="group hover-zoom overflow-hidden">
                 <div className="relative h-80 overflow-hidden mb-4">
                   <img
                     src={property.image}
@@ -500,9 +496,9 @@ function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonios" className="py-24 md:py-32 bg-beige-light" data-reveal="up">
+      <section id="testimonios" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20" data-reveal-child>
+          <div className="text-center mb-20">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Client Testimonials
             </h2>
@@ -531,7 +527,7 @@ function App() {
                 rating: 5,
               },
             ].map((testimonial, index) => (
-              <div key={index} className="bg-cream p-8" data-reveal-child>
+              <div key={index} className="bg-cream p-8">
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-charcoal/70 text-charcoal/70" />
@@ -549,9 +545,9 @@ function App() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-24 md:py-32 bg-cream" data-reveal="up">
+      <section id="faq" className="py-24 md:py-32 bg-cream">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16" data-reveal-child>
+          <div className="text-center mb-16">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Frequently Asked Questions
             </h2>
@@ -586,7 +582,7 @@ function App() {
                 answer: 'Vacation rentals in Punta Cana can generate 8-12% annual returns, with peak season occupancy rates of 80-90%. Santo Domingo long-term rentals typically yield 6-9% annually. Cap Cana luxury properties can achieve higher nightly rates during tourist season. RE/MAX Next Door provides rental management services and market data to help maximize your investment returns.'
               }
             ].map((faq, index) => (
-              <details key={index} className="group border border-charcoal/10 bg-beige-light" data-reveal-child>
+              <details key={index} className="group border border-charcoal/10 bg-beige-light">
                 <summary className="flex items-center justify-between cursor-pointer p-6 font-montserrat text-sm sm:text-base uppercase tracking-wider text-charcoal hover:opacity-70 transition-opacity">
                   <span className="pr-4">{faq.question}</span>
                   <span className="text-charcoal/50 text-xl group-open:rotate-45 transition-transform duration-200">+</span>
@@ -601,9 +597,9 @@ function App() {
       </section>
 
       {/* Blog / Market Insights Section */}
-      <section id="blog" className="py-24 md:py-32 bg-beige-light" data-reveal="up">
+      <section id="blog" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20" data-reveal-child>
+          <div className="text-center mb-20">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Market Insights
             </h2>
@@ -638,7 +634,7 @@ function App() {
                 category: 'Investment',
               },
             ].map((post, index) => (
-              <article key={index} className="group" itemScope itemType="https://schema.org/BlogPosting" data-reveal-child>
+              <article key={index} className="group" itemScope itemType="https://schema.org/BlogPosting">
                 <meta itemProp="author" content="Harold - RE/MAX Next Door" />
                 <meta itemProp="publisher" content="RE/MAX Next Door" />
                 <meta itemProp="datePublished" content={post.date} />
@@ -690,9 +686,9 @@ function App() {
       </section>
 
       {/* CONFOTUR Tax Incentives Section */}
-      <section id="confotur" className="py-24 md:py-32 bg-cream" data-reveal="up">
+      <section id="confotur" className="py-24 md:py-32 bg-cream">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16" data-reveal-child>
+          <div className="text-center mb-16">
             <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-4">Dominican Republic Tax Incentives</p>
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               CONFOTUR Law
@@ -703,7 +699,7 @@ function App() {
           </div>
 
           {/* Key Benefits for Buyers */}
-          <div className="mb-20" data-reveal-child>
+          <div className="mb-20">
             <div className="flex items-center gap-3 mb-10">
               <Shield className="w-6 h-6 text-charcoal" />
               <h3 className="font-montserrat text-2xl uppercase tracking-wider text-charcoal">
@@ -743,7 +739,7 @@ function App() {
           </div>
 
           {/* Benefits for Developers */}
-          <div className="mb-20" data-reveal-child>
+          <div className="mb-20">
             <div className="flex items-center gap-3 mb-10">
               <Landmark className="w-6 h-6 text-charcoal" />
               <h3 className="font-montserrat text-2xl uppercase tracking-wider text-charcoal">
@@ -773,7 +769,7 @@ function App() {
           </div>
 
           {/* Eligible Regions & Project Types */}
-          <div className="mb-20" data-reveal-child>
+          <div className="mb-20">
             <div className="flex items-center gap-3 mb-10">
               <MapPin className="w-6 h-6 text-charcoal" />
               <h3 className="font-montserrat text-2xl uppercase tracking-wider text-charcoal">

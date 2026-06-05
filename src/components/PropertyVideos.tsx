@@ -142,7 +142,7 @@ export default function PropertyVideos() {
             >
               <X className="w-8 h-8" />
             </button>
-            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <div className="aspect-video bg-black">
               {activeVideo.video_type === 'embed' ? (
                 <iframe
                   src={buildEmbedUrl(activeVideo.video_url)}
@@ -150,19 +150,17 @@ export default function PropertyVideos() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   referrerPolicy="strict-origin-when-cross-origin"
-                  className="absolute inset-0 w-full h-full"
+                  className="w-full h-full"
                 />
               ) : (
                 <video
-                  key={activeVideo.id}
+                  src={activeVideo.video_url}
                   controls
                   autoPlay
-                  playsInline
-                  className="absolute inset-0 w-full h-full bg-black"
+                  className="w-full h-full"
                   aria-label={activeVideo.title}
                 >
                   <source src={activeVideo.video_url} type="video/mp4" />
-                  Your browser does not support the video tag.
                 </video>
               )}
             </div>
