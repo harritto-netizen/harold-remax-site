@@ -291,10 +291,11 @@ function App() {
               <img
                 src="/harold-portrait.jpg"
                 alt="Harold - Certified Real Estate Agent RE/MAX Next Door in Santo Domingo"
-                className="w-full h-auto object-cover"
+                className="w-full h-auto object-cover max-w-[665px]"
                 loading="lazy"
-                width="600"
-                height="800"
+                decoding="async"
+                width="665"
+                height="998"
               />
             </div>
             <div className="space-y-8">
@@ -343,12 +344,18 @@ function App() {
               alt="RE/MAX Next Door"
               className="h-12 md:h-14 w-auto opacity-70 hover:opacity-100 transition-opacity"
               loading="lazy"
+              decoding="async"
+              width="315"
+              height="84"
             />
             <img
               src="/png-clipart-remax-logo-re-max-llc-real-estate-estate-agent-house-re-max-ocean-properties-new-balloon-logo-thumbnail.png"
               alt="RE/MAX International"
               className="h-10 md:h-12 w-auto opacity-70 hover:opacity-100 transition-opacity"
               loading="lazy"
+              decoding="async"
+              width="55"
+              height="70"
             />
             <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2">
               15+ Years Certified
