@@ -1,14 +1,15 @@
-import { Home, Building2, Key, Search, Star, Calendar, TrendingUp, Play, MessageCircle, X, Bell, Menu, Phone, Instagram, Facebook, Shield, BadgeCheck, Landmark, MapPin, AlertTriangle } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Home, Building2, Key, Search, Star, Calendar, MessageCircle, X, Bell, Menu, Phone, Instagram, Facebook, Shield, BadgeCheck, Landmark, MapPin, AlertTriangle } from 'lucide-react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import SchemaMarkup from './components/SchemaMarkup';
 import PropertyAlertForm from './components/PropertyAlertForm';
-import ExitIntentPopup from './components/ExitIntentPopup';
 import MobileCTABar from './components/MobileCTABar';
-import AdminLogin from './components/AdminLogin';
-import AdminDashboard from './components/AdminDashboard';
-import PropertyVideos from './components/PropertyVideos';
 import { getCurrentUser } from './lib/auth';
 import { initTracking, trackContact, trackViewContent } from './lib/tracking';
+
+const ExitIntentPopup = lazy(() => import('./components/ExitIntentPopup'));
+const AdminLogin = lazy(() => import('./components/AdminLogin'));
+const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
+const PropertyVideos = lazy(() => import('./components/PropertyVideos'));
 
 type View = 'main' | 'admin-login' | 'admin-dashboard';
 
@@ -72,11 +73,11 @@ function App() {
   }
 
   if (currentView === 'admin-login') {
-    return <AdminLogin onLoginSuccess={handleLoginSuccess} />;
+    return <Suspense fallback={<div className="min-h-screen bg-charcoal flex items-center justify-center"><p className="font-lato text-cream">Loading...</p></div>}><AdminLogin onLoginSuccess={handleLoginSuccess} /></Suspense>;
   }
 
   if (currentView === 'admin-dashboard') {
-    return <AdminDashboard onLogout={handleLogout} />;
+    return <Suspense fallback={<div className="min-h-screen bg-charcoal flex items-center justify-center"><p className="font-lato text-cream">Loading...</p></div>}><AdminDashboard onLogout={handleLogout} /></Suspense>;
   }
 
   return (
@@ -94,6 +95,7 @@ function App() {
                 className="h-8 sm:h-10 w-auto"
                 width="180"
                 height="48"
+                fetchPriority="high"
               />
             </div>
             <div className="hidden lg:flex space-x-12">
@@ -160,17 +162,20 @@ function App() {
 
       <main id="main-content">
       {/* Hero Section with Video Background */}
-      <section id="inicio" className="relative pt-24 overflow-hidden min-h-screen flex items-center">
-        {/* Video Background */}
+      <section id="inicio" className="relative pt-24 overflow-hidden min-h-screen flex items-center bg-charcoal">
+        {/* Video Background - lazy loaded */}
         <div className="absolute inset-0 z-0">
           <video
             autoPlay
             loop
             muted
             playsInline
+            preload="none"
+            poster=""
             className="w-full h-full object-cover"
             aria-label="Background video showing luxury Caribbean beachfront properties"
           >
+            <source src="/18335298-sd_640_360_24fps.mp4" type="video/mp4" media="(max-width: 768px)" />
             <source src="/18335298-hd_1920_1080_24fps.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-charcoal/40"></div>
@@ -630,7 +635,7 @@ function App() {
             ))}
           </div>
 
-          <PropertyVideos />
+          <Suspense fallback={null}><PropertyVideos /></Suspense>
         </div>
       </section>
 
@@ -977,7 +982,7 @@ function App() {
           )}
         </button>
       </div>
-      <ExitIntentPopup />
+      <Suspense fallback={null}><ExitIntentPopup /></Suspense>
     </div>
   );
 }

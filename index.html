@@ -1,28 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P3F80FDS7W"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-P3F80FDS7W');
-    </script>
-    <!-- Cloudflare Turnstile -->
-    <script
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-      defer
-    ></script>
-
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/re_max_next_door_(4).png" />
-    <link rel="apple-touch-icon" href="/re_max_next_door_(4).png" />
-    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#2C2C2C" />
     <meta name="color-scheme" content="light" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="format-detection" content="telephone=yes" />
 
     <!-- SEO Meta Tags -->
@@ -32,6 +14,10 @@
     <meta name="author" content="Harold - RE/MAX Next Door" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://primerealestatedr.com/" />
+
+    <link rel="icon" type="image/png" href="/re_max_next_door_(4).png" />
+    <link rel="apple-touch-icon" href="/re_max_next_door_(4).png" />
+    <link rel="manifest" href="/manifest.json" />
 
     <!-- Geo Tags -->
     <meta name="geo.region" content="DO-DN" />
@@ -55,18 +41,45 @@
     <meta name="twitter:description" content="Find your perfect home with 15+ years of experience. Luxury properties in the Dominican Republic. Free consultation." />
     <meta name="twitter:image" content="https://primerealestatedr.com/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.png" />
 
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://challenges.cloudflare.com" />
+    <!-- Font loading: preconnect + non-render-blocking stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Lato:wght@300;400;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Lato:wght@300;400;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&family=Lato:wght@300;400;700&display=swap" /></noscript>
+
+    <!-- Preconnect for images -->
     <link rel="preconnect" href="https://images.pexels.com" />
-    <link rel="preconnect" href="https://videos.pexels.com" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    <link rel="dns-prefetch" href="https://challenges.cloudflare.com" />
     <link rel="dns-prefetch" href="https://images.pexels.com" />
-    <link rel="dns-prefetch" href="https://videos.pexels.com" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Defer analytics and third-party scripts until after page load -->
+    <script>
+      window.addEventListener('load', function() {
+        // Google Analytics
+        var gs = document.createElement('script');
+        gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-P3F80FDS7W';
+        gs.async = true;
+        document.head.appendChild(gs);
+        gs.onload = function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', 'G-P3F80FDS7W');
+        };
+
+        // Cloudflare Turnstile (defer until needed)
+        setTimeout(function() {
+          var ts = document.createElement('script');
+          ts.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+          ts.defer = true;
+          document.head.appendChild(ts);
+        }, 3000);
+      });
+    </script>
   </body>
 </html>

@@ -5,38 +5,36 @@ declare global {
   }
 }
 
-const GA4_ID = import.meta.env.VITE_GA4_ID as string | undefined;
 const GOOGLE_ADS_ID = import.meta.env.VITE_GOOGLE_ADS_ID as string | undefined;
 const GOOGLE_ADS_LEAD_LABEL = import.meta.env.VITE_GOOGLE_ADS_LEAD_LABEL as string | undefined;
 
 let initialized = false;
 
-const injectScript = (src: string, inline?: string) => {
+const injectScript = (src: string) => {
   const s = document.createElement('script');
   s.async = true;
-  if (src) s.src = src;
-  if (inline) s.text = inline;
+  s.src = src;
   document.head.appendChild(s);
   return s;
-};
-
-const initGtag = (ids: string[]) => {
-  if (!ids.length) return;
-  injectScript(`https://www.googletagmanager.com/gtag/js?id=${ids[0]}`);
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() {
-    window.dataLayer!.push(arguments);
-  };
-  window.gtag('js', new Date());
-  ids.forEach((id) => window.gtag!('config', id, { send_page_view: true }));
 };
 
 export const initTracking = () => {
   if (initialized || typeof window === 'undefined') return;
   initialized = true;
 
-  const gtagIds = [GA4_ID, GOOGLE_ADS_ID].filter((x): x is string => Boolean(x));
-  if (gtagIds.length) initGtag(gtagIds);
+  if (GOOGLE_ADS_ID) {
+    window.addEventListener('load', () => {
+      injectScript(`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`);
+      window.dataLayer = window.dataLayer || [];
+      if (!window.gtag) {
+        window.gtag = function gtag() {
+          window.dataLayer!.push(arguments);
+        };
+        window.gtag('js', new Date());
+      }
+      window.gtag!('config', GOOGLE_ADS_ID, { send_page_view: true });
+    }, { once: true });
+  }
 };
 
 type LeadParams = { value?: number; currency?: string; contentName?: string };
