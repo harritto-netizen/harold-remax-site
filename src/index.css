@@ -111,3 +111,8 @@ textarea:focus-visible {
 .skip-link:focus {
   top: 1rem;
 }
+
+[data-reveal],
+[data-reveal-child] {
+  will-change: transform, opacity;
+}
