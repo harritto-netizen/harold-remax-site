@@ -87,7 +87,7 @@ function App() {
       <SchemaMarkup />
       <a href="#main-content" className="skip-link">Skip to main content</a>
       {/* Header/Navigation */}
-      <header className="bg-cream/95 backdrop-blur-sm border-b border-charcoal/10 fixed w-full top-0 z-50 transition-all duration-300">
+      <header className="bg-cream/95 backdrop-blur-sm border-b border-charcoal/10 fixed w-full top-0 z-50 transition-all duration-300" style={{ opacity: 0, transform: 'translateY(-20px)', animation: 'headerReveal 0.8s ease-out 0.1s forwards' }}>
         <nav aria-label="Primary" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 sm:space-x-3">
@@ -293,6 +293,7 @@ function App() {
                 loading="lazy"
                 width="600"
                 height="800"
+                data-parallax="0.2"
               />
             </div>
             <div className="space-y-8" data-reveal-child>
