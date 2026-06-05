@@ -154,13 +154,15 @@ export default function PropertyVideos() {
                 />
               ) : (
                 <video
-                  src={activeVideo.video_url}
+                  key={activeVideo.id}
                   controls
                   autoPlay
-                  className="absolute inset-0 w-full h-full object-contain bg-black"
+                  playsInline
+                  className="absolute inset-0 w-full h-full bg-black"
                   aria-label={activeVideo.title}
                 >
                   <source src={activeVideo.video_url} type="video/mp4" />
+                  Your browser does not support the video tag.
                 </video>
               )}
             </div>
