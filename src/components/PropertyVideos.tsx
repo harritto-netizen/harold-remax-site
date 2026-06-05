@@ -142,7 +142,7 @@ export default function PropertyVideos() {
             >
               <X className="w-8 h-8" />
             </button>
-            <div className="aspect-video bg-black">
+            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
               {activeVideo.video_type === 'embed' ? (
                 <iframe
                   src={buildEmbedUrl(activeVideo.video_url)}
@@ -150,14 +150,14 @@ export default function PropertyVideos() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                   referrerPolicy="strict-origin-when-cross-origin"
-                  className="w-full h-full"
+                  className="absolute inset-0 w-full h-full"
                 />
               ) : (
                 <video
                   src={activeVideo.video_url}
                   controls
                   autoPlay
-                  className="w-full h-full"
+                  className="absolute inset-0 w-full h-full object-contain bg-black"
                   aria-label={activeVideo.title}
                 >
                   <source src={activeVideo.video_url} type="video/mp4" />
