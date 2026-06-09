@@ -289,7 +289,7 @@ function App() {
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
               <img
-                src="/harold-portrait.jpg"
+                src="/1780975185532(1).png"
                 alt="Harold - Certified Real Estate Agent RE/MAX Next Door in Santo Domingo"
                 className="w-full h-auto object-cover max-w-[665px]"
                 loading="lazy"
