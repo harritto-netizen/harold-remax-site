@@ -10,4 +10,4 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 2
 
-Sitemap: https://primerealestatedr.com/sitemap.xml
+Sitemap: https://www.primerealestatedr.com/sitemap.xml
