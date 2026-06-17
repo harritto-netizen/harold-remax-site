@@ -2,11 +2,11 @@ export default function SchemaMarkup() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "@id": "https://primerealestatedr.com/#organization",
+    "@id": "https://www.primerealestatedr.com/#organization",
     "name": "RE/MAX Next Door",
-    "url": "https://primerealestatedr.com",
-    "logo": "https://primerealestatedr.com/re_max_next_door_(4).png",
-    "image": "https://primerealestatedr.com/harold-portrait.jpg",
+    "url": "https://www.primerealestatedr.com",
+    "logo": "https://www.primerealestatedr.com/re_max_next_door_(4).png",
+    "image": "https://www.primerealestatedr.com/harold-portrait.jpg",
     "description": "Certified RE/MAX real estate agent with 15+ years of experience in Santo Domingo and Punta Cana. Services for buying, selling, and renting luxury properties.",
     "address": {
       "@type": "PostalAddress",
@@ -47,7 +47,7 @@ export default function SchemaMarkup() {
     "@type": "Person",
     "name": "Harold",
     "jobTitle": "Certified Real Estate Agent",
-    "image": "https://primerealestatedr.com/harold-portrait.jpg",
+    "image": "https://www.primerealestatedr.com/harold-portrait.jpg",
     "telephone": "+1-809-426-2269",
     "email": "harold@remaxnextdoor.com",
     "worksFor": {
@@ -68,9 +68,9 @@ export default function SchemaMarkup() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "RE/MAX Next Door",
-    "image": "https://primerealestatedr.com/re_max_next_door_(4).png",
-    "@id": "https://primerealestatedr.com",
-    "url": "https://primerealestatedr.com",
+    "image": "https://www.primerealestatedr.com/re_max_next_door_(4).png",
+    "@id": "https://www.primerealestatedr.com",
+    "url": "https://www.primerealestatedr.com",
     "telephone": "+1-809-426-2269",
     "priceRange": "$$$$",
     "address": {
@@ -106,7 +106,7 @@ export default function SchemaMarkup() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "RE/MAX Next Door",
-    "url": "https://primerealestatedr.com"
+    "url": "https://www.primerealestatedr.com"
   };
 
   const serviceSchema = {
@@ -161,31 +161,31 @@ export default function SchemaMarkup() {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://primerealestatedr.com/"
+        "item": "https://www.primerealestatedr.com/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Properties",
-        "item": "https://primerealestatedr.com/#propiedades"
+        "item": "https://www.primerealestatedr.com/#propiedades"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "Services",
-        "item": "https://primerealestatedr.com/#servicios"
+        "item": "https://www.primerealestatedr.com/#servicios"
       },
       {
         "@type": "ListItem",
         "position": 4,
         "name": "Testimonials",
-        "item": "https://primerealestatedr.com/#testimonios"
+        "item": "https://www.primerealestatedr.com/#testimonios"
       },
       {
         "@type": "ListItem",
         "position": 5,
         "name": "Blog",
-        "item": "https://primerealestatedr.com/#blog"
+        "item": "https://www.primerealestatedr.com/#blog"
       }
     ]
   };
@@ -249,7 +249,7 @@ export default function SchemaMarkup() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "RE/MAX Next Door",
-    "@id": "https://primerealestatedr.com/#reviews",
+    "@id": "https://www.primerealestatedr.com/#reviews",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5",
@@ -307,14 +307,14 @@ export default function SchemaMarkup() {
     "@context": "https://schema.org",
     "@type": "Blog",
     "name": "RE/MAX Next Door Market Insights",
-    "url": "https://primerealestatedr.com/#blog",
+    "url": "https://www.primerealestatedr.com/#blog",
     "description": "Expert analysis on Dominican Republic real estate trends, investment opportunities, and market forecasts",
     "publisher": {
       "@type": "Organization",
       "name": "RE/MAX Next Door",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://primerealestatedr.com/re_max_next_door_(4).png"
+        "url": "https://www.primerealestatedr.com/re_max_next_door_(4).png"
       }
     },
     "blogPost": [
@@ -331,7 +331,7 @@ export default function SchemaMarkup() {
         },
         "description": "The DR real estate market is experiencing unprecedented growth in 2026 with foreign investment up 34% year-over-year. Punta Cana and Cap Cana lead with average property appreciation of 12-18% annually.",
         "image": "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg",
-        "url": "https://primerealestatedr.com/#blog",
+        "url": "https://www.primerealestatedr.com/#blog",
         "keywords": ["Dominican Republic real estate 2026", "Punta Cana investment", "Cap Cana property", "Caribbean real estate market", "foreign investment DR"]
       },
       {
@@ -347,7 +347,7 @@ export default function SchemaMarkup() {
         },
         "description": "The digital nomad visa program and fiber-optic infrastructure expansion are attracting remote professionals to purchase condos and villas in Punta Cana.",
         "image": "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg",
-        "url": "https://primerealestatedr.com/#blog",
+        "url": "https://www.primerealestatedr.com/#blog",
         "keywords": ["digital nomad Dominican Republic", "remote work Punta Cana", "buy home Cap Cana", "expat real estate DR", "work from home Caribbean"]
       },
       {
@@ -363,7 +363,7 @@ export default function SchemaMarkup() {
         },
         "description": "Santo Domingo is experiencing a luxury condo construction boom along the Malecon and in Naco district. Pre-construction prices offer 20-30% savings compared to completed units.",
         "image": "https://images.pexels.com/photos/2476632/pexels-photo-2476632.jpeg",
-        "url": "https://primerealestatedr.com/#blog",
+        "url": "https://www.primerealestatedr.com/#blog",
         "keywords": ["Santo Domingo condos", "luxury apartments Dominican Republic", "Malecon real estate", "Naco district property", "pre-construction investment"]
       }
     ]
@@ -386,7 +386,7 @@ export default function SchemaMarkup() {
       beds: 1,
       baths: 1,
       sqft: 786,
-      image: "https://primerealestatedr.com/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.png"
+      image: "https://www.primerealestatedr.com/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.png"
     },
     {
       name: "Villa Playa Nueva Romana",
@@ -395,7 +395,7 @@ export default function SchemaMarkup() {
       beds: 3,
       baths: 3,
       sqft: 4521,
-      image: "https://primerealestatedr.com/laud-2.webp"
+      image: "https://www.primerealestatedr.com/laud-2.webp"
     }
   ];
 
@@ -405,7 +405,7 @@ export default function SchemaMarkup() {
     "name": property.name,
     "image": property.image,
     "description": `Luxury property in ${property.location} with ${property.beds} bedrooms and ${property.baths} bathrooms`,
-    "url": "https://primerealestatedr.com/#propiedades",
+    "url": "https://www.primerealestatedr.com/#propiedades",
     "datePosted": "2025-01-01",
     "additionalProperty": [
       {
