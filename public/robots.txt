@@ -38,3 +38,4 @@ User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://www.primerealestatedr.com/sitemap.xml
+LLMs: https://www.primerealestatedr.com/llms.txt

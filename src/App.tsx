@@ -798,15 +798,33 @@ function App() {
                 answer: 'The top Santo Domingo neighborhoods for investment in 2026 are: Piantini (premium luxury, $2,200-2,800/m2, 6-8% rental yield), Naco (high-end modern towers, $1,800-2,400/m2, 7-9% yields), Evaristo Morales (growing demand, $1,500-2,000/m2, best value-to-yield ratio), and the Malecon corridor (new waterfront developments with ocean views). For commercial investment, Naco and the National District offer cap rates of 8-11% for retail and office spaces.'
               }
             ].map((faq, index) => (
-              <details key={index} className="group border border-charcoal/10 bg-beige-light">
-                <summary className="flex items-center justify-between cursor-pointer p-6 font-montserrat text-sm sm:text-base uppercase tracking-wider text-charcoal hover:opacity-70 transition-opacity">
-                  <span className="pr-4">{faq.question}</span>
-                  <span className="text-charcoal/50 text-xl group-open:rotate-45 transition-transform duration-200">+</span>
-                </summary>
-                <div className="px-6 pb-6">
-                  <p className="font-lato text-charcoal/80 leading-relaxed">{faq.answer}</p>
+              <div key={index} className="border border-charcoal/10 bg-beige-light" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                <button
+                  type="button"
+                  className="flex items-center justify-between w-full cursor-pointer p-6 font-montserrat text-sm sm:text-base uppercase tracking-wider text-charcoal hover:opacity-70 transition-opacity text-left"
+                  onClick={(e) => {
+                    const content = e.currentTarget.nextElementSibling as HTMLElement;
+                    const icon = e.currentTarget.querySelector('[data-icon]') as HTMLElement;
+                    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                      content.style.maxHeight = '0px';
+                      content.style.opacity = '0';
+                      icon.style.transform = 'rotate(0deg)';
+                    } else {
+                      content.style.maxHeight = content.scrollHeight + 'px';
+                      content.style.opacity = '1';
+                      icon.style.transform = 'rotate(45deg)';
+                    }
+                  }}
+                >
+                  <span className="pr-4" itemProp="name">{faq.question}</span>
+                  <span data-icon className="text-charcoal/50 text-xl transition-transform duration-200 flex-shrink-0">+</span>
+                </button>
+                <div className="overflow-hidden transition-all duration-300" style={{ maxHeight: '0px', opacity: '0' }} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                  <div className="px-6 pb-6">
+                    <p className="font-lato text-charcoal/80 leading-relaxed" itemProp="text">{faq.answer}</p>
+                  </div>
                 </div>
-              </details>
+              </div>
             ))}
           </div>
         </div>

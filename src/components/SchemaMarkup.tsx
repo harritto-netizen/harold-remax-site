@@ -660,6 +660,37 @@ export default function SchemaMarkup() {
     "keywords": ["Dominican Republic property prices 2026", "Punta Cana real estate data", "Santo Domingo condo prices per square meter", "Cap Cana rental yields", "Caribbean real estate market statistics"]
   };
 
+  const speakableSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "RE/MAX Next Door - Luxury Real Estate Dominican Republic",
+    "url": "https://www.primerealestatedr.com",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [
+        "#faq",
+        "#blog",
+        "#servicios",
+        "#confotur"
+      ]
+    },
+    "mainEntity": {
+      "@type": "RealEstateAgent",
+      "name": "Harold",
+      "worksFor": { "@type": "Organization", "name": "RE/MAX Next Door" },
+      "knowsAbout": [
+        "Dominican Republic luxury real estate",
+        "CONFOTUR tax incentives",
+        "Santo Domingo property market",
+        "Punta Cana real estate investment",
+        "Cap Cana vacation properties",
+        "Foreign buyer real estate process Dominican Republic",
+        "Caribbean rental income analysis",
+        "Pre-construction property investment"
+      ]
+    }
+  };
+
   return (
     <>
       <script
@@ -701,6 +732,10 @@ export default function SchemaMarkup() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(marketDataSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
       />
       {propertiesSchema.map((schema, index) => (
         <script
