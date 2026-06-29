@@ -1,17 +1,47 @@
 import { Home, Building2, Key, Search, Star, Calendar, MessageCircle, X, Bell, Menu, Phone, Instagram, Facebook, Shield, BadgeCheck, Landmark, MapPin, AlertTriangle } from 'lucide-react';
 import { useState, useEffect, lazy, Suspense } from 'react';
-import SchemaMarkup from './components/SchemaMarkup';
 import PropertyAlertForm from './components/PropertyAlertForm';
 import MobileCTABar from './components/MobileCTABar';
 import { getCurrentUser } from './lib/auth';
 import { initTracking, trackContact, trackViewContent } from './lib/tracking';
 
+const SchemaMarkup = lazy(() => import('./components/SchemaMarkup'));
 const ExitIntentPopup = lazy(() => import('./components/ExitIntentPopup'));
 const AdminLogin = lazy(() => import('./components/AdminLogin'));
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
 const PropertyVideos = lazy(() => import('./components/PropertyVideos'));
 
 type View = 'main' | 'admin-login' | 'admin-dashboard';
+
+function HeroVideo() {
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoaded(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!loaded) {
+    return <div className="absolute inset-0 z-0 bg-charcoal"><div className="absolute inset-0 bg-charcoal/40"></div></div>;
+  }
+
+  const isMobile = window.innerWidth <= 768;
+  return (
+    <div className="absolute inset-0 z-0">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="none"
+        className="w-full h-full object-cover"
+        aria-label="Background video showing luxury Caribbean beachfront properties"
+      >
+        <source src={isMobile ? "/18335298-sd_640_360_24fps.mp4" : "/18335298-hd_1920_1080_24fps.mp4"} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-charcoal/40"></div>
+    </div>
+  );
+}
 
 function App() {
   const [currentView, setCurrentView] = useState<View>('main');
@@ -82,7 +112,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-cream">
-      <SchemaMarkup />
+      <Suspense fallback={null}><SchemaMarkup /></Suspense>
       <a href="#main-content" className="skip-link">Skip to main content</a>
       {/* Header/Navigation */}
       <header className="bg-cream/95 backdrop-blur-sm border-b border-charcoal/10 fixed w-full top-0 z-50 transition-all duration-300">
@@ -163,23 +193,8 @@ function App() {
       <main id="main-content">
       {/* Hero Section with Video Background */}
       <section id="inicio" className="relative pt-24 overflow-hidden min-h-screen flex items-center bg-charcoal">
-        {/* Video Background - lazy loaded */}
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="none"
-            poster=""
-            className="w-full h-full object-cover"
-            aria-label="Background video showing luxury Caribbean beachfront properties"
-          >
-            <source src="/18335298-sd_640_360_24fps.mp4" type="video/mp4" media="(max-width: 768px)" />
-            <source src="/18335298-hd_1920_1080_24fps.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-charcoal/40"></div>
-        </div>
+        {/* Video Background - deferred load to reduce initial page weight */}
+        <HeroVideo />
 
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
@@ -294,6 +309,7 @@ function App() {
                 className="w-full h-auto object-cover max-w-[665px]"
                 loading="lazy"
                 decoding="async"
+                fetchPriority="low"
                 width="665"
                 height="998"
               />
