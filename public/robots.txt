@@ -10,4 +10,31 @@ User-agent: Bingbot
 Allow: /
 Crawl-delay: 2
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://www.primerealestatedr.com/sitemap.xml
