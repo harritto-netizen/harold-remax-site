@@ -504,9 +504,13 @@ export default function SchemaMarkup() {
       price: "850000",
       priceCurrency: "USD",
       location: "Punta Cana",
+      region: "La Altagracia",
       beds: 5,
       baths: 4,
-      sqft: 4200,
+      sqm: 390,
+      yearBuilt: "2023",
+      propertyType: "SingleFamilyResidence",
+      amenities: ["Private Pool", "Tropical Garden", "Covered Terrace", "Gated Community", "24/7 Security", "Generator", "Staff Quarters", "Golf Course Access"],
       image: "https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg"
     },
     {
@@ -514,9 +518,13 @@ export default function SchemaMarkup() {
       price: "260000",
       priceCurrency: "USD",
       location: "Cap Cana",
+      region: "La Altagracia",
       beds: 1,
       baths: 1,
-      sqft: 786,
+      sqm: 73,
+      yearBuilt: "2025",
+      propertyType: "Apartment",
+      amenities: ["Infinity Pool", "Rooftop Terrace", "Fitness Center", "Gated Resort Community", "24/7 Security", "Beach Club Access", "Concierge Service", "CONFOTUR Approved"],
       image: "https://www.primerealestatedr.com/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.png"
     },
     {
@@ -524,9 +532,13 @@ export default function SchemaMarkup() {
       price: "540000",
       priceCurrency: "USD",
       location: "Playa Nueva Romana",
+      region: "La Romana",
       beds: 3,
       baths: 3,
-      sqft: 4521,
+      sqm: 420,
+      yearBuilt: "2024",
+      propertyType: "SingleFamilyResidence",
+      amenities: ["Private Pool", "Beachfront Access", "Open Floor Plan", "Covered Parking", "Tropical Landscaping", "Gated Community", "Generator"],
       image: "https://www.primerealestatedr.com/laud-2.webp"
     },
     {
@@ -534,9 +546,13 @@ export default function SchemaMarkup() {
       price: "780000",
       priceCurrency: "USD",
       location: "Santo Domingo",
+      region: "Distrito Nacional",
       beds: 4,
       baths: 4,
-      sqft: 3800,
+      sqm: 353,
+      yearBuilt: "2022",
+      propertyType: "Apartment",
+      amenities: ["Panoramic City View", "Private Elevator", "Smart Home System", "Covered Parking", "Lobby with Concierge", "Rooftop Pool", "Fitness Center", "Generator"],
       image: "https://www.primerealestatedr.com/2025-12-13_09_46_23-edificio_rentable_con_en_santo_domingo,_distrito_nacional,_republica_dominicana_.png"
     },
     {
@@ -544,9 +560,13 @@ export default function SchemaMarkup() {
       price: "198000",
       priceCurrency: "USD",
       location: "Evaristo Morales, Santo Domingo",
+      region: "Distrito Nacional",
       beds: 1,
       baths: 2,
-      sqft: 902,
+      sqm: 84,
+      yearBuilt: "2024",
+      propertyType: "Apartment",
+      amenities: ["Balcony", "Modern Kitchen", "Swimming Pool", "Fitness Center", "Covered Parking", "24/7 Security", "Lobby", "Elevator"],
       image: "https://www.primerealestatedr.com/60.jpg"
     },
     {
@@ -554,36 +574,74 @@ export default function SchemaMarkup() {
       price: "145000",
       priceCurrency: "USD",
       location: "Bayahibe",
+      region: "La Romana",
       beds: 1,
       baths: 1,
-      sqft: 554,
+      sqm: 51,
+      yearBuilt: "2023",
+      propertyType: "Apartment",
+      amenities: ["Fully Furnished", "Beachfront Location", "Swimming Pool", "Restaurant On-Site", "Rental Management Available", "CONFOTUR Approved", "Dive Shop Access", "Tropical Garden"],
       image: "https://www.primerealestatedr.com/d-2392-1764611103-8d08280a-5912-4dc7-ab09-fc84088d5fcc.jpg"
     }
   ];
+
+  const sellerEntity = {
+    "@type": "RealEstateAgent",
+    "name": "Harold",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "RE/MAX Next Door",
+      "url": "https://www.primerealestatedr.com"
+    },
+    "telephone": "+1-809-426-2269",
+    "email": "harold@remaxnextdoor.com",
+    "image": "https://www.primerealestatedr.com/harold-portrait.jpg",
+    "url": "https://www.primerealestatedr.com"
+  };
 
   const propertiesSchema = properties.map((property) => ({
     "@context": "https://schema.org",
     "@type": "RealEstateListing",
     "name": property.name,
     "image": property.image,
-    "description": `${property.name} - ${property.beds} bedrooms, ${property.baths} bathrooms, ${property.sqft} sq ft. Located in ${property.location}, Dominican Republic. Listed by RE/MAX Next Door.`,
+    "description": `${property.name} - ${property.beds} bedrooms, ${property.baths} bathrooms, ${property.sqm} m2. Located in ${property.location}, Dominican Republic. Listed at $${Number(property.price).toLocaleString()} USD by Harold at RE/MAX Next Door.`,
     "url": "https://www.primerealestatedr.com/#propiedades",
     "datePosted": "2026-01-01",
     "offers": {
       "@type": "Offer",
       "price": property.price,
       "priceCurrency": property.priceCurrency,
-      "availability": "https://schema.org/InStock"
+      "availability": "https://schema.org/InStock",
+      "seller": sellerEntity
     },
+    "floorSize": {
+      "@type": "QuantitativeValue",
+      "value": property.sqm,
+      "unitCode": "MTK",
+      "unitText": "square meters"
+    },
+    "numberOfRooms": property.beds + property.baths,
+    "numberOfBedrooms": property.beds,
+    "numberOfBathroomsTotal": property.baths,
+    "yearBuilt": property.yearBuilt,
+    "additionalType": `https://schema.org/${property.propertyType}`,
+    "amenityFeature": property.amenities.map(amenity => ({
+      "@type": "LocationFeatureSpecification",
+      "name": amenity,
+      "value": true
+    })),
     "additionalProperty": [
       { "@type": "PropertyValue", "name": "Bedrooms", "value": property.beds },
       { "@type": "PropertyValue", "name": "Bathrooms", "value": property.baths },
-      { "@type": "PropertyValue", "name": "Living Area", "value": `${property.sqft} square feet` },
-      { "@type": "PropertyValue", "name": "Country", "value": "Dominican Republic" }
+      { "@type": "PropertyValue", "name": "Living Area (m2)", "value": property.sqm, "unitCode": "MTK" },
+      { "@type": "PropertyValue", "name": "Price per m2 (USD)", "value": Math.round(Number(property.price) / property.sqm) },
+      { "@type": "PropertyValue", "name": "Country", "value": "Dominican Republic" },
+      { "@type": "PropertyValue", "name": "Region", "value": property.region }
     ],
     "address": {
       "@type": "PostalAddress",
       "addressLocality": property.location,
+      "addressRegion": property.region,
       "addressCountry": "DO"
     }
   }));
