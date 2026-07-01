@@ -22,7 +22,7 @@ const soldProperties = [
     sqft: '5,200',
     soldDate: 'May 2026',
     daysOnMarket: 35,
-    image: '/D-6181-1780426201-fc1ba948-91ac-464e-a585-c3a5e5ef9017.webp',
+    image: '/RUID49c.jpg',
   },
   {
     title: 'Modern Apartment',
