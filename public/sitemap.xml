@@ -42,4 +42,20 @@
       <image:caption>Furnished apartment for sale in Bayahibe - 1 bedroom, 1 bathroom, 554 sq ft</image:caption>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.primerealestatedr.com/blog/confotur-tax-savings</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.primerealestatedr.com/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.png</image:loc>
+      <image:title>CONFOTUR-Approved Property in Cap Cana</image:title>
+      <image:caption>GreenWood apartment in Cap Cana with CONFOTUR tax exemption - 1 bedroom starting at $260,000 USD</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.primerealestatedr.com/d-2392-1764611103-8d08280a-5912-4dc7-ab09-fc84088d5fcc.jpg</image:loc>
+      <image:title>CONFOTUR-Approved Apartment in Bayahibe</image:title>
+      <image:caption>Furnished beachfront apartment in Bayahibe with CONFOTUR tax exemption at $145,000 USD</image:caption>
+    </image:image>
+  </url>
 </urlset>
