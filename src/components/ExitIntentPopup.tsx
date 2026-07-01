@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { X, Bell, CheckCircle, AlertCircle } from 'lucide-react';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
+import { SUPABASE_RAW_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 
 const STORAGE_KEY = 'property_alert_popup_dismissed';
@@ -62,7 +62,7 @@ export default function ExitIntentPopup() {
         is_active: true,
       };
 
-      const response = await fetch(`/api/send-property-alert-notification`, {
+      const response = await fetch(`${SUPABASE_RAW_URL}/functions/v1/send-property-alert-notification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -89,9 +89,7 @@ export default function ExitIntentPopup() {
     } catch (error: any) {
       setStatus('error');
       const detail = error?.message || String(error);
-      const urlInfo = SUPABASE_URL ? SUPABASE_URL.slice(0, 40) : 'MISSING_URL';
-      const keyInfo = SUPABASE_ANON_KEY ? `key_len=${SUPABASE_ANON_KEY.length}` : 'MISSING_KEY';
-      setErrorMessage(`${detail} | ${urlInfo} | ${keyInfo}`);
+      setErrorMessage(detail);
       console.error('Popup submit failed:', error);
     }
   };

@@ -16,6 +16,7 @@ const supabaseUrl =
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 export const SUPABASE_URL = supabaseUrl;
+export const SUPABASE_RAW_URL = rawSupabaseUrl;
 export const SUPABASE_ANON_KEY = supabaseAnonKey;
 
 export type Contact = {

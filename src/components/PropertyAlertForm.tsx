@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { Bell, CheckCircle, AlertCircle, Star } from 'lucide-react';
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
+import { SUPABASE_RAW_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 
 interface PropertyAlertFormProps {
@@ -51,7 +51,7 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
         is_active: true
       };
 
-      const response = await fetch(`/api/send-property-alert-notification`, {
+      const response = await fetch(`${SUPABASE_RAW_URL}/functions/v1/send-property-alert-notification`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -89,9 +89,7 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
     } catch (error: any) {
       setFormStatus('error');
       const detail = error?.message || String(error);
-      const urlInfo = SUPABASE_URL ? SUPABASE_URL.slice(0, 40) : 'MISSING_URL';
-      const keyInfo = SUPABASE_ANON_KEY ? `key_len=${SUPABASE_ANON_KEY.length}` : 'MISSING_KEY';
-      setErrorMessage(`${detail} | ${urlInfo} | ${keyInfo}`);
+      setErrorMessage(detail);
       console.error('Form submit failed:', error);
     }
   };
@@ -237,6 +235,8 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
                   <option value="Bayahibe">Bayahibe</option>
                   <option value="La Romana">La Romana</option>
                   <option value="Casa de Campo">Casa de Campo</option>
+                  <option value="Samana">Samana</option>
+                  <option value="Puerto Plata">Puerto Plata</option>
                 </select>
               </div>
             </div>
