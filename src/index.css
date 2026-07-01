@@ -133,3 +133,64 @@ textarea:focus-visible {
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
+
+/* Sold portfolio: desktop hover effects */
+.sold-card-img {
+  filter: grayscale(0);
+  transform: scale(1);
+}
+
+.sold-card-overlay-info {
+  opacity: 1;
+}
+
+.sold-card-overlay-info .sold-card-inner {
+  transform: translateY(0);
+}
+
+.sold-card-dark-overlay {
+  background: transparent;
+}
+
+.sold-card-label-below {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sold-card-img {
+    filter: grayscale(100%);
+  }
+
+  .group:hover .sold-card-img {
+    filter: grayscale(0);
+    transform: scale(1.05);
+  }
+
+  .sold-card-dark-overlay {
+    background: rgba(64, 62, 63, 0.3);
+  }
+
+  .group:hover .sold-card-dark-overlay {
+    background: transparent;
+  }
+
+  .sold-card-overlay-info {
+    opacity: 0;
+  }
+
+  .group:hover .sold-card-overlay-info {
+    opacity: 1;
+  }
+
+  .sold-card-overlay-info .sold-card-inner {
+    transform: translateY(1rem);
+  }
+
+  .group:hover .sold-card-overlay-info .sold-card-inner {
+    transform: translateY(0);
+  }
+
+  .sold-card-label-below {
+    display: block;
+  }
+}
