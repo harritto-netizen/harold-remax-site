@@ -461,7 +461,7 @@ export default function SchemaMarkup() {
         "description": "The DR real estate market is experiencing unprecedented growth in 2026 with foreign investment up 34% year-over-year. Punta Cana and Cap Cana lead with average property appreciation of 12-18% annually. Santo Domingo luxury condos see 8-14% annual gains in Piantini and Naco districts.",
         "image": "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg",
         "url": "https://www.primerealestatedr.com/#blog",
-        "keywords": ["Dominican Republic real estate 2026", "Punta Cana investment returns", "Cap Cana property appreciation", "Caribbean real estate market forecast", "foreign investment Dominican Republic", "Santo Domingo condo market"]
+        "keywords": ["Dominican Republic real estate 2026", "Punta Cana investment returns", "Cap Cana property appreciation", "Caribbean real estate market forecast", "foreign investment Dominican Republic", "Santo Domingo condo market", "real estate investing", "real estate investment opportunities", "real estate investment strategies", "luxury real estate investments"]
       },
       {
         "@type": "BlogPosting",
@@ -477,7 +477,7 @@ export default function SchemaMarkup() {
         "description": "The digital nomad visa program and fiber-optic infrastructure expansion are attracting remote professionals to purchase condos and villas in Punta Cana. 1-bedroom condos under $200,000 near coworking hubs offer the best value for remote workers relocating to the Caribbean.",
         "image": "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg",
         "url": "https://www.primerealestatedr.com/#blog",
-        "keywords": ["digital nomad Dominican Republic", "remote work Punta Cana", "buy home Cap Cana", "expat real estate DR", "work from home Caribbean", "digital nomad visa Dominican Republic"]
+        "keywords": ["digital nomad Dominican Republic", "remote work Punta Cana", "buy home Cap Cana", "expat real estate DR", "work from home Caribbean", "digital nomad visa Dominican Republic", "rental property", "condos for rent", "luxury homes", "beachfront homes"]
       },
       {
         "@type": "BlogPosting",
@@ -493,7 +493,7 @@ export default function SchemaMarkup() {
         "description": "Santo Domingo is experiencing a luxury condo construction boom along the Malecon and in Naco district. Pre-construction prices offer 20-30% savings compared to completed units. Average price per square meter: Piantini $2,500, Naco $2,100, Evaristo Morales $1,750.",
         "image": "https://images.pexels.com/photos/2476632/pexels-photo-2476632.jpeg",
         "url": "https://www.primerealestatedr.com/#blog",
-        "keywords": ["Santo Domingo condos 2026", "luxury apartments Dominican Republic", "Malecon real estate", "Naco district property prices", "pre-construction investment", "Piantini condos price per meter"]
+        "keywords": ["Santo Domingo condos 2026", "luxury apartments Dominican Republic", "Malecon real estate", "Naco district property prices", "pre-construction investment", "Piantini condos price per meter", "santo domingo real estate", "luxury properties for sale", "penthouses", "high end homes"]
       }
     ]
   };
@@ -657,7 +657,7 @@ export default function SchemaMarkup() {
       "name": "RE/MAX Next Door"
     },
     "dateModified": "2026-06-01",
-    "keywords": ["Dominican Republic property prices 2026", "Punta Cana real estate data", "Santo Domingo condo prices per square meter", "Cap Cana rental yields", "Caribbean real estate market statistics"]
+    "keywords": ["Dominican Republic property prices 2026", "Punta Cana real estate data", "Santo Domingo condo prices per square meter", "Cap Cana rental yields", "Caribbean real estate market statistics", "punta cana real estate", "cap cana real estate", "bavaro real estate", "la romana real estate", "bayahibe real estate", "waterfront properties", "oceanfront homes", "luxury real estate listings", "investment property for sale"]
   };
 
   const speakableSchema = {
