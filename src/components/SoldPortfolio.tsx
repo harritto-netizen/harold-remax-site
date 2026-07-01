@@ -118,14 +118,14 @@ export default function SoldPortfolio() {
                 <img
                   src={property.image}
                   alt={`${property.title} - Sold property in ${property.location}`}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                  className="w-full h-full object-cover transition-all duration-700 ease-out can-hover:grayscale can-hover:group-hover:grayscale-0 can-hover:group-hover:scale-105"
                   loading="lazy"
                   width="600"
                   height="900"
                 />
 
-                {/* Dark overlay that lightens on hover */}
-                <div className="absolute inset-0 bg-charcoal/30 group-hover:bg-charcoal/0 transition-all duration-700" />
+                {/* Dark overlay - only on hover devices */}
+                <div className="absolute inset-0 transition-all duration-700 can-hover:bg-charcoal/30 can-hover:group-hover:bg-charcoal/0" />
 
                 {/* Sold badge - always visible */}
                 <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-cream text-charcoal px-3 py-1.5 z-10">
@@ -133,17 +133,17 @@ export default function SoldPortfolio() {
                   <span className="font-lato text-xs uppercase tracking-wider font-medium">Sold</span>
                 </div>
 
-                {/* Details overlay - revealed on hover */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <div className="bg-charcoal/85 backdrop-blur-sm p-5 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                {/* Details overlay - always visible on touch, hover-reveal on desktop */}
+                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 opacity-100 can-hover:opacity-0 can-hover:group-hover:opacity-100 transition-all duration-500">
+                  <div className="bg-charcoal/85 backdrop-blur-sm p-4 sm:p-5 translate-y-0 can-hover:translate-y-4 can-hover:group-hover:translate-y-0 transition-transform duration-500 ease-out">
                     <p className="font-lato text-xs text-cream/70 uppercase tracking-wider mb-1">
                       {property.location}
                     </p>
-                    <h3 className="font-montserrat text-lg text-cream uppercase tracking-wide mb-3">
+                    <h3 className="font-montserrat text-base sm:text-lg text-cream uppercase tracking-wide mb-3">
                       {property.title}
                     </h3>
                     <div className="flex items-baseline justify-between mb-2">
-                      <p className="font-montserrat text-2xl font-light text-cream">
+                      <p className="font-montserrat text-xl sm:text-2xl font-light text-cream">
                         {property.price}
                       </p>
                     </div>
@@ -160,8 +160,8 @@ export default function SoldPortfolio() {
                 </div>
               </div>
 
-              {/* Minimal info below image - visible by default */}
-              <div className="mt-3 text-center">
+              {/* Minimal info below image - only on desktop where overlay is hidden */}
+              <div className="mt-3 text-center hidden can-hover:block">
                 <p className="font-montserrat text-sm text-cream/80 uppercase tracking-wider">
                   {property.title}
                 </p>

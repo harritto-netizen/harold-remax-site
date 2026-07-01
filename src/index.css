@@ -42,8 +42,10 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.hover-zoom:hover img {
-  animation: subtle-zoom 0.4s ease-out forwards;
+@media (hover: hover) and (pointer: fine) {
+  .hover-zoom:hover img {
+    animation: subtle-zoom 0.4s ease-out forwards;
+  }
 }
 
 @keyframes slide-in-right {
