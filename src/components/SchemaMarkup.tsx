@@ -657,7 +657,7 @@ export default function SchemaMarkup() {
       "name": "RE/MAX Next Door"
     },
     "dateModified": "2026-06-01",
-    "keywords": ["Dominican Republic property prices 2026", "Punta Cana real estate data", "Santo Domingo condo prices per square meter", "Cap Cana rental yields", "Caribbean real estate market statistics", "punta cana real estate", "cap cana real estate", "bavaro real estate", "la romana real estate", "bayahibe real estate", "waterfront properties", "oceanfront homes", "luxury real estate listings", "investment property for sale"]
+    "keywords": ["Dominican Republic property prices 2026", "Punta Cana real estate data", "Santo Domingo condo prices per square meter", "Cap Cana rental yields", "Caribbean real estate market statistics", "punta cana real estate", "cap cana real estate", "bavaro real estate", "la romana real estate", "bayahibe real estate", "samana real estate", "puerto plata real estate", "waterfront properties", "oceanfront homes", "luxury real estate listings", "investment property for sale"]
   };
 
   const speakableSchema = {
