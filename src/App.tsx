@@ -10,6 +10,8 @@ const ExitIntentPopup = lazy(() => import('./components/ExitIntentPopup'));
 const AdminLogin = lazy(() => import('./components/AdminLogin'));
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
 const PropertyVideos = lazy(() => import('./components/PropertyVideos'));
+const AnimatedStats = lazy(() => import('./components/AnimatedStats'));
+const SoldPortfolio = lazy(() => import('./components/SoldPortfolio'));
 
 type View = 'main' | 'admin-login' | 'admin-dashboard';
 
@@ -298,6 +300,9 @@ function App() {
         </div>
       </section>
 
+      {/* Animated Stats Section */}
+      <Suspense fallback={null}><AnimatedStats /></Suspense>
+
       {/* About Me Section */}
       <section className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -528,6 +533,9 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Sold Portfolio Section */}
+      <Suspense fallback={null}><SoldPortfolio /></Suspense>
 
       {/* Featured Properties Gallery */}
       <section id="propiedades" className="py-24 md:py-32 bg-cream">
