@@ -2,6 +2,7 @@ import { Home, Building2, Key, Search, Star, Calendar, MessageCircle, X, Bell, M
 import { useState, useEffect, lazy, Suspense } from 'react';
 import PropertyAlertForm from './components/PropertyAlertForm';
 import MobileCTABar from './components/MobileCTABar';
+import ScrollReveal from './components/ScrollReveal';
 import { getCurrentUser } from './lib/auth';
 import { initTracking, trackContact, trackViewContent } from './lib/tracking';
 
@@ -264,38 +265,38 @@ function App() {
       {/* Services Section */}
       <section id="servicios" className="py-24 md:py-32 bg-cream">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <ScrollReveal className="text-center mb-20">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Our Services
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
               Comprehensive real estate solutions for buyers, sellers, and investors
             </p>
-          </div>
+          </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div className="text-center">
+            <ScrollReveal delay={0} className="text-center">
               <Home className="w-12 h-12 text-charcoal mx-auto mb-6" />
               <h3 className="font-montserrat text-xl uppercase tracking-wider text-charcoal mb-4">Property Buying</h3>
               <p className="font-lato text-charcoal/70">
                 Expert guidance through every step of the buying process, ensuring the best investment for your future.
               </p>
-            </div>
+            </ScrollReveal>
 
-            <div className="text-center">
+            <ScrollReveal delay={150} className="text-center">
               <Building2 className="w-12 h-12 text-charcoal mx-auto mb-6" />
               <h3 className="font-montserrat text-xl uppercase tracking-wider text-charcoal mb-4">Property Selling</h3>
               <p className="font-lato text-charcoal/70">
                 Maximize your property value with effective marketing strategies and exposure to the right market.
               </p>
-            </div>
+            </ScrollReveal>
 
-            <div className="text-center">
+            <ScrollReveal delay={300} className="text-center">
               <Key className="w-12 h-12 text-charcoal mx-auto mb-6" />
               <h3 className="font-montserrat text-xl uppercase tracking-wider text-charcoal mb-4">Property Rentals</h3>
               <p className="font-lato text-charcoal/70">
                 Find the perfect tenant or ideal rental property with transparent and secure processes.
               </p>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -307,7 +308,7 @@ function App() {
       <section className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
+            <ScrollReveal direction="left">
               <img
                 src="/1780975185532(1).png"
                 alt="Harold - Certified Real Estate Agent RE/MAX Next Door in Santo Domingo"
@@ -318,7 +319,8 @@ function App() {
                 width="665"
                 height="998"
               />
-            </div>
+            </ScrollReveal>
+            <ScrollReveal direction="right" delay={200}>
             <div className="space-y-8">
               <h2 className="font-montserrat text-4xl sm:text-5xl font-light text-charcoal uppercase tracking-wider leading-tight">
                 About Harold
@@ -349,41 +351,59 @@ function App() {
                 Get In Touch
               </a>
             </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* Trust & Credentials Section */}
-      <section className="py-12 md:py-16 bg-cream border-y border-charcoal/5">
+      {/* Trust & Credentials Section - Marquee */}
+      <section className="py-12 md:py-16 bg-cream border-y border-charcoal/5 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="font-lato text-xs text-charcoal/50 uppercase tracking-widest text-center mb-8">
-            Trusted Credentials & Partnerships
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16">
-            <img
-              src="/re_max_next_door_(4).png"
-              alt="RE/MAX Next Door"
-              className="h-12 md:h-14 w-auto opacity-70 hover:opacity-100 transition-opacity"
-              loading="lazy"
-              decoding="async"
-              width="315"
-              height="84"
-            />
-            <img
-              src="/png-clipart-remax-logo-re-max-llc-real-estate-estate-agent-house-re-max-ocean-properties-new-balloon-logo-thumbnail.png"
-              alt="RE/MAX International"
-              className="h-10 md:h-12 w-auto opacity-70 hover:opacity-100 transition-opacity"
-              loading="lazy"
-              decoding="async"
-              width="55"
-              height="70"
-            />
-            <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2">
-              15+ Years Certified
-            </span>
-            <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2">
-              500+ Properties Sold
-            </span>
+          <ScrollReveal>
+            <p className="font-lato text-xs text-charcoal/50 uppercase tracking-widest text-center mb-8">
+              Trusted Credentials & Partnerships
+            </p>
+          </ScrollReveal>
+          <div className="relative overflow-hidden">
+            <div className="flex animate-marquee whitespace-nowrap">
+              {[...Array(2)].map((_, setIdx) => (
+                <div key={setIdx} className="flex items-center gap-12 md:gap-20 px-6 md:px-10 shrink-0">
+                  <img
+                    src="/re_max_next_door_(4).png"
+                    alt="RE/MAX Next Door"
+                    className="h-12 md:h-14 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                    loading="lazy"
+                    decoding="async"
+                    width="315"
+                    height="84"
+                  />
+                  <img
+                    src="/png-clipart-remax-logo-re-max-llc-real-estate-estate-agent-house-re-max-ocean-properties-new-balloon-logo-thumbnail.png"
+                    alt="RE/MAX International"
+                    className="h-10 md:h-12 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                    loading="lazy"
+                    decoding="async"
+                    width="55"
+                    height="70"
+                  />
+                  <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2 whitespace-nowrap">
+                    15+ Years Certified
+                  </span>
+                  <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2 whitespace-nowrap">
+                    500+ Properties Sold
+                  </span>
+                  <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2 whitespace-nowrap">
+                    RE/MAX International Network
+                  </span>
+                  <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2 whitespace-nowrap">
+                    350+ Happy Clients
+                  </span>
+                  <span className="font-montserrat text-xs uppercase tracking-widest text-charcoal/60 border border-charcoal/20 px-4 py-2 whitespace-nowrap">
+                    Bilingual Service EN/ES
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -391,7 +411,7 @@ function App() {
       {/* CONFOTUR Tax Incentives Section */}
       <section id="confotur" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <ScrollReveal className="text-center mb-16">
             <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-4">Dominican Republic Tax Incentives</p>
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               CONFOTUR Law
@@ -399,7 +419,7 @@ function App() {
             <p className="font-lato text-lg text-charcoal/70 max-w-3xl mx-auto leading-relaxed">
               The CONFOTUR Law (Law 158-01) is a highly lucrative tax incentive program enacted by the Dominican Republic government to stimulate tourism development and attract foreign and local real estate investments. Managed by the Consejo de Fomento Turistico (Tourism Promotion Council), it grants significant tax exemptions lasting up to 15 years.
             </p>
-          </div>
+          </ScrollReveal>
 
           {/* Key Benefits for Buyers */}
           <div className="mb-20">
@@ -540,14 +560,14 @@ function App() {
       {/* Featured Properties Gallery */}
       <section id="propiedades" className="py-24 md:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <ScrollReveal className="text-center mb-20">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Featured Properties
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
               Discover exceptional properties in Santo Domingo and Punta Cana
             </p>
-          </div>
+          </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
@@ -605,7 +625,7 @@ function App() {
                 location: 'Bayahibe'
               }
             ].map((property, index) => (
-              <div key={index} className="group hover-zoom overflow-hidden">
+              <ScrollReveal key={index} delay={index * 100} className="group hover-zoom overflow-hidden">
                 <div className="relative h-80 overflow-hidden mb-4">
                   <img
                     src={property.image}
@@ -662,7 +682,7 @@ function App() {
                     </button>
                   </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -680,14 +700,14 @@ function App() {
       {/* Testimonials Section */}
       <section id="testimonios" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <ScrollReveal className="text-center mb-20">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Client Testimonials
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
               Real results from buyers, sellers, and investors across the Dominican Republic
             </p>
-          </div>
+          </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
             {[
               {
@@ -727,7 +747,7 @@ function App() {
                 rating: 5,
               },
             ].map((testimonial, index) => (
-              <div key={index} className="bg-cream p-8">
+              <ScrollReveal key={index} delay={index * 100} className="bg-cream p-8">
                 <div className="flex gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-charcoal/70 text-charcoal/70" />
@@ -738,7 +758,7 @@ function App() {
                   <p className="font-montserrat text-sm uppercase tracking-wider text-charcoal">{testimonial.name}</p>
                   <p className="font-lato text-xs text-charcoal/60 uppercase tracking-wider mt-1">{testimonial.role}</p>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -747,14 +767,14 @@ function App() {
       {/* FAQ Section */}
       <section id="faq" className="py-24 md:py-32 bg-cream">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <ScrollReveal className="text-center mb-16">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Frequently Asked Questions
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
               Expert answers about buying, investing, and owning property in the Dominican Republic
             </p>
-          </div>
+          </ScrollReveal>
           <div className="space-y-6">
             {[
               {
@@ -841,14 +861,14 @@ function App() {
       {/* Blog / Market Insights Section */}
       <section id="blog" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
+          <ScrollReveal className="text-center mb-20">
             <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Market Insights
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
               Expert analysis on Dominican Republic real estate trends, investment opportunities, and market forecasts for 2026
             </p>
-          </div>
+          </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
@@ -876,7 +896,8 @@ function App() {
                 category: 'Investment',
               },
             ].map((post, index) => (
-              <article key={index} className="group" itemScope itemType="https://schema.org/BlogPosting">
+              <ScrollReveal key={index} delay={index * 150}>
+              <article className="group" itemScope itemType="https://schema.org/BlogPosting">
                 <meta itemProp="author" content="Harold - RE/MAX Next Door" />
                 <meta itemProp="publisher" content="RE/MAX Next Door" />
                 <meta itemProp="datePublished" content={post.date} />
@@ -915,6 +936,7 @@ function App() {
                   Discuss With Harold
                 </a>
               </article>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -926,7 +948,7 @@ function App() {
           </div>
 
           {/* Neighborhood Market Data - Answer-first content for AI extraction */}
-          <div className="mt-20 border-t border-charcoal/10 pt-16">
+          <ScrollReveal className="mt-20 border-t border-charcoal/10 pt-16">
             <h3 className="font-montserrat text-2xl sm:text-3xl font-light text-charcoal uppercase tracking-wider mb-10 text-center">
               2026 Neighborhood Price Guide
             </h3>
@@ -953,7 +975,7 @@ function App() {
             <p className="font-lato text-xs text-charcoal/40 text-center mt-6 italic">
               Data based on Q2 2026 market analysis by RE/MAX Next Door. Prices in USD. Yields are net estimates for furnished short-term rentals.
             </p>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
 
