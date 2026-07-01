@@ -11,7 +11,7 @@ const soldProperties = [
     sqft: '3,800',
     soldDate: 'June 2026',
     daysOnMarket: 28,
-    image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop',
   },
   {
     title: 'Oceanview Villa',
@@ -22,7 +22,7 @@ const soldProperties = [
     sqft: '5,200',
     soldDate: 'May 2026',
     daysOnMarket: 35,
-    image: 'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop',
   },
   {
     title: 'Modern Apartment',
@@ -33,7 +33,7 @@ const soldProperties = [
     sqft: '1,200',
     soldDate: 'May 2026',
     daysOnMarket: 18,
-    image: 'https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop',
   },
   {
     title: 'Beachfront Condo',
@@ -44,7 +44,7 @@ const soldProperties = [
     sqft: '1,450',
     soldDate: 'April 2026',
     daysOnMarket: 41,
-    image: 'https://images.pexels.com/photos/2119714/pexels-photo-2119714.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/2119714/pexels-photo-2119714.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop',
   },
   {
     title: 'Golf Course Villa',
@@ -55,18 +55,18 @@ const soldProperties = [
     sqft: '3,400',
     soldDate: 'March 2026',
     daysOnMarket: 32,
-    image: 'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop',
   },
   {
     title: 'Luxury Tower Unit',
-    location: 'Evaristo Morales, Santo Domingo',
+    location: 'Evaristo Morales',
     price: '$198,000',
     beds: 1,
     baths: 1,
     sqft: '860',
     soldDate: 'March 2026',
     daysOnMarket: 12,
-    image: 'https://images.pexels.com/photos/2462015/pexels-photo-2462015.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/2462015/pexels-photo-2462015.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop',
   },
 ];
 
@@ -90,69 +90,83 @@ export default function SoldPortfolio() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-cream">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-charcoal">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-4">
+          <p className="font-lato text-xs uppercase tracking-widest text-cream/50 mb-4">
             Our Track Record
           </p>
-          <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
+          <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-cream uppercase tracking-wider mb-6">
             Recently Sold
           </h2>
-          <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
+          <p className="font-lato text-lg text-cream/60 max-w-2xl mx-auto">
             A selection of properties we have successfully closed for our clients
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {soldProperties.map((property, index) => (
             <div
               key={index}
-              className={`group transition-all duration-700 ${
+              className={`group relative cursor-pointer transition-all duration-700 ${
                 visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="relative h-72 overflow-hidden mb-4">
+              {/* Vertical image container */}
+              <div className="relative aspect-[3/4] overflow-hidden">
                 <img
                   src={property.image}
                   alt={`${property.title} - Sold property in ${property.location}`}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
-                  width="400"
-                  height="288"
+                  width="600"
+                  height="900"
                 />
-                <div className="absolute inset-0 bg-charcoal/10 group-hover:bg-charcoal/20 transition-colors duration-300" />
-                <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-charcoal/90 text-cream px-3 py-1.5">
+
+                {/* Dark overlay that lightens on hover */}
+                <div className="absolute inset-0 bg-charcoal/30 group-hover:bg-charcoal/0 transition-all duration-700" />
+
+                {/* Sold badge - always visible */}
+                <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-cream text-charcoal px-3 py-1.5 z-10">
                   <BadgeCheck className="w-3.5 h-3.5" />
-                  <span className="font-lato text-xs uppercase tracking-wider">Sold</span>
+                  <span className="font-lato text-xs uppercase tracking-wider font-medium">Sold</span>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-charcoal/80 to-transparent p-5 pt-12">
-                  <p className="font-lato text-xs text-cream/80 uppercase tracking-wider mb-1">
-                    {property.location}
-                  </p>
-                  <h3 className="font-montserrat text-lg text-cream uppercase tracking-wide">
-                    {property.title}
-                  </h3>
+
+                {/* Details overlay - revealed on hover */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-500">
+                  <div className="bg-charcoal/85 backdrop-blur-sm p-5 translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <p className="font-lato text-xs text-cream/70 uppercase tracking-wider mb-1">
+                      {property.location}
+                    </p>
+                    <h3 className="font-montserrat text-lg text-cream uppercase tracking-wide mb-3">
+                      {property.title}
+                    </h3>
+                    <div className="flex items-baseline justify-between mb-2">
+                      <p className="font-montserrat text-2xl font-light text-cream">
+                        {property.price}
+                      </p>
+                    </div>
+                    <div className="flex gap-4 font-lato text-xs text-cream/70 mb-2">
+                      <span>{property.beds} Beds</span>
+                      <span>{property.baths} Baths</span>
+                      <span>{property.sqft} ft2</span>
+                    </div>
+                    <div className="flex items-center justify-between pt-2 border-t border-cream/20">
+                      <span className="font-lato text-xs text-cream/50">{property.soldDate}</span>
+                      <span className="font-lato text-xs text-cream/50">Sold in {property.daysOnMarket} days</span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <div className="flex items-baseline justify-between">
-                  <p className="font-montserrat text-2xl font-light text-charcoal">
-                    {property.price}
-                  </p>
-                  <span className="font-lato text-xs text-charcoal/50 uppercase tracking-wider">
-                    {property.soldDate}
-                  </span>
-                </div>
-                <div className="flex gap-4 font-lato text-sm text-charcoal/70">
-                  <span>{property.beds} Beds</span>
-                  <span>{property.baths} Baths</span>
-                  <span>{property.sqft} ft2</span>
-                </div>
-                <p className="font-lato text-xs text-charcoal/50 italic">
-                  Sold in {property.daysOnMarket} days
+              {/* Minimal info below image - visible by default */}
+              <div className="mt-3 text-center">
+                <p className="font-montserrat text-sm text-cream/80 uppercase tracking-wider">
+                  {property.title}
+                </p>
+                <p className="font-lato text-xs text-cream/40 mt-1">
+                  {property.location}
                 </p>
               </div>
             </div>
@@ -164,7 +178,7 @@ export default function SoldPortfolio() {
             href="https://wa.me/18094262269?text=Hello%20Harold,%20I%20saw%20your%20recent%20sales%20and%20I'm%20interested%20in%20selling%20my%20property.%20Can%20we%20discuss?"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block border-2 border-charcoal text-charcoal px-8 py-3 text-sm uppercase tracking-widest hover:bg-charcoal hover:text-cream transition-all duration-300"
+            className="inline-block border-2 border-cream text-cream px-8 py-3 text-sm uppercase tracking-widest hover:bg-cream hover:text-charcoal transition-all duration-300"
           >
             List Your Property With Us
           </a>
