@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { X, Bell, CheckCircle, AlertCircle } from 'lucide-react';
-import { SUPABASE_RAW_URL, SUPABASE_ANON_KEY } from '../lib/supabase';
+import { supabase } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 
 const STORAGE_KEY = 'property_alert_popup_dismissed';
@@ -62,25 +62,8 @@ export default function ExitIntentPopup() {
         is_active: true,
       };
 
-      const response = await fetch(`${SUPABASE_RAW_URL}/functions/v1/send-property-alert-notification`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-          apikey: SUPABASE_ANON_KEY,
-        },
-        body: JSON.stringify(alertData),
-      });
-
-      if (!response.ok) {
-        const text = await response.text().catch(() => '');
-        throw new Error(`Submit failed: HTTP ${response.status} ${text}`);
-      }
-
-      const result = await response.json().catch(() => ({}));
-      if (result.success === false) {
-        throw new Error(result.error || 'Submit failed');
-      }
+      const { error } = await supabase.from('property_alerts').insert([alertData]);
+      if (error) throw new Error(error.message);
 
       trackLead({ contentName: 'exit_intent_popup' });
       setStatus('success');
