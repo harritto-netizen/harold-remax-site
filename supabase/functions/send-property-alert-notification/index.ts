@@ -1,13 +1,12 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-import { createClient } from "npm:@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
 };
 
-interface PropertyAlert {
+interface AlertRecord {
   email: string;
   name: string | null;
   phone: string | null;
@@ -15,6 +14,12 @@ interface PropertyAlert {
   location: string | null;
   price_min: number | null;
   price_max: number | null;
+}
+
+interface WebhookPayload {
+  type?: string;
+  table?: string;
+  record?: AlertRecord;
 }
 
 function jsonResponse(body: unknown, status = 200) {
@@ -30,37 +35,21 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const payload: PropertyAlert = await req.json();
+    const payload: WebhookPayload & AlertRecord = await req.json();
 
-    if (!payload.email || typeof payload.email !== "string") {
-      return jsonResponse({ success: false, error: "Email is required" }, 400);
-    }
+    // Support both trigger/webhook format (record field) and direct format
+    const alert: AlertRecord = payload.record ?? {
+      email: payload.email,
+      name: payload.name ?? null,
+      phone: payload.phone ?? null,
+      property_type: payload.property_type ?? null,
+      location: payload.location ?? null,
+      price_min: payload.price_min ?? null,
+      price_max: payload.price_max ?? null,
+    };
 
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-    const admin = createClient(supabaseUrl, serviceRoleKey, {
-      auth: { persistSession: false },
-    });
-
-    const { error: insertError } = await admin.from("property_alerts").insert([
-      {
-        email: payload.email,
-        name: payload.name,
-        phone: payload.phone,
-        property_type: payload.property_type,
-        location: payload.location,
-        price_min: payload.price_min,
-        price_max: payload.price_max,
-        is_active: true,
-      },
-    ]);
-
-    if (insertError) {
-      console.error("DB insert failed:", insertError);
-      return jsonResponse(
-        { success: false, error: `DB insert failed: ${insertError.message}` },
-        500
-      );
+    if (!alert.email || typeof alert.email !== "string") {
+      return jsonResponse({ success: true, message: "No email to notify" });
     }
 
     const adminEmail = Deno.env.get("ADMIN_EMAIL") || "your-email@example.com";
@@ -69,7 +58,7 @@ Deno.serve(async (req: Request) => {
     if (!resendApiKey) {
       return jsonResponse({
         success: true,
-        message: "Alert saved successfully. Email notifications not configured.",
+        message: "Alert received. Email notifications not configured.",
       });
     }
 
@@ -88,16 +77,16 @@ Deno.serve(async (req: Request) => {
 
       <h3>Contact Information:</h3>
       <ul>
-        <li><strong>Name:</strong> ${payload.name || "Not provided"}</li>
-        <li><strong>Email:</strong> ${payload.email}</li>
-        <li><strong>Phone:</strong> ${payload.phone || "Not provided"}</li>
+        <li><strong>Name:</strong> ${alert.name || "Not provided"}</li>
+        <li><strong>Email:</strong> ${alert.email}</li>
+        <li><strong>Phone:</strong> ${alert.phone || "Not provided"}</li>
       </ul>
 
       <h3>Property Preferences:</h3>
       <ul>
-        <li><strong>Property Type:</strong> ${payload.property_type || "Any"}</li>
-        <li><strong>Location:</strong> ${payload.location || "Any"}</li>
-        <li><strong>Price Range:</strong> ${formatPrice(payload.price_min)} - ${formatPrice(payload.price_max)}</li>
+        <li><strong>Property Type:</strong> ${alert.property_type || "Any"}</li>
+        <li><strong>Location:</strong> ${alert.location || "Any"}</li>
+        <li><strong>Price Range:</strong> ${formatPrice(alert.price_min)} - ${formatPrice(alert.price_max)}</li>
       </ul>
 
       <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ccc; color: #666;">
@@ -114,7 +103,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         from: "Property Alerts <onboarding@resend.dev>",
         to: [adminEmail],
-        subject: `New Property Alert: ${payload.name || payload.email}`,
+        subject: `New Property Alert: ${alert.name || alert.email}`,
         html: emailHtml,
       }),
     });
@@ -122,9 +111,10 @@ Deno.serve(async (req: Request) => {
     if (!emailResponse.ok) {
       const errorData = await emailResponse.text();
       console.error("Email send failed:", errorData);
+      return jsonResponse({ success: true, message: "Alert saved, email delivery failed" });
     }
 
-    return jsonResponse({ success: true, message: "Alert saved successfully" });
+    return jsonResponse({ success: true, message: "Notification sent" });
   } catch (error) {
     console.error("Error processing request:", error);
     return jsonResponse(
