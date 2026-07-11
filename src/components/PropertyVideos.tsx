@@ -104,6 +104,9 @@ export default function PropertyVideos() {
                 alt={video.title}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
+                width="640"
+                height="360"
               />
               <div className="absolute inset-0 bg-charcoal/30 group-hover:bg-charcoal/40 transition-colors duration-300 flex items-center justify-center">
                 <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-cream/95 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">

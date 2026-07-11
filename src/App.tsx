@@ -309,16 +309,23 @@ function App() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <ScrollReveal direction="left">
-              <img
-                src="/1780975185532(1).png"
-                alt="Harold - Certified Real Estate Agent RE/MAX Next Door in Santo Domingo"
-                className="w-full h-auto object-cover max-w-[665px]"
-                loading="lazy"
-                decoding="async"
-                fetchPriority="low"
-                width="665"
-                height="998"
-              />
+              <picture>
+                <source
+                  srcSet="/1780975185532(1)-sm.webp 400w, /1780975185532(1).webp 665w"
+                  sizes="(max-width: 768px) 400px, 665px"
+                  type="image/webp"
+                />
+                <img
+                  src="/1780975185532(1).png"
+                  alt="Harold - Certified Real Estate Agent RE/MAX Next Door in Santo Domingo"
+                  className="w-full h-auto object-cover max-w-[665px]"
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                  width="665"
+                  height="998"
+                />
+              </picture>
             </ScrollReveal>
             <ScrollReveal direction="right" delay={200}>
             <div className="space-y-8">
@@ -585,7 +592,7 @@ function App() {
                 beds: 1,
                 baths: 1,
                 sqft: '786',
-                image: '/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.png',
+                image: '/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.webp',
                 location: 'Cap Cana'
               },
               {
@@ -632,6 +639,7 @@ function App() {
                     alt={`${property.title} - Property with ${property.beds} bedrooms and ${property.baths} bathrooms in ${property.location}`}
                     className="w-full h-full object-cover transition-transform duration-500"
                     loading="lazy"
+                    decoding="async"
                     width="400"
                     height="320"
                   />
