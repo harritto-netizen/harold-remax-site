@@ -122,14 +122,17 @@ function App() {
         <nav aria-label="Primary" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <img
-                src="/re_max_next_door_(4).png"
-                alt="RE/MAX Next Door Logo"
-                className="h-8 sm:h-10 w-auto"
-                width="180"
-                height="48"
-                fetchPriority="high"
-              />
+              <picture>
+                <source srcSet="/re_max_next_door_(4).webp" type="image/webp" />
+                <img
+                  src="/re_max_next_door_(4)-sm.png"
+                  alt="RE/MAX Next Door Logo"
+                  className="h-8 sm:h-10 w-auto"
+                  width="180"
+                  height="48"
+                  fetchPriority="high"
+                />
+              </picture>
             </div>
             <div className="hidden lg:flex space-x-12">
               <a href="#inicio" className="text-charcoal text-sm uppercase tracking-widest hover:opacity-60 transition-opacity">Home</a>
@@ -375,15 +378,18 @@ function App() {
             <div className="flex animate-marquee whitespace-nowrap">
               {[...Array(2)].map((_, setIdx) => (
                 <div key={setIdx} className="flex items-center gap-12 md:gap-20 px-6 md:px-10 shrink-0">
-                  <img
-                    src="/re_max_next_door_(4).png"
-                    alt="RE/MAX Next Door"
-                    className="h-12 md:h-14 w-auto opacity-70 hover:opacity-100 transition-opacity"
-                    loading="lazy"
-                    decoding="async"
-                    width="315"
-                    height="84"
-                  />
+                  <picture>
+                    <source srcSet="/re_max_next_door_(4).webp" type="image/webp" />
+                    <img
+                      src="/re_max_next_door_(4)-sm.png"
+                      alt="RE/MAX Next Door"
+                      className="h-12 md:h-14 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                      loading="lazy"
+                      decoding="async"
+                      width="315"
+                      height="84"
+                    />
+                  </picture>
                   <img
                     src="/png-clipart-remax-logo-re-max-llc-real-estate-estate-agent-house-re-max-ocean-properties-new-balloon-logo-thumbnail.png"
                     alt="RE/MAX International"
@@ -993,14 +999,17 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
-              <img
-                src="/re_max_next_door_(4).png"
-                alt="RE/MAX Next Door Logo - Real Estate Dominican Republic"
-                className="h-10 w-auto mb-4"
-                loading="lazy"
-                width="180"
-                height="40"
-              />
+              <picture>
+                <source srcSet="/re_max_next_door_(4).webp" type="image/webp" />
+                <img
+                  src="/re_max_next_door_(4)-sm.png"
+                  alt="RE/MAX Next Door Logo - Real Estate Dominican Republic"
+                  className="h-10 w-auto mb-4"
+                  loading="lazy"
+                  width="180"
+                  height="40"
+                />
+              </picture>
               <p className="font-lato text-sm text-charcoal/70 leading-relaxed">
                 Certified RE/MAX real estate agency specializing in luxury properties across the Dominican Republic. Serving Santo Domingo, Punta Cana, Cap Cana, and Bayahibe.
               </p>
