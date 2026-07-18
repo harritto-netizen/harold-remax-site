@@ -2,6 +2,7 @@
 /api/send-contact-notification  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/send-contact-notification  200
 /supabase-proxy/*  https://wllejqlypxctumdxkecn.supabase.co/:splat  200
 /blog/confotur-tax-savings  /blog/confotur-tax-savings.html  200
+/privacy-policy  /privacy-policy.html  200
 /admin  /index.html  200
 /       /index.html  200
 /*      /404.html    404
