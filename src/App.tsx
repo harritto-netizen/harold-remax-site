@@ -13,6 +13,7 @@ const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
 const PropertyVideos = lazy(() => import('./components/PropertyVideos'));
 const AnimatedStats = lazy(() => import('./components/AnimatedStats'));
 const SoldPortfolio = lazy(() => import('./components/SoldPortfolio'));
+const MarketInsights = lazy(() => import('./components/MarketInsights'));
 
 type View = 'main' | 'admin-login' | 'admin-dashboard';
 
@@ -850,125 +851,7 @@ function App() {
       </section>
 
       {/* Blog / Market Insights Section */}
-      <section id="blog" className="py-24 md:py-32 bg-beige-light">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal className="text-center mb-20">
-            <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
-              Market Insights
-            </h2>
-            <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
-              Expert analysis on Dominican Republic real estate trends, investment opportunities, and market forecasts for 2026
-            </p>
-          </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Dominican Republic Real Estate Market Forecast 2026: Record Foreign Investment Drives Growth',
-                date: 'May 28, 2026',
-                excerpt: 'The DR real estate market is experiencing unprecedented growth in 2026 with foreign investment up 34% year-over-year. Punta Cana and Cap Cana lead with average property appreciation of 12-18% annually, making the Dominican Republic the top Caribbean investment destination.',
-                image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-                readTime: '5 min read',
-                category: 'Market Analysis',
-              },
-              {
-                title: 'Why Remote Workers Are Buying Homes in Punta Cana and Cap Cana in 2026',
-                date: 'May 15, 2026',
-                excerpt: 'The digital nomad visa program and fiber-optic infrastructure expansion are attracting remote professionals to purchase condos and villas in Punta Cana. New co-living developments and smart-home communities are reshaping the buyer demographic.',
-                image: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=800',
-                readTime: '4 min read',
-                category: 'Lifestyle',
-              },
-              {
-                title: 'Santo Domingo Luxury Condo Boom: New Developments and Investment Returns',
-                date: 'May 2, 2026',
-                excerpt: 'Santo Domingo is experiencing a luxury condo construction boom along the Malecon and in Naco district. Pre-construction prices offer 20-30% savings compared to completed units, with rental yields averaging 8-10% for furnished short-term rentals.',
-                image: 'https://images.pexels.com/photos/2476632/pexels-photo-2476632.jpeg?auto=compress&cs=tinysrgb&w=800',
-                readTime: '6 min read',
-                category: 'Investment',
-              },
-            ].map((post, index) => (
-              <ScrollReveal key={index} delay={index * 150}>
-              <article className="group" itemScope itemType="https://schema.org/BlogPosting">
-                <meta itemProp="author" content="Harold - RE/MAX Next Door" />
-                <meta itemProp="publisher" content="RE/MAX Next Door" />
-                <meta itemProp="datePublished" content={post.date} />
-                <div className="h-64 overflow-hidden mb-4 relative">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                    width="400"
-                    height="256"
-                    itemProp="image"
-                  />
-                  <span className="absolute top-4 left-4 bg-charcoal/80 text-cream font-lato text-xs uppercase tracking-wider px-3 py-1">
-                    {post.category}
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 mb-3">
-                  <p className="font-lato text-xs text-charcoal/50 uppercase tracking-wider">{post.date}</p>
-                  <span className="w-1 h-1 rounded-full bg-charcoal/30"></span>
-                  <p className="font-lato text-xs text-charcoal/50 uppercase tracking-wider">{post.readTime}</p>
-                </div>
-                <h3 className="font-montserrat text-lg uppercase tracking-wide text-charcoal mb-3 group-hover:opacity-60 transition-opacity leading-tight" itemProp="headline">
-                  {post.title}
-                </h3>
-                <p className="font-lato text-charcoal/70 mb-4 leading-relaxed text-sm" itemProp="description">
-                  {post.excerpt}
-                </p>
-                <a
-                  href={`https://wa.me/18094262269?text=${encodeURIComponent(`Hi Harold, I just read your article "${post.title}" and would like to learn more about investment opportunities.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => trackContact('blog_cta')}
-                  className="inline-block font-lato text-sm text-charcoal uppercase tracking-widest border-b border-charcoal hover:opacity-60 transition-opacity pb-1"
-                >
-                  Discuss With Harold
-                </a>
-              </article>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          {/* SEO-rich summary paragraph */}
-          <div className="mt-16 text-center max-w-3xl mx-auto">
-            <p className="font-lato text-charcoal/60 text-sm leading-relaxed">
-              Stay informed about the Dominican Republic real estate market with expert insights from RE/MAX Next Door. Whether you are looking to buy property in Punta Cana, invest in Santo Domingo condos, or explore luxury villas in Cap Cana, our market reports help you make confident investment decisions. Contact Harold for a personalized market analysis.
-            </p>
-          </div>
-
-          {/* Neighborhood Market Data - Answer-first content for AI extraction */}
-          <ScrollReveal className="mt-20 border-t border-charcoal/10 pt-16">
-            <h3 className="font-montserrat text-2xl sm:text-3xl font-light text-charcoal uppercase tracking-wider mb-10 text-center">
-              2026 Neighborhood Price Guide
-            </h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { area: 'Piantini, Santo Domingo', priceRange: '$2,200 - $2,800/m2', yield: '6-8%', type: 'Luxury Condos & Penthouses', trend: 'Up 14% YoY' },
-                { area: 'Naco, Santo Domingo', priceRange: '$1,800 - $2,400/m2', yield: '7-9%', type: 'Modern Towers & Apartments', trend: 'Up 11% YoY' },
-                { area: 'Evaristo Morales, Santo Domingo', priceRange: '$1,500 - $2,000/m2', yield: '8-10%', type: 'Apartments & Mixed-Use', trend: 'Up 16% YoY' },
-                { area: 'Cap Cana', priceRange: '$3,000 - $4,500/m2', yield: '8-12%', type: 'Resort Condos & Villas', trend: 'Up 18% YoY' },
-                { area: 'Punta Cana', priceRange: '$2,000 - $3,500/m2', yield: '8-12%', type: 'Vacation Condos & Homes', trend: 'Up 15% YoY' },
-                { area: 'Bayahibe', priceRange: '$1,800 - $2,800/m2', yield: '9-12%', type: 'Beachfront Condos', trend: 'Up 13% YoY' },
-              ].map((data, index) => (
-                <div key={index} className="border border-charcoal/10 p-6 hover:border-charcoal/25 transition-colors">
-                  <h4 className="font-montserrat text-sm uppercase tracking-wider text-charcoal mb-3">{data.area}</h4>
-                  <p className="font-montserrat text-2xl font-light text-charcoal mb-1">{data.priceRange}</p>
-                  <div className="space-y-1 mt-3">
-                    <p className="font-lato text-xs text-charcoal/60"><span className="text-charcoal/80 font-medium">Type:</span> {data.type}</p>
-                    <p className="font-lato text-xs text-charcoal/60"><span className="text-charcoal/80 font-medium">Rental Yield:</span> {data.yield} annually</p>
-                    <p className="font-lato text-xs text-charcoal/60"><span className="text-charcoal/80 font-medium">Price Trend:</span> {data.trend}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="font-lato text-xs text-charcoal/40 text-center mt-6 italic">
-              Data based on Q2 2026 market analysis by RE/MAX Next Door. Prices in USD. Yields are net estimates for furnished short-term rentals.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+      <Suspense fallback={null}><MarketInsights /></Suspense>
 
       </main>
       {/* Footer */}
