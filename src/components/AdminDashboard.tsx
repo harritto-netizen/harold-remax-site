@@ -26,10 +26,19 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'active' | 'inactive'>('all');
   const [tab, setTab] = useState<'alerts' | 'videos'>('alerts');
+  const [hasAdminRole, setHasAdminRole] = useState<boolean | null>(null);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchAlerts();
+    checkAdminRole();
   }, []);
+
+  const checkAdminRole = async () => {
+    const { data } = await supabase.auth.getSession();
+    const role = data.session?.user?.app_metadata?.role;
+    setHasAdminRole(role === 'admin');
+  };
 
   const fetchAlerts = async () => {
     setLoading(true);
@@ -46,28 +55,55 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
 
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this alert?')) return;
+    setActionError(null);
 
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('property_alerts')
       .delete()
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
 
-    if (!error) {
-      setAlerts(alerts.filter(alert => alert.id !== id));
+    if (error) {
+      setActionError('Delete failed. Please try again.');
+      return;
     }
+
+    if (!data || data.length === 0) {
+      setActionError(
+        'Your account does not have permission to delete records. Ask the site owner to grant your user the admin role.'
+      );
+      await fetchAlerts();
+      return;
+    }
+
+    setAlerts(alerts.filter(alert => alert.id !== id));
   };
 
   const handleToggleActive = async (id: string, currentStatus: boolean) => {
-    const { error } = await supabase
+    setActionError(null);
+
+    const { data, error } = await supabase
       .from('property_alerts')
       .update({ is_active: !currentStatus })
-      .eq('id', id);
+      .eq('id', id)
+      .select('id');
 
-    if (!error) {
-      setAlerts(alerts.map(alert =>
-        alert.id === id ? { ...alert, is_active: !currentStatus } : alert
-      ));
+    if (error) {
+      setActionError('Update failed. Please try again.');
+      return;
     }
+
+    if (!data || data.length === 0) {
+      setActionError(
+        'Your account does not have permission to change records. Ask the site owner to grant your user the admin role.'
+      );
+      await fetchAlerts();
+      return;
+    }
+
+    setAlerts(alerts.map(alert =>
+      alert.id === id ? { ...alert, is_active: !currentStatus } : alert
+    ));
   };
 
   const handleSignOut = async () => {
@@ -136,6 +172,28 @@ export default function AdminDashboard({ onLogout }: AdminDashboardProps) {
           <VideoManager />
         ) : (
           <>
+        {hasAdminRole === false && (
+          <div className="mb-6 bg-yellow-500/10 border border-yellow-500/40 text-yellow-100 p-4 font-lato text-sm">
+            <p className="font-medium mb-1">Your account cannot delete or change records.</p>
+            <p className="text-yellow-100/80">
+              The database only allows changes from admin accounts. To grant your account admin
+              access, open Supabase Studio, go to Authentication, edit your user, and set
+              app metadata to <code className="bg-charcoal/40 px-1 py-0.5">{"{\"role\":\"admin\"}"}</code>.
+              Then sign out and sign back in.
+            </p>
+          </div>
+        )}
+        {actionError && (
+          <div className="mb-6 bg-red-500/10 border border-red-500/40 text-red-200 p-4 font-lato text-sm flex items-start justify-between">
+            <span>{actionError}</span>
+            <button
+              onClick={() => setActionError(null)}
+              className="ml-4 text-red-200/70 hover:text-red-100 text-xs uppercase tracking-wider"
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
         <div className="mb-6 flex items-center justify-between">
           <div className="flex space-x-2">
             <button
