@@ -46,7 +46,7 @@ export default function MarketInsights() {
             </h3>
             <div className="grid md:grid-cols-2 gap-8">
               <a
-                href="/blog/living-investing-evaristo-morales-santo-domingo-real-estate"
+                href="/blog/living-investing-evaristo-morales-santo-domingo-real-estate.html"
                 className="group block bg-white border border-charcoal/10 hover:border-charcoal/30 transition-colors overflow-hidden"
               >
                 <div className="aspect-[16/10] overflow-hidden bg-beige-light">
@@ -74,7 +74,7 @@ export default function MarketInsights() {
               </a>
 
               <a
-                href="/blog/confotur-tax-savings"
+                href="/blog/confotur-tax-savings.html"
                 className="group block bg-white border border-charcoal/10 hover:border-charcoal/30 transition-colors overflow-hidden"
               >
                 <div className="aspect-[16/10] overflow-hidden bg-beige-light">
