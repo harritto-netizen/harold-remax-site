@@ -51,8 +51,8 @@ export default function MarketInsights() {
               >
                 <div className="aspect-[16/10] overflow-hidden bg-beige-light">
                   <img
-                    src="/60.jpg"
-                    alt="Torre Roraima apartment in Evaristo Morales, Santo Domingo"
+                    src="https://euwpcnaioorzkhmwfnjn.supabase.co/storage/v1/object/public/creative-assets/images/4ddaebfa-fe2e-4924-8717-dd1332c732e7/1787761402669-jkfd9n4p26d.jpeg"
+                    alt="Evaristo Morales luxury real estate hero"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
