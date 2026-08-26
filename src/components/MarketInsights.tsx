@@ -40,6 +40,71 @@ export default function MarketInsights() {
         </ScrollReveal>
 
         <ScrollReveal>
+          <div className="mb-16">
+            <h3 className="font-montserrat text-2xl sm:text-3xl font-light text-charcoal uppercase tracking-wider mb-10 text-center">
+              Featured Articles
+            </h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              <a
+                href="/blog/living-investing-evaristo-morales-santo-domingo-real-estate"
+                className="group block bg-white border border-charcoal/10 hover:border-charcoal/30 transition-colors overflow-hidden"
+              >
+                <div className="aspect-[16/10] overflow-hidden bg-beige-light">
+                  <img
+                    src="/60.jpg"
+                    alt="Torre Roraima apartment in Evaristo Morales, Santo Domingo"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6 md:p-8">
+                  <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-3">
+                    August 26, 2026 &middot; Santo Domingo
+                  </p>
+                  <h4 className="font-montserrat text-xl md:text-2xl font-light text-charcoal mb-3 leading-snug">
+                    Living and Investing in Evaristo Morales
+                  </h4>
+                  <p className="font-lato text-sm text-charcoal/70 leading-relaxed mb-4">
+                    Discover why Evaristo Morales is one of Santo Domingo's premier neighborhoods for luxury living and property investment, featuring Torre Roraima.
+                  </p>
+                  <span className="inline-block font-montserrat text-xs uppercase tracking-widest text-charcoal border-b border-charcoal pb-1 group-hover:opacity-70 transition-opacity">
+                    Read Article
+                  </span>
+                </div>
+              </a>
+
+              <a
+                href="/blog/confotur-tax-savings"
+                className="group block bg-white border border-charcoal/10 hover:border-charcoal/30 transition-colors overflow-hidden"
+              >
+                <div className="aspect-[16/10] overflow-hidden bg-beige-light">
+                  <img
+                    src="/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.png"
+                    alt="CONFOTUR-approved property in Cap Cana"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6 md:p-8">
+                  <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-3">
+                    July 1, 2026 &middot; Tax Planning
+                  </p>
+                  <h4 className="font-montserrat text-xl md:text-2xl font-light text-charcoal mb-3 leading-snug">
+                    CONFOTUR Tax Savings Explained
+                  </h4>
+                  <p className="font-lato text-sm text-charcoal/70 leading-relaxed mb-4">
+                    How CONFOTUR Law 158-01 eliminates transfer tax, property tax, and rental income tax for 15 years on qualifying Dominican Republic properties.
+                  </p>
+                  <span className="inline-block font-montserrat text-xs uppercase tracking-widest text-charcoal border-b border-charcoal pb-1 group-hover:opacity-70 transition-opacity">
+                    Read Article
+                  </span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal>
           <div ref={containerRef} className="holo-blog-wrapper">
             <div id="holo-blog"></div>
           </div>
