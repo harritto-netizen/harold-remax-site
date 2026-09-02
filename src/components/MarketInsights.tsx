@@ -44,7 +44,35 @@ export default function MarketInsights() {
             <h3 className="font-montserrat text-2xl sm:text-3xl font-light text-charcoal uppercase tracking-wider mb-10 text-center">
               Featured Articles
             </h3>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <a
+                href="/blog/confotur-law-dominican-republic-real-estate-tax-guide.html"
+                className="group block bg-white border border-charcoal/10 hover:border-charcoal/30 transition-colors overflow-hidden"
+              >
+                <div className="aspect-[16/10] overflow-hidden bg-beige-light">
+                  <img
+                    src="https://euwpcnaioorzkhmwfnjn.supabase.co/storage/v1/object/public/creative-assets/images/4ddaebfa-fe2e-4924-8717-dd1332c732e7/1787764605009-c67tto0ddpb.jpeg"
+                    alt="Luxury Dominican Republic real estate CONFOTUR tax guide"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6 md:p-8">
+                  <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-3">
+                    September 2, 2026 &middot; Tax Planning
+                  </p>
+                  <h4 className="font-montserrat text-xl md:text-2xl font-light text-charcoal mb-3 leading-snug">
+                    CONFOTUR Law: Luxury Buyer Tax Guide
+                  </h4>
+                  <p className="font-lato text-sm text-charcoal/70 leading-relaxed mb-4">
+                    How Law 158-01 delivers 0% transfer tax and a 15-year property tax exemption for luxury buyers in the Dominican Republic, plus how to verify qualifying developments.
+                  </p>
+                  <span className="inline-block font-montserrat text-xs uppercase tracking-widest text-charcoal border-b border-charcoal pb-1 group-hover:opacity-70 transition-opacity">
+                    Read Article
+                  </span>
+                </div>
+              </a>
+
               <a
                 href="/blog/living-investing-evaristo-morales-santo-domingo-real-estate.html"
                 className="group block bg-white border border-charcoal/10 hover:border-charcoal/30 transition-colors overflow-hidden"
