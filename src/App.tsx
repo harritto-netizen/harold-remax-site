@@ -1,5 +1,5 @@
 import { Home, Building2, Key, Search, Star, Calendar, MessageCircle, X, Bell, Menu, Phone, Instagram, Facebook, Shield, BadgeCheck, Landmark, MapPin, AlertTriangle } from 'lucide-react';
-import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import PropertyAlertForm from './components/PropertyAlertForm';
 import MobileCTABar from './components/MobileCTABar';
 import ScrollReveal from './components/ScrollReveal';
@@ -54,46 +54,6 @@ function App() {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [alertPrefill, setAlertPrefill] = useState<{ location: string; propertyType: string }>({ location: '', propertyType: '' });
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const menuTriggerRef = useRef<HTMLButtonElement | null>(null);
-  const menuFirstLinkRef = useRef<HTMLAnchorElement | null>(null);
-  const videoTriggerRef = useRef<HTMLElement | null>(null);
-  const videoCloseRef = useRef<HTMLButtonElement | null>(null);
-
-  const closeMobileMenu = useCallback(() => {
-    setMobileMenuOpen(false);
-    menuTriggerRef.current?.focus();
-  }, []);
-
-  const closeVideoModal = useCallback(() => {
-    setShowVideoModal(false);
-    videoTriggerRef.current?.focus();
-    videoTriggerRef.current = null;
-  }, []);
-
-  useEffect(() => {
-    if (!mobileMenuOpen && !showVideoModal) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        if (showVideoModal) closeVideoModal();
-        else if (mobileMenuOpen) closeMobileMenu();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [mobileMenuOpen, showVideoModal, closeMobileMenu, closeVideoModal]);
-
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      requestAnimationFrame(() => menuFirstLinkRef.current?.focus());
-    }
-  }, [mobileMenuOpen]);
-
-  useEffect(() => {
-    if (showVideoModal) {
-      requestAnimationFrame(() => videoCloseRef.current?.focus());
-    }
-  }, [showVideoModal]);
 
   const scrollToAlerts = (location: string = '', propertyType: string = '') => {
     setAlertPrefill({ location, propertyType });
@@ -183,12 +143,9 @@ function App() {
                 Get In Touch
               </a>
               <button
-                ref={menuTriggerRef}
                 onClick={() => setMobileMenuOpen(true)}
                 className="lg:hidden text-charcoal p-2"
                 aria-label="Open navigation menu"
-                aria-expanded={mobileMenuOpen}
-                aria-controls="mobile-nav-drawer"
               >
                 <Menu className="w-6 h-6" />
               </button>
@@ -199,33 +156,27 @@ function App() {
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div
-          id="mobile-nav-drawer"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation menu"
-          className="fixed inset-0 z-[60] lg:hidden animate-slide-in"
-        >
+        <div className="fixed inset-0 z-[60] lg:hidden animate-slide-in">
           <div className="absolute inset-0 bg-cream flex flex-col p-8 pt-24">
             <button
-              onClick={closeMobileMenu}
+              onClick={() => setMobileMenuOpen(false)}
               className="absolute top-6 right-6 text-charcoal p-2"
               aria-label="Close navigation menu"
             >
               <X className="w-6 h-6" />
             </button>
-            <a ref={menuFirstLinkRef} href="#inicio" onClick={closeMobileMenu} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Home</a>
-            <a href="#servicios" onClick={closeMobileMenu} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Services</a>
-            <a href="#propiedades" onClick={closeMobileMenu} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Properties</a>
-            <a href="#testimonios" onClick={closeMobileMenu} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Testimonials</a>
-            <a href="#confotur" onClick={closeMobileMenu} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">CONFOTUR</a>
-            <a href="#blog" onClick={closeMobileMenu} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Blog</a>
+            <a href="#inicio" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Home</a>
+            <a href="#servicios" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Services</a>
+            <a href="#propiedades" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Properties</a>
+            <a href="#testimonios" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Testimonials</a>
+            <a href="#confotur" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">CONFOTUR</a>
+            <a href="#blog" onClick={() => setMobileMenuOpen(false)} className="font-montserrat text-2xl uppercase tracking-widest text-charcoal mb-8">Blog</a>
             <div className="mt-auto">
               <a
                 href="https://wa.me/18094262269?text=Hello%20Harold,%20I'm%20interested%20in%20your%20real%20estate%20services"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => { trackContact('whatsapp_mobile_menu'); closeMobileMenu(); }}
+                onClick={() => { trackContact('whatsapp_mobile_menu'); setMobileMenuOpen(false); }}
                 className="block w-full text-center border-2 border-charcoal text-charcoal px-6 py-4 text-sm uppercase tracking-widest hover:bg-charcoal hover:text-cream transition-all duration-300"
               >
                 Get In Touch
@@ -235,7 +186,7 @@ function App() {
         </div>
       )}
 
-      <main id="main-content" tabIndex={-1}>
+      <main id="main-content">
       {/* Hero Section with Video Background */}
       <section id="inicio" className="relative pt-24 overflow-hidden min-h-screen flex items-center bg-charcoal">
         {/* Video Background - deferred load to reduce initial page weight */}
@@ -866,43 +817,35 @@ function App() {
                 question: 'What are the best neighborhoods in Santo Domingo for real estate investment?',
                 answer: 'The top Santo Domingo neighborhoods for investment in 2026 are: Piantini (premium luxury, $2,200-2,800/m2, 6-8% rental yield), Naco (high-end modern towers, $1,800-2,400/m2, 7-9% yields), Evaristo Morales (growing demand, $1,500-2,000/m2, best value-to-yield ratio), and the Malecon corridor (new waterfront developments with ocean views). For commercial investment, Naco and the National District offer cap rates of 8-11% for retail and office spaces.'
               }
-            ].map((faq, index) => {
-              const isOpen = openFaq === index;
-              const panelId = `faq-panel-${index}`;
-              const buttonId = `faq-trigger-${index}`;
-              return (
-                <div key={index} className="border border-charcoal/10 bg-beige-light" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-                  <button
-                    type="button"
-                    id={buttonId}
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    className="flex items-center justify-between w-full cursor-pointer p-6 font-montserrat text-sm sm:text-base uppercase tracking-wider text-charcoal hover:opacity-70 transition-opacity text-left"
-                    onClick={() => setOpenFaq(isOpen ? null : index)}
-                  >
-                    <span className="pr-4" itemProp="name">{faq.question}</span>
-                    <span
-                      aria-hidden="true"
-                      className="text-charcoal/50 text-xl transition-transform duration-200 flex-shrink-0"
-                      style={{ transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)' }}
-                    >+</span>
-                  </button>
-                  <div
-                    id={panelId}
-                    role="region"
-                    aria-labelledby={buttonId}
-                    hidden={!isOpen}
-                    itemScope
-                    itemProp="acceptedAnswer"
-                    itemType="https://schema.org/Answer"
-                  >
-                    <div className="px-6 pb-6">
-                      <p className="font-lato text-charcoal/80 leading-relaxed" itemProp="text">{faq.answer}</p>
-                    </div>
+            ].map((faq, index) => (
+              <div key={index} className="border border-charcoal/10 bg-beige-light" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+                <button
+                  type="button"
+                  className="flex items-center justify-between w-full cursor-pointer p-6 font-montserrat text-sm sm:text-base uppercase tracking-wider text-charcoal hover:opacity-70 transition-opacity text-left"
+                  onClick={(e) => {
+                    const content = e.currentTarget.nextElementSibling as HTMLElement;
+                    const icon = e.currentTarget.querySelector('[data-icon]') as HTMLElement;
+                    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                      content.style.maxHeight = '0px';
+                      content.style.opacity = '0';
+                      icon.style.transform = 'rotate(0deg)';
+                    } else {
+                      content.style.maxHeight = content.scrollHeight + 'px';
+                      content.style.opacity = '1';
+                      icon.style.transform = 'rotate(45deg)';
+                    }
+                  }}
+                >
+                  <span className="pr-4" itemProp="name">{faq.question}</span>
+                  <span data-icon className="text-charcoal/50 text-xl transition-transform duration-200 flex-shrink-0">+</span>
+                </button>
+                <div className="overflow-hidden transition-all duration-300" style={{ maxHeight: '0px', opacity: '0' }} itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                  <div className="px-6 pb-6">
+                    <p className="font-lato text-charcoal/80 leading-relaxed" itemProp="text">{faq.answer}</p>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -973,17 +916,10 @@ function App() {
 
       {/* Video Modal */}
       {showVideoModal && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Presentation video"
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={closeVideoModal}
-        >
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setShowVideoModal(false)}>
           <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
             <button
-              ref={videoCloseRef}
-              onClick={closeVideoModal}
+              onClick={() => setShowVideoModal(false)}
               aria-label="Close video"
               className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
             >
