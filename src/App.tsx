@@ -862,15 +862,7 @@ function App() {
               Related Topics
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
-            <div>
-              <h3 className="font-montserrat text-sm uppercase tracking-widest text-charcoal mb-4">From the Blog</h3>
-              <ul className="space-y-2 font-lato text-sm text-charcoal/75">
-                <li><a href="/blog/confotur-tax-savings" className="hover:text-charcoal hover:underline underline-offset-4">CONFOTUR tax savings explained: save $15,000+ on DR property</a></li>
-                <li><a href="/blog/living-investing-evaristo-morales-santo-domingo-real-estate" className="hover:text-charcoal hover:underline underline-offset-4">Evaristo Morales: Santo Domingo luxury real estate spotlight</a></li>
-                <li><a href="#blog" className="hover:text-charcoal hover:underline underline-offset-4">All market insights and neighborhood reports</a></li>
-              </ul>
-            </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
             <div>
               <h3 className="font-montserrat text-sm uppercase tracking-widest text-charcoal mb-4">Tax Incentives</h3>
               <ul className="space-y-2 font-lato text-sm text-charcoal/75">
