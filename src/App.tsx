@@ -156,8 +156,8 @@ function App() {
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden animate-slide-in">
-          <div className="absolute inset-0 bg-cream flex flex-col p-8 pt-24">
+        <div className="fixed inset-0 z-[60] lg:hidden animate-slide-in" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+          <nav aria-label="Mobile" className="absolute inset-0 bg-cream flex flex-col p-8 pt-24">
             <button
               onClick={() => setMobileMenuOpen(false)}
               className="absolute top-6 right-6 text-charcoal p-2"
@@ -182,19 +182,19 @@ function App() {
                 Get In Touch
               </a>
             </div>
-          </div>
+          </nav>
         </div>
       )}
 
       <main id="main-content">
       {/* Hero Section with Video Background */}
-      <section id="inicio" className="relative pt-24 overflow-hidden min-h-screen flex items-center bg-charcoal">
+      <section id="inicio" aria-labelledby="hero-heading" className="relative pt-24 overflow-hidden min-h-screen flex items-center bg-charcoal">
         {/* Video Background - deferred load to reduce initial page weight */}
         <HeroVideo />
 
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-          <h1 className="font-montserrat text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-cream uppercase tracking-wider leading-tight mb-8">
+          <h1 id="hero-heading" className="font-montserrat text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-cream uppercase tracking-wider leading-tight mb-8">
             Luxury Caribbean
             <span className="block mt-2">Real Estate</span>
           </h1>
@@ -256,10 +256,10 @@ function App() {
       </section>
 
       {/* Services Section */}
-      <section id="servicios" className="py-24 md:py-32 bg-cream">
+      <section id="servicios" aria-labelledby="services-heading" className="py-24 md:py-32 bg-cream">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-20">
-            <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
+            <h2 id="services-heading" className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Our Services
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
@@ -298,7 +298,7 @@ function App() {
       <Suspense fallback={null}><AnimatedStats /></Suspense>
 
       {/* About Me Section */}
-      <section className="py-24 md:py-32 bg-beige-light">
+      <section aria-labelledby="about-heading" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <ScrollReveal direction="left">
@@ -322,7 +322,7 @@ function App() {
             </ScrollReveal>
             <ScrollReveal direction="right" delay={200}>
             <div className="space-y-8">
-              <h2 className="font-montserrat text-4xl sm:text-5xl font-light text-charcoal uppercase tracking-wider leading-tight">
+              <h2 id="about-heading" className="font-montserrat text-4xl sm:text-5xl font-light text-charcoal uppercase tracking-wider leading-tight">
                 About Harold
               </h2>
               <p className="font-lato text-lg text-charcoal/80 leading-relaxed">
@@ -357,7 +357,7 @@ function App() {
       </section>
 
       {/* Trust & Credentials Section - Marquee */}
-      <section className="py-12 md:py-16 bg-cream border-y border-charcoal/5 overflow-hidden">
+      <section aria-label="Trusted credentials and partnerships" className="py-12 md:py-16 bg-cream border-y border-charcoal/5 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
             <p className="font-lato text-xs text-charcoal/50 uppercase tracking-widest text-center mb-8">
@@ -400,11 +400,11 @@ function App() {
       </section>
 
       {/* CONFOTUR Tax Incentives Section */}
-      <section id="confotur" className="py-24 md:py-32 bg-beige-light">
+      <section id="confotur" aria-labelledby="confotur-heading" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-16">
             <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-4">Dominican Republic Tax Incentives</p>
-            <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
+            <h2 id="confotur-heading" className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               CONFOTUR Law
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-3xl mx-auto leading-relaxed">
@@ -549,10 +549,10 @@ function App() {
       <Suspense fallback={null}><SoldPortfolio /></Suspense>
 
       {/* Featured Properties Gallery */}
-      <section id="propiedades" className="py-24 md:py-32 bg-cream">
+      <section id="propiedades" aria-labelledby="properties-heading" className="py-24 md:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-20">
-            <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
+            <h2 id="properties-heading" className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Featured Properties
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
@@ -683,17 +683,17 @@ function App() {
       </section>
 
       {/* Property Alert Signup Section */}
-      <section id="property-alerts" className="py-0 bg-cream scroll-mt-24">
+      <aside id="property-alerts" aria-label="Property alert signup" className="py-0 bg-cream scroll-mt-24 block">
         <div className="max-w-4xl mx-auto">
           <PropertyAlertForm initialLocation={alertPrefill.location} initialPropertyType={alertPrefill.propertyType} />
         </div>
-      </section>
+      </aside>
 
       {/* Testimonials Section */}
-      <section id="testimonios" className="py-24 md:py-32 bg-beige-light">
+      <section id="testimonios" aria-labelledby="testimonials-heading" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-20">
-            <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
+            <h2 id="testimonials-heading" className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Client Testimonials
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
@@ -757,10 +757,10 @@ function App() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-24 md:py-32 bg-cream">
+      <section id="faq" aria-labelledby="faq-heading" className="py-24 md:py-32 bg-cream">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-16">
-            <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
+            <h2 id="faq-heading" className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               Frequently Asked Questions
             </h2>
             <p className="font-lato text-lg text-charcoal/70 max-w-2xl mx-auto">
@@ -916,7 +916,7 @@ function App() {
 
       {/* Video Modal */}
       {showVideoModal && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setShowVideoModal(false)}>
+        <div role="dialog" aria-modal="true" aria-label="Presentation video" className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setShowVideoModal(false)}>
           <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setShowVideoModal(false)}
@@ -943,7 +943,7 @@ function App() {
       <MobileCTABar />
 
       {/* WhatsApp Floating Button */}
-      <div className="fixed bottom-24 md:bottom-8 right-8 z-50">
+      <aside aria-label="WhatsApp contact" className="fixed bottom-24 md:bottom-8 right-8 z-50">
         {showWhatsApp && (
           <div role="dialog" aria-label="WhatsApp contact" className="mb-4 bg-cream border border-charcoal/20 shadow-xl p-6 max-w-sm animate-fade-in">
             <div className="flex justify-between items-start mb-4">
@@ -990,7 +990,7 @@ function App() {
             <MessageCircle className="w-6 h-6" aria-hidden="true" />
           )}
         </button>
-      </div>
+      </aside>
       <Suspense fallback={null}><ExitIntentPopup /></Suspense>
     </div>
   );
