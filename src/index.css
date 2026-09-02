@@ -61,10 +61,6 @@ h1, h2, h3, h4, h5, h6 {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-*:focus {
-  outline: none;
-}
-
 a:focus-visible,
 button:focus-visible,
 [role="button"]:focus-visible,
@@ -121,8 +117,27 @@ textarea:focus-visible {
   animation: marquee 25s linear infinite;
 }
 
-.animate-marquee:hover {
+.animate-marquee:hover,
+.animate-marquee:focus-within {
   animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-fade-in,
+  .animate-slide-in,
+  .animate-marquee,
+  .animate-float {
+    animation: none !important;
+  }
+  .hover-zoom:hover img { animation: none !important; }
+  *, *::before, *::after {
+    transition-duration: 0.001ms !important;
+  }
+}
+
+main:focus {
+  outline: none;
 }
 
 @keyframes float {
