@@ -8,14 +8,89 @@ html {
 
 body {
   font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  color: #403E3F;
+  font-weight: 400;
+  color: #2B2A2A;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  max-width: 70ch;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.05em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: #1F1E1E;
+}
+
+h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+h2 { font-size: clamp(1.625rem, 3vw, 2.25rem); margin-bottom: 0.875rem; }
+h3 { font-size: clamp(1.375rem, 2.5vw, 1.75rem); margin-bottom: 0.75rem; }
+h4 { font-size: 1.25rem; margin-bottom: 0.625rem; }
+h5 { font-size: 1.125rem; margin-bottom: 0.5rem; }
+h6 { font-size: 1rem; margin-bottom: 0.5rem; }
+
+a {
+  text-underline-offset: 3px;
+}
+
+::selection {
+  background: #403E3F;
+  color: #F5F1EB;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  body { color: #000; }
+  h1, h2, h3, h4, h5, h6 { color: #000; }
+  a { text-decoration: underline; }
+}
+
+/* Dyslexia-friendly reading mode: toggle by adding class="dyslexia-friendly" on <html> */
+.dyslexia-friendly body,
+.dyslexia-friendly p,
+.dyslexia-friendly li,
+.dyslexia-friendly a,
+.dyslexia-friendly span,
+.dyslexia-friendly button,
+.dyslexia-friendly input,
+.dyslexia-friendly textarea {
+  font-family: 'Verdana', 'Trebuchet MS', sans-serif !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.16em !important;
+  line-height: 1.8 !important;
+}
+
+.dyslexia-friendly h1,
+.dyslexia-friendly h2,
+.dyslexia-friendly h3,
+.dyslexia-friendly h4,
+.dyslexia-friendly h5,
+.dyslexia-friendly h6 {
+  font-family: 'Verdana', 'Trebuchet MS', sans-serif !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1.3 !important;
+}
+
+.dyslexia-friendly p {
+  max-width: 60ch !important;
 }
 
 @keyframes fade-in {
