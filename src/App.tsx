@@ -853,6 +853,44 @@ function App() {
       {/* Blog / Market Insights Section */}
       <Suspense fallback={null}><MarketInsights /></Suspense>
 
+      {/* Related Topics - Internal Linking Hub */}
+      <section aria-labelledby="related-heading" className="py-20 bg-cream border-t border-charcoal/10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-3">Keep Exploring</p>
+            <h2 id="related-heading" className="font-montserrat text-3xl sm:text-4xl font-light text-charcoal uppercase tracking-wider">
+              Related Topics
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+            <div>
+              <h3 className="font-montserrat text-sm uppercase tracking-widest text-charcoal mb-4">Tax Incentives</h3>
+              <ul className="space-y-2 font-lato text-sm text-charcoal/75">
+                <li><a href="/blog/confotur-tax-savings" className="hover:text-charcoal hover:underline underline-offset-4">Complete CONFOTUR Law 158-01 guide</a></li>
+                <li><a href="#confotur" className="hover:text-charcoal hover:underline underline-offset-4">How the 15-year property-tax exemption works</a></li>
+                <li><a href="#faq" className="hover:text-charcoal hover:underline underline-offset-4">Frequently asked questions about DR property taxes</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-montserrat text-sm uppercase tracking-widest text-charcoal mb-4">Neighborhood Guides</h3>
+              <ul className="space-y-2 font-lato text-sm text-charcoal/75">
+                <li><a href="/blog/living-investing-evaristo-morales-santo-domingo-real-estate" className="hover:text-charcoal hover:underline underline-offset-4">Living and investing in Evaristo Morales</a></li>
+                <li><a href="#propiedades" className="hover:text-charcoal hover:underline underline-offset-4">Luxury condos in Piantini and Naco</a></li>
+                <li><a href="#propiedades" className="hover:text-charcoal hover:underline underline-offset-4">Beachfront villas in Cap Cana and Bayahibe</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-montserrat text-sm uppercase tracking-widest text-charcoal mb-4">Buying &amp; Selling</h3>
+              <ul className="space-y-2 font-lato text-sm text-charcoal/75">
+                <li><a href="#servicios" className="hover:text-charcoal hover:underline underline-offset-4">Full-service real estate representation</a></li>
+                <li><a href="#property-alerts" className="hover:text-charcoal hover:underline underline-offset-4">Get alerts on new listings that match your criteria</a></li>
+                <li><a href="#testimonios" className="hover:text-charcoal hover:underline underline-offset-4">Read what buyers and sellers say about working with Harold</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       </main>
       {/* Footer */}
       <footer className="bg-cream border-t border-charcoal/10 py-16 pb-24 md:pb-16">
