@@ -589,13 +589,13 @@ function App() {
                 location: 'Playa Nueva Romana'
               },
               {
-                title: 'Luxury Home with Panoramic View',
+                title: 'Luxury Apartment in Cap Cana',
                 price: '$780,000',
                 beds: 4,
                 baths: 4,
                 sqft: '3,800',
-                image: '/2025-12-13_09_46_23-edificio_rentable_con_en_santo_domingo,_distrito_nacional,_republica_dominicana_.png',
-                location: 'Santo Domingo'
+                image: 'https://images.pexels.com/photos/34271104/pexels-photo-34271104.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+                location: 'Cap Cana, Dominican Republic'
               },
               {
                 title: 'Apartment in Torre Roraima',
