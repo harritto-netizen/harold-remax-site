@@ -93,7 +93,7 @@ export default function SoldPortfolio() {
     <section ref={sectionRef} className="py-24 md:py-32 bg-charcoal">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="font-lato text-xs uppercase tracking-widest text-cream/50 mb-4">
+          <p className="font-lato text-[29px] uppercase tracking-widest text-cream/50 mb-4">
             Our Track Record
           </p>
           <h2 className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-cream uppercase tracking-wider mb-6">

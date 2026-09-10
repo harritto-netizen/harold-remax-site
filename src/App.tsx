@@ -360,7 +360,7 @@ function App() {
       <section aria-label="Trusted credentials and partnerships" className="py-12 md:py-16 bg-cream border-y border-charcoal/5 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal>
-            <p className="font-lato text-xs text-charcoal/50 uppercase tracking-widest text-center mb-8">
+            <p className="font-lato text-[27px] text-charcoal/50 uppercase tracking-widest text-center mb-8">
               Trusted Credentials & Partnerships
             </p>
           </ScrollReveal>
@@ -857,7 +857,7 @@ function App() {
       <section aria-labelledby="related-heading" className="py-20 bg-cream border-t border-charcoal/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-3">Keep Exploring</p>
+            <p className="font-lato text-[27px] uppercase tracking-widest text-charcoal/50 mb-3">Keep Exploring</p>
             <h2 id="related-heading" className="font-montserrat text-3xl sm:text-4xl font-light text-charcoal uppercase tracking-wider">
               Related Topics
             </h2>

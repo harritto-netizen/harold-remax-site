@@ -62,7 +62,7 @@ export default function AnimatedStats() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="font-lato text-xs uppercase tracking-widest text-cream/50 mb-4">
+          <p className="font-lato text-[25px] uppercase tracking-widest text-cream/50 mb-4">
             Proven Track Record
           </p>
           <h2 className="font-montserrat text-4xl sm:text-5xl font-light text-cream uppercase tracking-wider">

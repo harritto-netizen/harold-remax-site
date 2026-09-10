@@ -75,7 +75,7 @@ export default function PropertyVideos() {
   return (
     <div className="mt-24 md:mt-32">
       <div className="text-center mb-16">
-        <p className="font-lato text-xs text-charcoal/50 uppercase tracking-widest mb-4">
+        <p className="font-lato text-[28px] text-charcoal/50 uppercase tracking-widest mb-4">
           Watch & Explore
         </p>
         <h3 className="font-montserrat text-3xl sm:text-4xl md:text-5xl font-light text-charcoal uppercase tracking-wider mb-6">
