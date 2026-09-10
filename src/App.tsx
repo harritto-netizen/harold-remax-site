@@ -403,7 +403,7 @@ function App() {
       <section id="confotur" aria-labelledby="confotur-heading" className="py-24 md:py-32 bg-beige-light">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal className="text-center mb-16">
-            <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-4">Dominican Republic Tax Incentives</p>
+            <p className="font-lato text-[28px] uppercase tracking-widest text-charcoal/50 mb-4">Dominican Republic Tax Incentives</p>
             <h2 id="confotur-heading" className="font-montserrat text-4xl sm:text-5xl md:text-6xl font-light text-charcoal uppercase tracking-wider mb-6">
               CONFOTUR Law
             </h2>
