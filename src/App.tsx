@@ -14,6 +14,7 @@ const PropertyVideos = lazy(() => import('./components/PropertyVideos'));
 const AnimatedStats = lazy(() => import('./components/AnimatedStats'));
 const SoldPortfolio = lazy(() => import('./components/SoldPortfolio'));
 const MarketInsights = lazy(() => import('./components/MarketInsights'));
+const BuyersGuideMagnet = lazy(() => import('./components/BuyersGuideMagnet'));
 
 type View = 'main' | 'admin-login' | 'admin-dashboard';
 
@@ -547,6 +548,9 @@ function App() {
 
       {/* Sold Portfolio Section */}
       <Suspense fallback={null}><SoldPortfolio /></Suspense>
+
+      {/* Lead Magnet: Buyer's Guide */}
+      <Suspense fallback={null}><BuyersGuideMagnet /></Suspense>
 
       {/* Featured Properties Gallery */}
       <section id="propiedades" aria-labelledby="properties-heading" className="py-24 md:py-32 bg-cream">
