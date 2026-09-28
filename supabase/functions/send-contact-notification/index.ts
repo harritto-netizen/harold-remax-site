@@ -13,6 +13,28 @@ interface ContactMessage {
   message: string;
 }
 
+/**
+ * The submitter controls every one of these fields, so nothing may reach the
+ * notification email as markup. Escaping here means an enquiry cannot plant a
+ * link, an image beacon or any other element inside a message the recipient
+ * trusts.
+ */
+function escapeHtml(value: unknown, maxLength = 500): string {
+  const text = value === null || value === undefined ? "" : String(value);
+  return text
+    .slice(0, maxLength)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/** Strips CR/LF so a field can never inject a header into the outgoing mail. */
+function singleLine(value: unknown, maxLength = 200): string {
+  return String(value ?? "").replace(/[\r\n]+/g, " ").slice(0, maxLength);
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 200, headers: corsHeaders });
@@ -43,14 +65,14 @@ Deno.serve(async (req: Request) => {
 
       <h3>Contact Information:</h3>
       <ul>
-        <li><strong>Name:</strong> ${payload.name}</li>
-        <li><strong>Email:</strong> ${payload.email}</li>
-        <li><strong>Phone:</strong> ${payload.phone || "Not provided"}</li>
+        <li><strong>Name:</strong> ${escapeHtml(payload.name, 100)}</li>
+        <li><strong>Email:</strong> ${escapeHtml(payload.email, 255)}</li>
+        <li><strong>Phone:</strong> ${payload.phone ? escapeHtml(payload.phone, 50) : "Not provided"}</li>
       </ul>
 
       <h3>Message:</h3>
       <div style="background-color: #f5f5f5; padding: 15px; border-left: 4px solid #333; margin: 20px 0;">
-        <p style="white-space: pre-wrap; margin: 0;">${payload.message}</p>
+        <p style="white-space: pre-wrap; margin: 0;">${escapeHtml(payload.message, 2000)}</p>
       </div>
 
       <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ccc; color: #666;">
@@ -67,8 +89,8 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         from: "Contact Form <onboarding@resend.dev>",
         to: [adminEmail],
-        reply_to: payload.email,
-        subject: `New Contact Message from ${payload.name}`,
+        reply_to: singleLine(payload.email, 255),
+        subject: `New Contact Message from ${singleLine(payload.name, 100)}`,
         html: emailHtml,
       }),
     });
@@ -86,11 +108,13 @@ Deno.serve(async (req: Request) => {
       }
     );
   } catch (error) {
+    // The caller gets a constant message: the exception text would expose
+    // internal detail about the service.
     console.error("Error processing request:", error);
     return new Response(
       JSON.stringify({
         success: false,
-        error: error instanceof Error ? error.message : "Unknown error",
+        error: "Unable to process this request.",
       }),
       {
         status: 500,

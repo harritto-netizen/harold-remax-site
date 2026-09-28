@@ -81,7 +81,10 @@ export default function VideoManager() {
       const { data } = supabase.storage.from('property-videos').getPublicUrl(path);
       setForm((f) => ({ ...f, video_type: 'upload', video_url: data.publicUrl }));
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Upload failed');
+      // Never render the backend error: it leaks storage paths and policy
+      // detail. Keep it in the console for debugging only.
+      console.error('Video upload failed:', err);
+      setError('That file could not be uploaded. Please try again.');
     } finally {
       setUploading(false);
     }
@@ -110,7 +113,8 @@ export default function VideoManager() {
         .update(payload)
         .eq('id', form.id);
       if (upErr) {
-        setError(upErr.message);
+        console.error('Video update failed:', upErr);
+        setError('That video could not be saved. Please try again.');
         setSaving(false);
         return;
       }
@@ -119,7 +123,8 @@ export default function VideoManager() {
         .from('property_videos')
         .insert(payload);
       if (insErr) {
-        setError(insErr.message);
+        console.error('Video insert failed:', insErr);
+        setError('That video could not be saved. Please try again.');
         setSaving(false);
         return;
       }

@@ -190,8 +190,10 @@ Deno.serve(async (req: Request) => {
       }
     );
   } catch (err) {
+    // Constant message only: the exception text is internal detail.
+    console.error("Market insights fetch failed:", err);
     return new Response(
-      JSON.stringify({ error: (err as Error).message }),
+      JSON.stringify({ error: "Unable to load market insights." }),
       {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },

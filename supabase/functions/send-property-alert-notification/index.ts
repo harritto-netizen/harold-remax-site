@@ -29,6 +29,26 @@ function jsonResponse(body: unknown, status = 200) {
   });
 }
 
+/**
+ * Every field below is supplied by whoever filled in the signup form, so none
+ * of it may reach the notification email as markup.
+ */
+function escapeHtml(value: unknown, maxLength = 500): string {
+  const text = value === null || value === undefined ? "" : String(value);
+  return text
+    .slice(0, maxLength)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+/** Strips CR/LF so a field can never inject a header into the outgoing mail. */
+function singleLine(value: unknown, maxLength = 200): string {
+  return String(value ?? "").replace(/[\r\n]+/g, " ").slice(0, maxLength);
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 200, headers: corsHeaders });
@@ -77,16 +97,16 @@ Deno.serve(async (req: Request) => {
 
       <h3>Contact Information:</h3>
       <ul>
-        <li><strong>Name:</strong> ${alert.name || "Not provided"}</li>
-        <li><strong>Email:</strong> ${alert.email}</li>
-        <li><strong>Phone:</strong> ${alert.phone || "Not provided"}</li>
+        <li><strong>Name:</strong> ${alert.name ? escapeHtml(alert.name, 100) : "Not provided"}</li>
+        <li><strong>Email:</strong> ${escapeHtml(alert.email, 255)}</li>
+        <li><strong>Phone:</strong> ${alert.phone ? escapeHtml(alert.phone, 50) : "Not provided"}</li>
       </ul>
 
       <h3>Property Preferences:</h3>
       <ul>
-        <li><strong>Property Type:</strong> ${alert.property_type || "Any"}</li>
-        <li><strong>Location:</strong> ${alert.location || "Any"}</li>
-        <li><strong>Price Range:</strong> ${formatPrice(alert.price_min)} - ${formatPrice(alert.price_max)}</li>
+        <li><strong>Property Type:</strong> ${alert.property_type ? escapeHtml(alert.property_type, 50) : "Any"}</li>
+        <li><strong>Location:</strong> ${alert.location ? escapeHtml(alert.location, 100) : "Any"}</li>
+        <li><strong>Price Range:</strong> ${escapeHtml(formatPrice(alert.price_min), 40)} - ${escapeHtml(formatPrice(alert.price_max), 40)}</li>
       </ul>
 
       <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #ccc; color: #666;">
@@ -103,7 +123,7 @@ Deno.serve(async (req: Request) => {
       body: JSON.stringify({
         from: "Property Alerts <onboarding@resend.dev>",
         to: [adminEmail],
-        subject: `New Property Alert: ${alert.name || alert.email}`,
+        subject: `New Property Alert: ${singleLine(alert.name || alert.email, 120)}`,
         html: emailHtml,
       }),
     });
@@ -116,9 +136,10 @@ Deno.serve(async (req: Request) => {
 
     return jsonResponse({ success: true, message: "Notification sent" });
   } catch (error) {
+    // Constant message only: the exception text is internal detail.
     console.error("Error processing request:", error);
     return jsonResponse(
-      { success: false, error: error instanceof Error ? error.message : "Unknown error" },
+      { success: false, error: "Unable to process this request." },
       500
     );
   }
