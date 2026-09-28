@@ -71,8 +71,8 @@ export default function ExitIntentPopup() {
       setTimeout(() => setIsOpen(false), 3500);
     } catch (error: any) {
       setStatus('error');
-      const detail = error?.message || String(error);
-      setErrorMessage(detail);
+      // Generic message only: the backend error leaks schema and policy detail.
+      setErrorMessage('We could not save your request. Please try again.');
       console.error('Popup submit failed:', error);
     }
   };

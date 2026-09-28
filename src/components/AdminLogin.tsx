@@ -20,7 +20,11 @@ export default function AdminLogin({ onLoginSuccess }: AdminLoginProps) {
     const { error } = await signIn(email, password);
 
     if (error) {
-      setError(error.message);
+      // One constant message for every failure mode. Distinguishing "no such
+      // account" from "wrong password" from "unconfirmed email" lets an
+      // attacker enumerate which addresses have accounts.
+      console.error('Admin sign-in failed:', error);
+      setError('Invalid credentials. Please try again.');
       setLoading(false);
     } else {
       onLoginSuccess();

@@ -20,22 +20,37 @@ function getVimeoId(url: string): string | null {
   return m ? m[1] : null;
 }
 
-function buildEmbedUrl(url: string): string {
+/**
+ * Only YouTube and Vimeo may be framed. Anything else returns null and the
+ * player refuses to render, so a stored video_url cannot point the in-page
+ * frame at an arbitrary site. The returned URL is rebuilt from a validated id
+ * rather than passed through from the stored value.
+ */
+function buildEmbedUrl(url: string): string | null {
   const yt = getYouTubeId(url);
   if (yt) {
     return `https://www.youtube-nocookie.com/embed/${yt}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
   }
   const vm = getVimeoId(url);
   if (vm) return `https://player.vimeo.com/video/${vm}?autoplay=1`;
-  return url;
+  return null;
 }
 
-function buildWatchUrl(url: string): string {
+function buildWatchUrl(url: string): string | null {
   const yt = getYouTubeId(url);
   if (yt) return `https://www.youtube.com/watch?v=${yt}`;
   const vm = getVimeoId(url);
   if (vm) return `https://vimeo.com/${vm}`;
-  return url;
+  return null;
+}
+
+/** Direct-file playback is restricted to https, blocking javascript: and data: values. */
+function safeFileUrl(url: string): string | null {
+  try {
+    return new URL(url, window.location.origin).protocol === 'https:' ? url : null;
+  } catch {
+    return null;
+  }
 }
 
 function getThumbnail(video: PropertyVideo): string {
@@ -146,26 +161,48 @@ export default function PropertyVideos() {
               <X className="w-8 h-8" />
             </button>
             <div className="aspect-video bg-black">
-              {activeVideo.video_type === 'embed' ? (
-                <iframe
-                  src={buildEmbedUrl(activeVideo.video_url)}
-                  title={activeVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  className="w-full h-full"
-                />
-              ) : (
-                <video
-                  src={activeVideo.video_url}
-                  controls
-                  autoPlay
-                  className="w-full h-full"
-                  aria-label={activeVideo.title}
-                >
-                  <source src={activeVideo.video_url} type="video/mp4" />
-                </video>
-              )}
+              {(() => {
+                if (activeVideo.video_type === 'embed') {
+                  const embedUrl = buildEmbedUrl(activeVideo.video_url);
+                  if (!embedUrl) {
+                    return (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <p className="font-lato text-sm text-cream/60">This video is unavailable.</p>
+                      </div>
+                    );
+                  }
+                  return (
+                    <iframe
+                      src={embedUrl}
+                      title={activeVideo.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      sandbox="allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox"
+                      className="w-full h-full"
+                    />
+                  );
+                }
+                const fileUrl = safeFileUrl(activeVideo.video_url);
+                if (!fileUrl) {
+                  return (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <p className="font-lato text-sm text-cream/60">This video is unavailable.</p>
+                    </div>
+                  );
+                }
+                return (
+                  <video
+                    src={fileUrl}
+                    controls
+                    autoPlay
+                    className="w-full h-full"
+                    aria-label={activeVideo.title}
+                  >
+                    <source src={fileUrl} type="video/mp4" />
+                  </video>
+                );
+              })()}
             </div>
             <div className="mt-4 text-center">
               <h4 className="font-montserrat text-xl uppercase tracking-wide text-cream mb-2">
@@ -178,7 +215,7 @@ export default function PropertyVideos() {
               )}
               {activeVideo.video_type === 'embed' && getYouTubeId(activeVideo.video_url) && (
                 <a
-                  href={buildWatchUrl(activeVideo.video_url)}
+                  href={buildWatchUrl(activeVideo.video_url) ?? undefined}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 mt-4 px-5 py-2 border border-cream/40 text-cream hover:bg-cream hover:text-charcoal transition-colors duration-300 font-lato text-xs uppercase tracking-widest"

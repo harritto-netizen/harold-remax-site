@@ -34,9 +34,10 @@ export default function BuyersGuideMagnet() {
         window.open(GUIDE_URL, '_blank', 'noopener');
       }, 400);
     } catch (err) {
-      const detail = err instanceof Error ? err.message : String(err);
+      // Generic message only: the backend error leaks schema and policy detail.
+      console.error('Guide request failed:', err);
       setStatus('error');
-      setErrorMessage(detail);
+      setErrorMessage('We could not send the guide. Please try again.');
     }
   };
 
@@ -118,10 +119,7 @@ export default function BuyersGuideMagnet() {
                   <div className="bg-red-500/20 border border-red-500/70 p-4 flex items-start gap-3 animate-fade-in">
                     <AlertCircle className="w-5 h-5 text-red-300 flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-lato text-cream text-sm">Something went wrong. Please try again.</p>
-                      {errorMessage && (
-                        <p className="font-lato text-cream/60 text-xs mt-1">{errorMessage}</p>
-                      )}
+                      <p className="font-lato text-cream text-sm">{errorMessage}</p>
                     </div>
                   </div>
                 )}

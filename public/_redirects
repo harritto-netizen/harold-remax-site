@@ -1,6 +1,10 @@
 /api/send-property-alert-notification  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/send-property-alert-notification  200
 /api/send-contact-notification  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/send-contact-notification  200
-/supabase-proxy/*  https://wllejqlypxctumdxkecn.supabase.co/:splat  200
+/supabase-proxy/rest/v1/*       https://wllejqlypxctumdxkecn.supabase.co/rest/v1/:splat       200
+/supabase-proxy/auth/v1/*       https://wllejqlypxctumdxkecn.supabase.co/auth/v1/:splat       200
+/supabase-proxy/storage/v1/*    https://wllejqlypxctumdxkecn.supabase.co/storage/v1/:splat    200
+/supabase-proxy/functions/v1/*  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/:splat  200
+/supabase-proxy/realtime/v1/*   https://wllejqlypxctumdxkecn.supabase.co/realtime/v1/:splat   200
 /blog/confotur-tax-savings  /blog/confotur-tax-savings.html  200
 /blog/living-investing-evaristo-morales-santo-domingo-real-estate  /blog/living-investing-evaristo-morales-santo-domingo-real-estate.html  200
 /privacy-policy  /privacy-policy.html  200

@@ -71,8 +71,9 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
       }, 5000);
     } catch (error: any) {
       setFormStatus('error');
-      const detail = error?.message || String(error);
-      setErrorMessage(detail);
+      // Never surface the backend error: it leaks table, column and policy
+      // detail. Keep it in the console for debugging only.
+      setErrorMessage('We could not save your request. Please try again.');
       console.error('Form submit failed:', error);
     }
   };

@@ -3,7 +3,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import PropertyAlertForm from './components/PropertyAlertForm';
 import MobileCTABar from './components/MobileCTABar';
 import ScrollReveal from './components/ScrollReveal';
-import { getCurrentUser } from './lib/auth';
+import { getCurrentAdmin, signOut } from './lib/auth';
 import { initTracking, trackContact, trackViewContent } from './lib/tracking';
 
 const SchemaMarkup = lazy(() => import('./components/SchemaMarkup'));
@@ -76,8 +76,10 @@ function App() {
     const path = window.location.pathname;
 
     if (path === '/admin') {
-      const user = await getCurrentUser();
-      if (user) {
+      // Only a session carrying the server-controlled admin role may open the
+      // dashboard. A plain signed-in account is not an administrator.
+      const admin = await getCurrentAdmin();
+      if (admin) {
         setCurrentView('admin-dashboard');
       } else {
         setCurrentView('admin-login');
@@ -89,7 +91,16 @@ function App() {
     setIsCheckingAuth(false);
   };
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = async () => {
+    const admin = await getCurrentAdmin();
+    if (!admin) {
+      // Authenticated but not an administrator: end the session rather than
+      // rendering an admin surface the account has no right to.
+      await signOut();
+      setCurrentView('admin-login');
+      window.history.pushState({}, '', '/admin');
+      return;
+    }
     setCurrentView('admin-dashboard');
     window.history.pushState({}, '', '/admin');
   };
