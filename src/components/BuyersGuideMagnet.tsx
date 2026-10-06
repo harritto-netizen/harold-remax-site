@@ -1,6 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { CheckCircle, AlertCircle, Download, BookOpen, ShieldCheck, Clock } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { publicSupabase } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 import FormReassurance from './FormReassurance';
 
@@ -19,7 +19,7 @@ export default function BuyersGuideMagnet() {
     setErrorMessage('');
 
     try {
-      const { error } = await supabase.from('contacts').insert([
+      const { error } = await publicSupabase.from('contacts').insert([
         {
           name: name.trim(),
           email: email.trim(),

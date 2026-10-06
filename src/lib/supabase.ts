@@ -16,6 +16,11 @@ const supabaseUrl =
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+// Lead forms must always submit as a visitor: insert policies are scoped to anon, so an admin session in the same browser would be rejected.
+export const publicSupabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: 'public-lead-forms' },
+});
+
 export type Contact = {
   id: string;
   name: string;

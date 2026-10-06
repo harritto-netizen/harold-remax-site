@@ -1,6 +1,6 @@
 import { useMemo, useState, FormEvent } from 'react';
 import { AlertCircle, Calculator, Lock, Quote, TrendingUp, Unlock } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { publicSupabase } from '../lib/supabase';
 import { trackContact, trackLead } from '../lib/tracking';
 import { AREAS, PROPERTIES, formatUSD, whatsappLink, type PropertyArea } from '../data/properties';
 import FormReassurance from './FormReassurance';
@@ -78,7 +78,7 @@ export default function RentalIncomeCalculator() {
     e.preventDefault();
     setStatus('loading');
     try {
-      const { error } = await supabase.from('contacts').insert([
+      const { error } = await publicSupabase.from('contacts').insert([
         {
           name: name.trim(),
           email: email.trim(),

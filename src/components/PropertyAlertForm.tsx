@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { Bell, CheckCircle, AlertCircle, Star } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { publicSupabase } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 import FormReassurance from './FormReassurance';
 
@@ -52,7 +52,7 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
         is_active: true
       };
 
-      const { error } = await supabase.from('property_alerts').insert([alertData]);
+      const { error } = await publicSupabase.from('property_alerts').insert([alertData]);
       if (error) throw new Error(error.message);
 
       trackLead({ contentName: 'property_alert_form' });

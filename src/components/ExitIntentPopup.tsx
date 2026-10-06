@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { X, Bell, CheckCircle, AlertCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { publicSupabase } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
 
 const STORAGE_KEY = 'property_alert_popup_dismissed';
@@ -62,7 +62,7 @@ export default function ExitIntentPopup() {
         is_active: true,
       };
 
-      const { error } = await supabase.from('property_alerts').insert([alertData]);
+      const { error } = await publicSupabase.from('property_alerts').insert([alertData]);
       if (error) throw new Error(error.message);
 
       trackLead({ contentName: 'exit_intent_popup' });
