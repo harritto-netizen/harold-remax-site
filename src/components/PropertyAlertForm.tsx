@@ -2,6 +2,7 @@ import { useState, useEffect, FormEvent } from 'react';
 import { Bell, CheckCircle, AlertCircle, Star } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
+import FormReassurance from './FormReassurance';
 
 interface PropertyAlertFormProps {
   initialLocation?: string;
@@ -95,7 +96,7 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
             <Star key={i} className="w-4 h-4 fill-cream text-cream" />
           ))}
         </div>
-        <span className="font-lato text-xs uppercase tracking-wider">Trusted by 500+ buyers and investors</span>
+        <span className="font-lato text-xs uppercase tracking-wider">350+ happy clients &middot; RE/MAX Certified</span>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl mx-auto">
@@ -137,7 +138,7 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
               disabled={formStatus === 'loading'}
               className="border-2 border-cream text-cream px-8 py-4 text-sm uppercase tracking-widest hover:bg-cream hover:text-charcoal transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-lato whitespace-nowrap"
             >
-              {formStatus === 'loading' ? 'Subscribing...' : 'Get Early Access'}
+              {formStatus === 'loading' ? 'Subscribing...' : 'Show Me New Listings First'}
             </button>
           )}
         </div>
@@ -263,10 +264,16 @@ export default function PropertyAlertForm({ initialLocation = '', initialPropert
               disabled={formStatus === 'loading'}
               className="w-full border-2 border-cream text-cream px-8 py-4 text-sm uppercase tracking-widest hover:bg-cream hover:text-charcoal transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-lato"
             >
-              {formStatus === 'loading' ? 'Subscribing...' : 'Get Property Alerts'}
+              {formStatus === 'loading' ? 'Subscribing...' : 'Show Me New Listings First'}
             </button>
           </div>
         )}
+        <div className="max-w-xl mx-auto">
+          <FormReassurance
+            trackingLabel="whatsapp_alerts_form"
+            whatsappText="Hi Harold, please let me know about new listings that match what I'm looking for."
+          />
+        </div>
       </form>
     </div>
   );

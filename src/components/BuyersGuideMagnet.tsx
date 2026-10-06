@@ -2,6 +2,7 @@ import { useState, FormEvent } from 'react';
 import { CheckCircle, AlertCircle, Download, BookOpen, ShieldCheck, Clock } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { trackLead } from '../lib/tracking';
+import FormReassurance from './FormReassurance';
 
 const GUIDE_URL = '/guides/dr-buyers-guide-2026.html';
 const LEAD_SOURCE = 'buyers_guide_2026';
@@ -79,7 +80,7 @@ export default function BuyersGuideMagnet() {
             </ul>
 
             <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50">
-              Trusted by 1,200+ international buyers &middot; No spam &middot; Unsubscribe anytime
+              350+ happy clients &middot; RE/MAX Certified &middot; 15+ years
             </p>
           </div>
 
@@ -111,7 +112,7 @@ export default function BuyersGuideMagnet() {
                 <div>
                   <p className="font-lato text-xs uppercase tracking-[0.24em] text-cream/50 mb-2">Get instant access</p>
                   <h3 className="font-montserrat text-2xl md:text-3xl font-light uppercase tracking-wider text-cream">
-                    Send me the guide
+                    Send my free guide
                   </h3>
                 </div>
 
@@ -168,15 +169,15 @@ export default function BuyersGuideMagnet() {
                   ) : (
                     <>
                       <Download className="w-4 h-4" strokeWidth={1.5} />
-                      Send me the guide
+                      Send My Free Buyer's Guide
                     </>
                   )}
                 </button>
 
-                <p className="font-lato text-[11px] text-cream/50 leading-relaxed text-center">
-                  By requesting the guide you agree to receive occasional emails from RE/MAX Next Door.
-                  We never share your information.
-                </p>
+                <FormReassurance
+                  trackingLabel="whatsapp_guide_form"
+                  whatsappText="Hi Harold, I'd like to talk about buying property in the Dominican Republic."
+                />
               </form>
             )}
           </div>

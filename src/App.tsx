@@ -1,10 +1,12 @@
-import { Home, Building2, Key, Search, Star, Calendar, MessageCircle, X, Bell, Menu, Phone, Instagram, Facebook, Shield, BadgeCheck, Landmark, MapPin, AlertTriangle } from 'lucide-react';
+import { Home, Building2, Key, Search, Star, MessageCircle, X, Menu, Phone, Instagram, Facebook, Shield, BadgeCheck, Landmark, MapPin, AlertTriangle, CalendarCheck } from 'lucide-react';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import PropertyAlertForm from './components/PropertyAlertForm';
 import MobileCTABar from './components/MobileCTABar';
 import ScrollReveal from './components/ScrollReveal';
+import FeaturedProperties, { EMPTY_FILTERS, type PropertyFilters } from './components/FeaturedProperties';
+import { whatsappLink } from './data/properties';
 import { getCurrentAdmin, signOut } from './lib/auth';
-import { initTracking, trackContact, trackViewContent } from './lib/tracking';
+import { initTracking, trackContact } from './lib/tracking';
 
 const SchemaMarkup = lazy(() => import('./components/SchemaMarkup'));
 const ExitIntentPopup = lazy(() => import('./components/ExitIntentPopup'));
@@ -15,6 +17,9 @@ const AnimatedStats = lazy(() => import('./components/AnimatedStats'));
 const SoldPortfolio = lazy(() => import('./components/SoldPortfolio'));
 const MarketInsights = lazy(() => import('./components/MarketInsights'));
 const BuyersGuideMagnet = lazy(() => import('./components/BuyersGuideMagnet'));
+const RentalIncomeCalculator = lazy(() => import('./components/RentalIncomeCalculator'));
+
+const STRATEGY_CALL_LINK = whatsappLink("Hi Harold, I'd like to book a free 15-minute strategy call about buying property in the Dominican Republic.");
 
 type View = 'main' | 'admin-login' | 'admin-dashboard';
 
@@ -55,6 +60,18 @@ function App() {
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [alertPrefill, setAlertPrefill] = useState<{ location: string; propertyType: string }>({ location: '', propertyType: '' });
+  const [searchDraft, setSearchDraft] = useState<PropertyFilters>(EMPTY_FILTERS);
+  const [activeFilters, setActiveFilters] = useState<PropertyFilters>(EMPTY_FILTERS);
+
+  const runSearch = () => {
+    setActiveFilters(searchDraft);
+    document.getElementById('propiedades')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const clearFilters = () => {
+    setSearchDraft(EMPTY_FILTERS);
+    setActiveFilters(EMPTY_FILTERS);
+  };
 
   const scrollToAlerts = (location: string = '', propertyType: string = '') => {
     setAlertPrefill({ location, propertyType });
@@ -206,16 +223,31 @@ function App() {
 
         {/* Content */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-          <h1 id="hero-heading" className="font-montserrat text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-cream uppercase tracking-wider leading-tight mb-8">
-            Luxury Caribbean
-            <span className="block mt-2">Real Estate</span>
+          <h1 id="hero-heading" className="font-montserrat text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-cream uppercase tracking-wider leading-tight mb-8">
+            Own Your Piece of the Caribbean
+            <span className="block mt-3 text-2xl sm:text-3xl md:text-4xl tracking-[0.2em] text-cream/90">Without the Guesswork</span>
           </h1>
-          <p className="font-lato text-xl text-cream/90 mb-12 max-w-2xl mx-auto">
-            Exclusive properties in Santo Domingo and Punta Cana
+          <p className="font-lato text-lg sm:text-xl text-cream/90 mb-10 max-w-3xl mx-auto leading-relaxed">
+            Checked listings, clear title review and real rental numbers in Santo Domingo and Punta Cana. Backed by 15+ years and the RE/MAX network, so you can buy confidently from anywhere.
           </p>
-          <a href="#propiedades" className="inline-block border-2 border-cream text-cream px-8 py-3 text-sm uppercase tracking-widest hover:bg-cream hover:text-charcoal transition-all duration-300">
-            View Properties
-          </a>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#propiedades" className="inline-block bg-cream text-charcoal border-2 border-cream px-8 py-3 text-sm uppercase tracking-widest hover:bg-white hover:border-white transition-all duration-300">
+              See Properties That Fit My Budget
+            </a>
+            <a
+              href={STRATEGY_CALL_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackContact('strategy_call_hero')}
+              className="inline-flex items-center gap-2 border-2 border-cream text-cream px-8 py-3 text-sm uppercase tracking-widest hover:bg-cream hover:text-charcoal transition-all duration-300"
+            >
+              <CalendarCheck className="w-4 h-4" aria-hidden="true" />
+              Book a Free 15-Min Strategy Call
+            </a>
+          </div>
+          <p className="mt-6 font-lato text-xs uppercase tracking-[0.2em] text-cream/80">
+            RE/MAX Certified &middot; 15+ Years &middot; Title Review on Every Purchase
+          </p>
 
           {/* Quick Search Bar */}
           <div className="mt-12 w-full max-w-3xl mx-auto bg-cream/10 backdrop-blur-md border border-cream/20 p-4 md:p-6">
@@ -223,9 +255,10 @@ function App() {
               <select
                 aria-label="Location"
                 className="bg-transparent border border-cream/30 text-cream font-lato text-sm px-4 py-3 uppercase tracking-wider appearance-none cursor-pointer"
-                defaultValue=""
+                value={searchDraft.area}
+                onChange={(e) => setSearchDraft({ ...searchDraft, area: e.target.value })}
               >
-                <option value="" disabled className="text-charcoal">Location</option>
+                <option value="" className="text-charcoal">Any Location</option>
                 <option value="Santo Domingo" className="text-charcoal">Santo Domingo</option>
                 <option value="Punta Cana" className="text-charcoal">Punta Cana</option>
                 <option value="Cap Cana" className="text-charcoal">Cap Cana</option>
@@ -235,9 +268,10 @@ function App() {
               <select
                 aria-label="Property type"
                 className="bg-transparent border border-cream/30 text-cream font-lato text-sm px-4 py-3 uppercase tracking-wider appearance-none cursor-pointer"
-                defaultValue=""
+                value={searchDraft.kind}
+                onChange={(e) => setSearchDraft({ ...searchDraft, kind: e.target.value })}
               >
-                <option value="" disabled className="text-charcoal">Property Type</option>
+                <option value="" className="text-charcoal">Any Type</option>
                 <option value="villa" className="text-charcoal">Villa</option>
                 <option value="apartment" className="text-charcoal">Apartment</option>
                 <option value="condo" className="text-charcoal">Condo</option>
@@ -247,21 +281,23 @@ function App() {
               <select
                 aria-label="Budget range"
                 className="bg-transparent border border-cream/30 text-cream font-lato text-sm px-4 py-3 uppercase tracking-wider appearance-none cursor-pointer"
-                defaultValue=""
+                value={searchDraft.budget}
+                onChange={(e) => setSearchDraft({ ...searchDraft, budget: e.target.value })}
               >
-                <option value="" disabled className="text-charcoal">Budget</option>
+                <option value="" className="text-charcoal">Any Budget</option>
                 <option value="0-200000" className="text-charcoal">Under $200K</option>
                 <option value="200000-500000" className="text-charcoal">$200K - $500K</option>
                 <option value="500000-1000000" className="text-charcoal">$500K - $1M</option>
                 <option value="1000000+" className="text-charcoal">$1M+</option>
               </select>
-              <a
-                href="#propiedades"
+              <button
+                type="button"
+                onClick={runSearch}
                 className="flex items-center justify-center gap-2 bg-cream text-charcoal px-6 py-3 text-sm uppercase tracking-widest font-lato hover:bg-cream/90 transition-all"
               >
                 <Search className="w-4 h-4" />
                 Search
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -563,6 +599,9 @@ function App() {
       {/* Lead Magnet: Buyer's Guide */}
       <Suspense fallback={null}><BuyersGuideMagnet /></Suspense>
 
+      {/* Lead Magnet: Rental Income Calculator */}
+      <Suspense fallback={null}><RentalIncomeCalculator /></Suspense>
+
       {/* Featured Properties Gallery */}
       <section id="propiedades" aria-labelledby="properties-heading" className="py-24 md:py-32 bg-cream">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -574,124 +613,7 @@ function App() {
               Discover exceptional properties in Santo Domingo and Punta Cana
             </p>
           </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Luxury Villa in Punta Cana',
-                price: '$850,000',
-                beds: 5,
-                baths: 4,
-                sqft: '4,200',
-                image: 'https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=1200',
-                location: 'Punta Cana'
-              },
-              {
-                title: 'GreenWood Apartment',
-                price: '$260,000',
-                beds: 1,
-                baths: 1,
-                sqft: '786',
-                image: '/d-2574-1765469617-c45431a7-3384-488b-b949-0103dfb4aa72.webp',
-                location: 'Cap Cana'
-              },
-              {
-                title: 'Villa Playa Nueva Romana',
-                price: '$540,000',
-                beds: 3,
-                baths: 3,
-                sqft: '4,521',
-                image: '/laud-2.webp',
-                location: 'Playa Nueva Romana'
-              },
-              {
-                title: 'Luxury Apartment in Cap Cana',
-                price: '$780,000',
-                beds: 4,
-                baths: 4,
-                sqft: '3,800',
-                image: 'https://images.pexels.com/photos/34271104/pexels-photo-34271104.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
-                location: 'Cap Cana, Dominican Republic'
-              },
-              {
-                title: 'Apartment in Torre Roraima',
-                price: '$198,000',
-                beds: 1,
-                baths: 2,
-                sqft: '902',
-                image: '/60.jpg',
-                location: 'Evaristo Morales, Santo Domingo'
-              },
-              {
-                title: 'Furnished Apartment in Bayahibe',
-                price: '$145,000',
-                beds: 1,
-                baths: 1,
-                sqft: '554',
-                image: '/d-2392-1764611103-8d08280a-5912-4dc7-ab09-fc84088d5fcc.jpg',
-                location: 'Bayahibe'
-              }
-            ].map((property, index) => (
-              <ScrollReveal key={index} delay={index * 100} className="group hover-zoom overflow-hidden">
-                <div className="relative h-80 overflow-hidden mb-4">
-                  <img
-                    src={property.image}
-                    alt={`${property.title} - Property with ${property.beds} bedrooms and ${property.baths} bathrooms in ${property.location}`}
-                    className="w-full h-full object-cover transition-transform duration-500"
-                    loading="lazy"
-                    decoding="async"
-                    width="400"
-                    height="320"
-                  />
-                  <div className="absolute inset-0 bg-charcoal/20 group-hover:bg-charcoal/30 transition-colors duration-300"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <p className="font-lato text-sm uppercase tracking-wider mb-2 opacity-90">{property.location}</p>
-                    <h3 className="font-montserrat text-xl uppercase tracking-wide">{property.title}</h3>
-                  </div>
-                </div>
-                <div className="space-y-3">
-                  <p className="font-montserrat text-2xl font-light text-charcoal">{property.price}</p>
-                  <div className="flex gap-6 font-lato text-sm text-charcoal/70">
-                    <span>{property.beds} Beds</span>
-                    <span>{property.baths} Baths</span>
-                    <span>{property.sqft} ft²</span>
-                  </div>
-                  <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 pt-2">
-                    <a
-                      href={`https://wa.me/18094262269?text=Hello%20Harold,%20I'm%20interested%20in%20the%20${encodeURIComponent(property.title)}%20listed%20at%20${encodeURIComponent(property.price)}%20in%20${encodeURIComponent(property.location)}.%20Can%20you%20provide%20more%20details?`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => {
-                        const numericPrice = Number(property.price.replace(/[^0-9]/g, '')) || undefined;
-                        trackViewContent({ contentName: property.title, value: numericPrice });
-                        trackContact('whatsapp_property');
-                      }}
-                      className="inline-block font-lato text-sm text-charcoal uppercase tracking-widest border-b border-charcoal hover:opacity-60 transition-opacity pb-1"
-                    >
-                      View Details
-                    </a>
-                    <a
-                      href={`https://wa.me/18094262269?text=${encodeURIComponent(`Hi Harold, I'd like to schedule a tour of ${property.title} in ${property.location}. When are you available?`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => trackContact('schedule_tour')}
-                      className="inline-flex items-center gap-1.5 font-lato text-xs text-charcoal uppercase tracking-widest border border-charcoal px-3 py-1.5 hover:bg-charcoal hover:text-cream transition-all duration-300"
-                    >
-                      <Calendar className="w-3.5 h-3.5" />
-                      Schedule Tour
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => scrollToAlerts(property.location, '')}
-                      className="inline-flex items-center gap-1.5 font-lato text-xs text-charcoal/70 uppercase tracking-wider hover:text-charcoal transition-colors"
-                    >
-                      <Bell className="w-3.5 h-3.5" />
-                      Alert me of similar
-                    </button>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
+          <FeaturedProperties filters={activeFilters} onClearFilters={clearFilters} onAlert={scrollToAlerts} />
 
           <Suspense fallback={null}><PropertyVideos /></Suspense>
         </div>
