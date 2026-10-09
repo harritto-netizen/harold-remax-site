@@ -245,9 +245,6 @@ function App() {
               Book a Free 15-Min Strategy Call
             </a>
           </div>
-          <p className="mt-6 font-lato text-xs uppercase tracking-[0.2em] text-cream/80">
-            RE/MAX Certified &middot; 15+ Years &middot; Title Review on Every Purchase
-          </p>
 
           {/* Quick Search Bar */}
           <div className="mt-12 w-full max-w-3xl mx-auto bg-cream/10 backdrop-blur-md border border-cream/20 p-4 md:p-6">
