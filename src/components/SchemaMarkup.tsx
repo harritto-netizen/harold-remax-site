@@ -449,6 +449,22 @@ export default function SchemaMarkup() {
     "blogPost": [
       {
         "@type": "BlogPosting",
+        "headline": "Punta Cana vs Cap Cana vs Santo Domingo: Where to Buy in Late 2026",
+        "datePublished": "2026-10-09",
+        "dateModified": "2026-10-09",
+        "author": {
+          "@type": "Person",
+          "name": "Harold",
+          "jobTitle": "Certified Real Estate Agent",
+          "worksFor": { "@type": "Organization", "name": "RE/MAX Next Door" }
+        },
+        "description": "Side-by-side comparison of price per square meter, net rental yields, occupancy, seasonality and CONFOTUR availability in Punta Cana, Cap Cana and Santo Domingo for buyers in Q4 2026.",
+        "image": "https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg",
+        "url": "https://www.primerealestatedr.com/blog/punta-cana-vs-cap-cana-vs-santo-domingo-where-to-buy-2026",
+        "keywords": ["Punta Cana vs Cap Cana", "where to buy property Dominican Republic", "Santo Domingo vs Punta Cana", "Dominican Republic real estate Q4 2026", "Cap Cana price per square meter", "Punta Cana rental yield", "CONFOTUR"]
+      },
+      {
+        "@type": "BlogPosting",
         "headline": "Dominican Republic Real Estate Market Forecast 2026: Record Foreign Investment Drives Growth",
         "datePublished": "2026-05-28",
         "dateModified": "2026-05-28",

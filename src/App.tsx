@@ -808,6 +808,7 @@ function App() {
             <div>
               <h3 className="font-montserrat text-sm uppercase tracking-widest text-charcoal mb-4">Neighborhood Guides</h3>
               <ul className="space-y-2 font-lato text-sm text-charcoal/75">
+                <li><a href="/blog/punta-cana-vs-cap-cana-vs-santo-domingo-where-to-buy-2026" className="hover:text-charcoal hover:underline underline-offset-4">Punta Cana vs Cap Cana vs Santo Domingo</a></li>
                 <li><a href="/blog/living-investing-evaristo-morales-santo-domingo-real-estate" className="hover:text-charcoal hover:underline underline-offset-4">Living and investing in Evaristo Morales</a></li>
                 <li><a href="#propiedades" className="hover:text-charcoal hover:underline underline-offset-4">Luxury condos in Piantini and Naco</a></li>
                 <li><a href="#propiedades" className="hover:text-charcoal hover:underline underline-offset-4">Beachfront villas in Cap Cana and Bayahibe</a></li>

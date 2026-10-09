@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.primerealestatedr.com/</loc>
-    <lastmod>2026-06-29</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -40,6 +40,17 @@
       <image:loc>https://www.primerealestatedr.com/d-2392-1764611103-8d08280a-5912-4dc7-ab09-fc84088d5fcc.jpg</image:loc>
       <image:title>Furnished Apartment in Bayahibe</image:title>
       <image:caption>Furnished apartment for sale in Bayahibe - 1 bedroom, 1 bathroom, 554 sq ft</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.primerealestatedr.com/blog/punta-cana-vs-cap-cana-vs-santo-domingo-where-to-buy-2026</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg</image:loc>
+      <image:title>Punta Cana vs Cap Cana vs Santo Domingo</image:title>
+      <image:caption>Where to buy property in the Dominican Republic in late 2026 - prices, rental yields and CONFOTUR compared</image:caption>
     </image:image>
   </url>
   <url>

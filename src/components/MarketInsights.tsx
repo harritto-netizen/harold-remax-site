@@ -44,7 +44,38 @@ export default function MarketInsights() {
             <h3 className="font-montserrat text-2xl sm:text-3xl font-light text-charcoal uppercase tracking-wider mb-10 text-center">
               Featured Articles
             </h3>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <a
+                href="/blog/punta-cana-vs-cap-cana-vs-santo-domingo-where-to-buy-2026"
+                className="group block bg-white border border-charcoal/10 hover:border-charcoal/30 transition-colors overflow-hidden md:col-span-2 lg:col-span-1"
+              >
+                <div className="aspect-[16/10] overflow-hidden bg-beige-light relative">
+                  <img
+                    src="https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=800"
+                    alt="Luxury villa in Punta Cana compared with Cap Cana and Santo Domingo"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <span className="absolute top-4 left-4 bg-cream text-charcoal font-lato text-[11px] uppercase tracking-widest px-3 py-1">
+                    New
+                  </span>
+                </div>
+                <div className="p-6 md:p-8">
+                  <p className="font-lato text-xs uppercase tracking-widest text-charcoal/50 mb-3">
+                    October 9, 2026 &middot; Market Analysis
+                  </p>
+                  <h4 className="font-montserrat text-xl md:text-2xl font-light text-charcoal mb-3 leading-snug">
+                    Punta Cana vs Cap Cana vs Santo Domingo: Where to Buy in Late 2026
+                  </h4>
+                  <p className="font-lato text-sm text-charcoal/70 leading-relaxed mb-4">
+                    Prices per m2, rental yields, occupancy and CONFOTUR benefits compared side by side, plus three questions to pick the right area for you.
+                  </p>
+                  <span className="inline-block font-montserrat text-xs uppercase tracking-widest text-charcoal border-b border-charcoal pb-1 group-hover:opacity-70 transition-opacity">
+                    Read Article
+                  </span>
+                </div>
+              </a>
+
               <a
                 href="/blog/living-investing-evaristo-morales-santo-domingo-real-estate.html"
                 className="group block bg-white border border-charcoal/10 hover:border-charcoal/30 transition-colors overflow-hidden"
