@@ -158,6 +158,13 @@ export default function ExitIntentPopup() {
               >
                 {status === 'loading' ? 'Subscribing...' : 'Send Me Exclusive Listings'}
               </button>
+              <p className="font-lato text-[11px] text-charcoal/50 text-center leading-relaxed">
+                Unsubscribe anytime. See our{' '}
+                <a href="/privacy-policy" className="underline underline-offset-2 hover:text-charcoal transition-colors">
+                  Privacy Policy
+                </a>
+                .
+              </p>
               <button
                 type="button"
                 onClick={dismiss}

@@ -7,14 +7,6 @@
     <meta name="color-scheme" content="light" />
     <meta name="format-detection" content="telephone=yes" />
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5T8KX4BJ');</script>
-    <!-- End Google Tag Manager -->
-
     <!-- SEO Meta Tags -->
     <title>RE/MAX Next Door | Luxury Real Estate Dominican Republic</title>
     <meta name="description" content="Certified RE/MAX real estate agent with 15+ years experience. Buy, sell, and rent luxury properties in Santo Domingo, Punta Cana, Cap Cana, and Bayahibe. 2026 market insights, investment analysis, and free consultation. 500+ properties sold." />
@@ -148,9 +140,6 @@
     </script>
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5T8KX4BJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <div id="root">
       <!-- Static content for AI crawlers that don't execute JavaScript. React replaces this on mount. -->
       <article itemscope itemtype="https://schema.org/RealEstateAgent">
@@ -275,22 +264,9 @@
     </div>
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Defer analytics and third-party scripts until after page load -->
+    <!-- Analytics load only after cookie consent (see cookie banner) -->
     <script>
       window.addEventListener('load', function() {
-        // Google Analytics
-        var gs = document.createElement('script');
-        gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-P3F80FDS7W';
-        gs.async = true;
-        document.head.appendChild(gs);
-        gs.onload = function() {
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          window.gtag = gtag;
-          gtag('js', new Date());
-          gtag('config', 'G-P3F80FDS7W');
-        };
-
         // Cloudflare Turnstile (defer until needed)
         setTimeout(function() {
           var ts = document.createElement('script');

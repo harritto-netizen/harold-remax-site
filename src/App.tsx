@@ -4,9 +4,10 @@ import PropertyAlertForm from './components/PropertyAlertForm';
 import MobileCTABar from './components/MobileCTABar';
 import ScrollReveal from './components/ScrollReveal';
 import FeaturedProperties, { EMPTY_FILTERS, type PropertyFilters } from './components/FeaturedProperties';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import { whatsappLink } from './data/properties';
 import { getCurrentAdmin, signOut } from './lib/auth';
-import { initTracking, trackContact } from './lib/tracking';
+import { getConsent, initTracking, trackContact } from './lib/tracking';
 
 const SchemaMarkup = lazy(() => import('./components/SchemaMarkup'));
 const ExitIntentPopup = lazy(() => import('./components/ExitIntentPopup'));
@@ -62,6 +63,7 @@ function App() {
   const [alertPrefill, setAlertPrefill] = useState<{ location: string; propertyType: string }>({ location: '', propertyType: '' });
   const [searchDraft, setSearchDraft] = useState<PropertyFilters>(EMPTY_FILTERS);
   const [activeFilters, setActiveFilters] = useState<PropertyFilters>(EMPTY_FILTERS);
+  const [showCookieBanner, setShowCookieBanner] = useState(() => getConsent() === null);
 
   const runSearch = () => {
     setActiveFilters(searchDraft);
@@ -882,7 +884,13 @@ function App() {
             <p className="font-lato text-xs text-charcoal/50">
               Luxury real estate in Santo Domingo, Punta Cana, Cap Cana, Bayahibe, and La Romana
             </p>
-            <p className="font-lato text-xs text-charcoal/50">© 2026 RE/MAX Next Door. All rights reserved.</p>
+            <p className="font-lato text-xs text-charcoal/50">
+              © 2026 RE/MAX Next Door. All rights reserved.
+              <span className="mx-2" aria-hidden="true">&middot;</span>
+              <a href="/privacy-policy" className="hover:text-charcoal underline-offset-4 hover:underline transition-colors">Privacy Policy</a>
+              <span className="mx-2" aria-hidden="true">&middot;</span>
+              <button type="button" onClick={() => setShowCookieBanner(true)} className="hover:text-charcoal underline-offset-4 hover:underline transition-colors">Cookie Settings</button>
+            </p>
           </div>
         </div>
       </footer>
@@ -965,6 +973,7 @@ function App() {
         </button>
       </aside>
       <Suspense fallback={null}><ExitIntentPopup /></Suspense>
+      <CookieConsentBanner open={showCookieBanner} onClose={() => setShowCookieBanner(false)} />
     </div>
   );
 }

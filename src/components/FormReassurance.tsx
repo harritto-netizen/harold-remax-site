@@ -37,7 +37,12 @@ export default function FormReassurance({
       </div>
       <p className={`flex items-start gap-2 font-lato text-xs leading-relaxed ${muted}`}>
         <Lock className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" strokeWidth={1.5} aria-hidden="true" />
-        No spam. One useful email a week at most, unsubscribe in one click. Your details stay with Harold and are never sold or shared.
+        <span>
+          No spam. One useful email a week at most, unsubscribe in one click. Your details stay with Harold and are never sold.{' '}
+          <a href="/privacy-policy" className={`${strong} underline underline-offset-2 hover:opacity-70 transition-opacity`}>
+            Privacy Policy
+          </a>
+        </span>
       </p>
       <a
         href={whatsappLink(whatsappText)}
