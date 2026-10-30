@@ -19,10 +19,14 @@ const SoldPortfolio = lazy(() => import('./components/SoldPortfolio'));
 const MarketInsights = lazy(() => import('./components/MarketInsights'));
 const BuyersGuideMagnet = lazy(() => import('./components/BuyersGuideMagnet'));
 const RentalIncomeCalculator = lazy(() => import('./components/RentalIncomeCalculator'));
+const BlogIndex = lazy(() => import('./components/blog/BlogIndex'));
+const BlogArticle = lazy(() => import('./components/blog/BlogArticle'));
 
 const STRATEGY_CALL_LINK = whatsappLink("Hi Harold, I'd like to book a free 15-minute strategy call about buying property in the Dominican Republic.");
 
-type View = 'main' | 'admin-login' | 'admin-dashboard';
+type View = 'main' | 'admin-login' | 'admin-dashboard' | 'blog-index' | 'blog-article';
+
+const BLOG_ARTICLE_PATH = /^\/blog\/([a-z0-9]+(?:-[a-z0-9]+)*)\/?$/;
 
 function HeroVideo() {
   const [loaded, setLoaded] = useState(false);
@@ -103,6 +107,10 @@ function App() {
       } else {
         setCurrentView('admin-login');
       }
+    } else if (path === '/blog' || path === '/blog/') {
+      setCurrentView('blog-index');
+    } else if (BLOG_ARTICLE_PATH.test(path)) {
+      setCurrentView('blog-article');
     } else {
       setCurrentView('main');
     }
@@ -143,6 +151,18 @@ function App() {
 
   if (currentView === 'admin-dashboard') {
     return <Suspense fallback={<div className="min-h-screen bg-charcoal flex items-center justify-center"><p className="font-lato text-cream">Loading...</p></div>}><AdminDashboard onLogout={handleLogout} /></Suspense>;
+  }
+
+  if (currentView === 'blog-index' || currentView === 'blog-article') {
+    const slug = window.location.pathname.match(BLOG_ARTICLE_PATH)?.[1] ?? '';
+    return (
+      <>
+        <Suspense fallback={<div className="min-h-screen bg-cream" />}>
+          {currentView === 'blog-index' ? <BlogIndex /> : <BlogArticle slug={slug} />}
+        </Suspense>
+        <CookieConsentBanner open={showCookieBanner} onClose={() => setShowCookieBanner(false)} />
+      </>
+    );
   }
 
   return (
@@ -866,7 +886,7 @@ function App() {
                 <a href="#testimonios" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Client Testimonials</a>
                 <a href="#faq" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">FAQ</a>
                 <a href="#confotur" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">CONFOTUR Law</a>
-                <a href="#blog" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Market Insights</a>
+                <a href="/blog" className="block font-lato text-sm text-charcoal/70 hover:text-charcoal transition-colors">Market Insights</a>
               </nav>
             </div>
             <div>

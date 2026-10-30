@@ -1,30 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
-
-const HOLO_SCRIPT_SRC =
-  'https://prod-api-holo-ai.fly.dev/public/seo/embed/08f4c3ef-0a74-49bf-afda-c02f9b895192.js';
+import PostCard, { toCardPost } from './blog/PostCard';
+import { fetchPostSummaries, type BlogPostSummary } from '../lib/blog';
 
 export default function MarketInsights() {
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const [latestPosts, setLatestPosts] = useState<BlogPostSummary[]>([]);
 
   useEffect(() => {
-    if (!containerRef.current) return;
-
-    const existing = document.querySelector<HTMLScriptElement>(
-      `script[src="${HOLO_SCRIPT_SRC}"]`
-    );
-    if (existing) {
-      existing.remove();
-    }
-
-    const script = document.createElement('script');
-    script.src = HOLO_SCRIPT_SRC;
-    script.defer = true;
-    document.body.appendChild(script);
-
-    return () => {
-      script.remove();
-    };
+    fetchPostSummaries(3)
+      .then(setLatestPosts)
+      .catch(() => setLatestPosts([]));
   }, []);
 
   return (
@@ -38,6 +24,21 @@ export default function MarketInsights() {
             Expert analysis on Dominican Republic real estate trends, investment opportunities, and market forecasts
           </p>
         </ScrollReveal>
+
+        {latestPosts.length > 0 && (
+          <ScrollReveal>
+            <div className="mb-16">
+              <h3 className="font-montserrat text-2xl sm:text-3xl font-light text-charcoal uppercase tracking-wider mb-10 text-center">
+                Latest Articles
+              </h3>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {latestPosts.map((post) => (
+                  <div key={post.id} className="flex"><PostCard post={toCardPost(post)} /></div>
+                ))}
+              </div>
+            </div>
+          </ScrollReveal>
+        )}
 
         <ScrollReveal>
           <div className="mb-16">
@@ -135,11 +136,15 @@ export default function MarketInsights() {
           </div>
         </ScrollReveal>
 
-        <ScrollReveal>
-          <div ref={containerRef} className="holo-blog-wrapper">
-            <div id="holo-blog"></div>
-          </div>
-        </ScrollReveal>
+        <div className="text-center">
+          <a
+            href="/blog"
+            className="group inline-flex items-center gap-2 border border-charcoal text-charcoal px-8 py-3 text-sm uppercase tracking-widest hover:bg-charcoal hover:text-cream transition-all duration-300"
+          >
+            View All Articles
+            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
+        </div>
 
         <div className="mt-16 text-center max-w-3xl mx-auto">
           <p className="font-lato text-charcoal/60 text-sm leading-relaxed">

@@ -9,6 +9,9 @@
 /blog/living-investing-evaristo-morales-santo-domingo-real-estate  /blog/living-investing-evaristo-morales-santo-domingo-real-estate.html  200
 /blog/punta-cana-vs-cap-cana-vs-santo-domingo-where-to-buy-2026  /blog/punta-cana-vs-cap-cana-vs-santo-domingo-where-to-buy-2026.html  200
 /privacy-policy  /privacy-policy.html  200
+/blog-sitemap.xml  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/blog-sitemap  200
+/blog  /index.html  200
+/blog/*  /index.html  200
 /admin  /index.html  200
 /       /index.html  200
 /*      /404.html    404

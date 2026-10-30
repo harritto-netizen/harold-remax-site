@@ -1,7 +1,6 @@
 # Supabase local configuration.
 #
-# Every function below requires a valid token on the request. None of them is a
-# public webhook: the contact and property-alert notifiers are invoked by the
+# The first three functions require a valid token on the request: the contact and property-alert notifiers are invoked by the
 # database trigger, which sends the service-role key as a bearer token, and the
 # market-insights reader is only ever called with the project's own key. Leaving
 # verify_jwt off let anyone on the internet POST a forged enquiry or alert and
@@ -15,3 +14,12 @@ verify_jwt = true
 
 [functions.fetch-market-insights]
 verify_jwt = true
+
+# Public by design: Holo cannot send a Supabase token, so the function verifies
+# Holo's HMAC signature (or bearer secret) itself before writing anything.
+[functions.holo-webhook]
+verify_jwt = false
+
+# Public read-only sitemap fetched by search engines.
+[functions.blog-sitemap]
+verify_jwt = false

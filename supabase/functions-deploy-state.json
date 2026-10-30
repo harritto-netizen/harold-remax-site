@@ -1,0 +1,25 @@
+{
+  "projectId": "58336825",
+  "functions": {
+    "fetch-market-insights": {
+      "hasChanged": false,
+      "hash": "e577724ba8c1f92b511a0fb9c29d45bece48ddb2036f237d140efb82c0bc7ae5"
+    },
+    "send-contact-notification": {
+      "hasChanged": false,
+      "hash": "be0edaf60761a973e18800bf85f7329e4a309d2873f6a7de7036cab4da276f51"
+    },
+    "send-property-alert-notification": {
+      "hasChanged": false,
+      "hash": "c341b350d501729253c520942e3eb748ee8ae9e7d2d47eb8c0ea2a14382dffcf"
+    },
+    "blog-sitemap": {
+      "hasChanged": false,
+      "hash": "233b4926c6cbdda16196b7103108901deb28355c101e17b4019b42cc7a5090ba"
+    },
+    "holo-webhook": {
+      "hasChanged": false,
+      "hash": "108d7412328c274f07c9289d6b6af9282c1c5bea943adbcea7f3b42c7192077f"
+    }
+  }
+}

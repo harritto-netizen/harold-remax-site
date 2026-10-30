@@ -38,4 +38,5 @@ User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://www.primerealestatedr.com/sitemap.xml
+Sitemap: https://www.primerealestatedr.com/blog-sitemap.xml
 LLMs: https://www.primerealestatedr.com/llms.txt
