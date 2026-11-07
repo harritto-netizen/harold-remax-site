@@ -1,9 +1,17 @@
 {
   "projectId": "58336825",
   "functions": {
+    "blog-sitemap": {
+      "hasChanged": false,
+      "hash": "233b4926c6cbdda16196b7103108901deb28355c101e17b4019b42cc7a5090ba"
+    },
     "fetch-market-insights": {
       "hasChanged": false,
       "hash": "e577724ba8c1f92b511a0fb9c29d45bece48ddb2036f237d140efb82c0bc7ae5"
+    },
+    "holo-webhook": {
+      "hasChanged": false,
+      "hash": "108d7412328c274f07c9289d6b6af9282c1c5bea943adbcea7f3b42c7192077f"
     },
     "send-contact-notification": {
       "hasChanged": false,
@@ -13,13 +21,9 @@
       "hasChanged": false,
       "hash": "c341b350d501729253c520942e3eb748ee8ae9e7d2d47eb8c0ea2a14382dffcf"
     },
-    "blog-sitemap": {
+    "blog-prerender": {
       "hasChanged": false,
-      "hash": "233b4926c6cbdda16196b7103108901deb28355c101e17b4019b42cc7a5090ba"
-    },
-    "holo-webhook": {
-      "hasChanged": false,
-      "hash": "108d7412328c274f07c9289d6b6af9282c1c5bea943adbcea7f3b42c7192077f"
+      "hash": "2a967ba02849942640aa6aa427d75a03590cb2c5e1dc5a4698f1b398fc74a824"
     }
   }
 }

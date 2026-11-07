@@ -569,7 +569,7 @@ export default function SchemaMarkup() {
       yearBuilt: "2022",
       propertyType: "Apartment",
       amenities: ["Panoramic City View", "Private Elevator", "Smart Home System", "Covered Parking", "Lobby with Concierge", "Rooftop Pool", "Fitness Center", "Generator"],
-      image: "https://www.primerealestatedr.com/2025-12-13_09_46_23-edificio_rentable_con_en_santo_domingo,_distrito_nacional,_republica_dominicana_.png"
+      image: "https://www.primerealestatedr.com/2025-12-13_09_46_23-edificio_rentable_con_en_santo_domingo%2C_distrito_nacional%2C_republica_dominic.png"
     },
     {
       name: "Modern Apartment in Torre Roraima - Evaristo Morales",
