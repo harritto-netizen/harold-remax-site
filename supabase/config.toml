@@ -24,6 +24,10 @@ verify_jwt = false
 [functions.blog-sitemap]
 verify_jwt = false
 
+# Unified dynamic sitemap (static pages + live blog posts) for /sitemap.xml.
+[functions.sitemap]
+verify_jwt = false
+
 # Public static HTML for crawlers (first-wave indexing) on /blog/*.
 [functions.blog-prerender]
 verify_jwt = false
