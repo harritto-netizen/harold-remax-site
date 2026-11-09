@@ -147,7 +147,7 @@ export default function MarketInsights() {
         </div>
 
         <div className="mt-16 text-center max-w-3xl mx-auto">
-          <p className="font-lato text-charcoal/60 text-sm leading-relaxed">
+          <p className="font-lato text-charcoal/60 text-[19px] leading-relaxed">
             Stay informed about the Dominican Republic real estate market with expert insights from RE/MAX Next Door. Whether you are looking to buy property in Punta Cana, invest in Santo Domingo condos, or explore luxury villas in Cap Cana, our market reports help you make confident investment decisions. Contact Harold for a personalized market analysis.
           </p>
         </div>
@@ -176,7 +176,7 @@ export default function MarketInsights() {
               </div>
             ))}
           </div>
-          <p className="font-lato text-xs text-charcoal/40 text-center mt-6 italic">
+          <p className="font-lato text-[23px] text-charcoal/40 text-center mt-6 italic">
             Data based on Q2 2026 market analysis by RE/MAX Next Door. Prices in USD. Yields are net estimates for furnished short-term rentals.
           </p>
         </ScrollReveal>
