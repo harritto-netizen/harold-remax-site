@@ -79,7 +79,9 @@ export function setPageMeta(opts: {
   const url = `${SITE_URL}${opts.path}`;
   document.title = opts.title;
   setMeta('name', 'description', opts.description);
-  setMeta('name', 'robots', opts.noindex ? 'noindex, follow' : 'index, follow');
+  setMeta('name', 'robots', opts.noindex
+    ? 'noindex, follow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
   setMeta('property', 'og:title', opts.title);
   setMeta('property', 'og:description', opts.description);
   setMeta('property', 'og:url', url);
