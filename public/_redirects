@@ -12,10 +12,6 @@
 /sitemap.xml  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/sitemap  200!
 /blog-sitemap.xml  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/sitemap  200
 
-# Normalize trailing slashes on blog URLs (strict 301) before any rewrite.
-/blog/  /blog  301!
-/blog/:slug/  /blog/:slug  301!
-
 # Serve crawler-friendly static HTML for blog pages (first-wave indexing).
 /blog  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/blog-prerender?view=index  200
 /blog/:slug  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/blog-prerender?slug=:slug  200
