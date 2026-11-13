@@ -36,7 +36,9 @@ function htmlResponse(html: string, status = 200): Response {
     headers: {
       ...corsHeaders,
       "Content-Type": "text/html; charset=utf-8",
-      "Cache-Control": "public, max-age=300",
+      // Netlify's CDN mangles content-type on stored proxy responses (serves them
+      // as text/plain + sandbox CSP). Keep proxy responses uncached.
+      "Cache-Control": "private, no-store",
     },
   });
 }

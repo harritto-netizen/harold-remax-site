@@ -13,8 +13,12 @@
 /blog-sitemap.xml  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/sitemap  200
 
 # Serve crawler-friendly static HTML for blog pages (first-wave indexing).
-/blog  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/blog-prerender?view=index  200
-/blog/:slug  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/blog-prerender?slug=:slug  200
+# /blog and /blog/<slug> are served by the React app (App.tsx routes) because
+# Netlify proxy rewrites flatten the upstream text/html to text/plain.
+/blog/crawler  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/blog-prerender?view=index  200
+/blog/crawler/:slug  https://wllejqlypxctumdxkecn.supabase.co/functions/v1/blog-prerender?slug=:slug  200
+/blog  /index.html  200
+/blog/:slug  /index.html  200
 
 /admin  /index.html  200
 /       /index.html  200
