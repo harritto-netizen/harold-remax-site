@@ -51,7 +51,7 @@ function HeroVideo() {
         className="w-full h-full object-cover"
         aria-label="Background video showing luxury Caribbean beachfront properties"
       >
-        <source src={isMobile ? "/18335298-sd_640_360_24fps.mp4" : "/18335298-hd_1920_1080_24fps.mp4"} type="video/mp4" />
+        <source src={isMobile ? "/hero-beachfront-drone-sd.mp4" : "/hero-beachfront-drone-hd.mp4"} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-charcoal/40"></div>
     </div>
@@ -371,12 +371,12 @@ function App() {
             <ScrollReveal direction="left">
               <picture>
                 <source
-                  srcSet="/1780975185532(1)-sm.webp 400w, /1780975185532(1).webp 665w"
+                  srcSet="/harold-portrait-about-sm.webp 400w, /harold-portrait-about.webp 665w"
                   sizes="(max-width: 768px) 400px, 665px"
                   type="image/webp"
                 />
                 <img
-                  src="/1780975185532(1).png"
+                  src="/harold-portrait-about.png"
                   alt="Harold - Certified Real Estate Agent RE/MAX Next Door in Santo Domingo"
                   className="w-full h-auto object-cover max-w-[665px]"
                   loading="lazy"
@@ -436,7 +436,7 @@ function App() {
               {[...Array(2)].map((_, setIdx) => (
                 <div key={setIdx} className="flex items-center gap-12 md:gap-20 px-6 md:px-10 shrink-0">
                   <img
-                    src="/png-clipart-remax-logo-re-max-llc-real-estate-estate-agent-house-re-max-ocean-properties-new-balloon-logo-thumbnail.png"
+                    src="/remax-logo.png"
                     alt="RE/MAX International"
                     className="h-10 md:h-12 w-auto opacity-70 hover:opacity-100 transition-opacity"
                     loading="lazy"
